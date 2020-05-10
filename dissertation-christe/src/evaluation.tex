@@ -1,0 +1,1060 @@
+\chapter{Evaluation}\label{ch:evaluation}
+Evaluation of the Laha framework involves deploying reference Laha-compliant DSNs, validating the data collected from the reference implementations, and then comparing and contrasting various metrics for each of the stated goals. Metrics were collected during a set of experiments for each of the Laha reference implementations in summer 2019.
+
+The following sections describe my approach to deploying the reference implementations, data validation, evaluating the main goals of the Laha framework, and evaluating the tertiary goals of the Laha framework.
+
+\section{Deploy Laha reference implementations on test sites}\label{sec:deploy-laha-reference-implementations-on-test-sites}
+Both the OPQ and Lokahi reference implementations were deployed to test sites where validated data collection took place. The following sections describe the reference implementation deployments in detail.
+
+\subsection{OPQ Reference Deployment}\label{subsec:opq-reference-deployment}
+Fifteen Laha-compliant OPQ Boxes were deployed over the UH Manoa microgrid during the Summer and Fall of 2019.
+
+The placement strategy I utilized aimed to maximize our ability to collect distributed PQ Events by placing sensors on the same electrical lines. We also considered placing Boxes in locations co-located with sensitive or demanding electrical equipment in the hope of seeing PQ Events generated from this equipment. Finally, we considered data access in terms of network availability and ground truth availability. Working with my colleagues and the Office of Energy Management, I selected the 15 locations for the campus wide deployment. Table~\ref{table:OpqDeployment} displays the details of the UH Manoa campus deployment and justifications for choosing those locations.
+
+\begin{table}[H]
+	\centering
+	\caption{OPQ Deployment}
+	\begin{tabularx}{\textwidth}{lllX}
+		\toprule
+		\textbf{Box} & \textbf{Location} & \textbf{Latitude} & \textbf{Longitude} \\
+		\midrule
+		1000 & POST 1 & -157.816237 & 21.297438 \\
+		1001 & Hamilton & -157.816173 & 21.300332 \\
+		1002 & POST 2 & -157.816305 & 21.297663 \\
+		1003 & LAVA Lab & -157.816034748669 & 21.29974948387028 \\
+		1005 & Parking Structure Ph II & -157.819234 & 21.296042 \\
+		1006 & Frog 1 & -157.823122 & 21.29805 \\
+		1007 & Frog 2 & -157.822819 & 21.298046 \\
+		1008 & Mile's Office & -157.8137681609306 & 21.30386147625208 \\
+		1009 & Watanabe & -157.815817 & 21.298351 \\
+		1010 & Holmes & -157.816104 & 21.297011 \\
+		1021 & Marine Science Building & -157.8156900462205 & 21.29789461271471 \\
+		1022 & Ag. Engineering & -157.8154874938278 & 21.30163608338939 \\
+		1023 & Law Library & -157.817361 & 21.296328 \\
+		1024 & IT Building & -157.816451 & 21.29886 \\
+		1025 & Kennedy Theater & -157.815225 & 21.299282 \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:OpqDeployment}
+\end{table}
+
+Determination of electrical lines was aided by the UH Manoa electrical blueprint as displayed in Figure~\ref{fig:UhGridTopo}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=\textheight]{figures/uh_power_grid.pdf}
+	\caption{UH Deployment Grid Topology}
+	\label{fig:UhGridTopo}
+\end{figure}
+
+A graphical representation showing the complete coverage of Boxes on the UH Manoa microgrid is displayed in Figure~\ref{fig:UhDeploy}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/deploy.jpg}
+	\caption{UH Deployment}
+	\label{fig:UhDeploy}
+\end{figure}
+
+All devices were placed in a location that had access to UH Manoa's wireless network. As soon as they were installed, they started transmitting PQ data for that location.
+
+\subsection{Lokahi Deployment}\label{subsec:lokahi-deployment}
+
+Over a period of three months, data was collected from over 100 Lokahi sensors at large distributed globally.
+
+Figure~\ref{fig:active_lokahi_sensors_i} shows the number of active Lokahi sensors sampling at different sampling rates over this period.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_num_sensors.png}
+	\caption{Active Lokahi Sensors}
+	\label{fig:active_lokahi_sensors_i}
+\end{figure}
+
+Data was collected globally. The next series of Figures will show where data was collected from using the Lokahi network over the deployment window. It should be noted that this map only displays data from sensors that recorded public data. This was done to protect the privacy of users that have marked their data as private. Other results for the Lokahi network utilize the full data set of public and private data. I took care to not expose any private details and only provide results as statistical summaries.
+
+Figure~\ref{fig:lokahi_deploy_1} shows Lokahi sensors deployed in the state of Hawaii.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_deploy_1.jpg}
+	\caption{Lokahi Sensors: Hawaii}
+	\label{fig:lokahi_deploy_1}
+\end{figure}
+
+Here, we can observe sensor coverage on the islands of Oahu, Maui, and the Big Island of Hawaii.
+
+Figure~\ref{fig:lokahi_deploy_2} shows Lokahi sensors deployed across North America.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_deploy_2.jpg}
+	\caption{Lokahi Sensors: North America}
+	\label{fig:lokahi_deploy_2}
+\end{figure}
+
+Lokahi has provided significant sensor coverage over the North American continent with most sensors located in the United States and others located in Mexico and Canada.
+
+Figure~\ref{fig:lokahi_deploy_3} shows Lokahi sensors deployed through Central and South America.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_deploy_3.jpg}
+	\caption{Lokahi Sensors: Central and South America}
+	\label{fig:lokahi_deploy_3}
+\end{figure}
+
+Here we can see sensors that were deployed in Columbia, Costa Rica, and Brazil.
+
+Figure~\ref{fig:lokahi_deploy_4} shows Lokahi sensors deployed through Europe and Western Asia.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_deploy_4.jpg}
+	\caption{Lokahi Sensors: Europe and Western Asia}
+	\label{fig:lokahi_deploy_4}
+\end{figure}
+
+Europe also provides excellent coverage for the Lokahi network. You will also note that Lokahi sensors have been deployed to several countries outside of Europe including Turkey, Israel, Ukraine, and Russia.
+
+Figure~\ref{fig:lokahi_deploy_5} shows Lokahi sensors deployed through South-East Asia.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_deploy_5.jpg}
+	\caption{Lokahi Sensors: India and South-East Asia}
+	\label{fig:lokahi_deploy_5}
+\end{figure}
+
+Here, we can see Lokahi sensors that have been deployed in India, Bangladesh, Sri Lanka, Pakistan, and Malaysia.
+
+Figure~\ref{fig:lokahi_deploy_6} shows Lokahi sensors deployed through Oceania.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_deploy_6.jpg}
+	\caption{Lokahi Sensors: Oceania}
+	\label{fig:lokahi_deploy_6}
+\end{figure}
+
+Lokahi sensors have been deployed to the Western, Southern, and Eastern coasts of Australia as well as New Zealand.
+
+Figure~\ref{fig:lokahi_deploy_7} shows Lokahi sensors deployed through East Asia.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/lokahi_deploy_7.jpg}
+	\caption{Lokahi Sensors: East Asia}
+	\label{fig:lokahi_deploy_7}
+\end{figure}
+
+Here we can observe Lokahi sensors that have been deployed to China, Taiwan, Russia, South Korea, and Japan.
+
+\section{Validate data collected by Laha deployment}\label{sec:validate-data-collected-by-laha-deployment}
+Data from both experimental deployments were validated against ground truth data as described in Section~\ref{subsec:anticipated-contributions}. In the OPQ deployment, ground truth is provided by UH meters installed at the main of each building. In the Lokahi deployment, ground truth was provided by high-end calibrated microphones.
+
+Results of data validation are provided in Section~\ref{sec:ground-truth-analysis}.
+
+\subsection{Validate data collected by OPQ deployment}\label{subsec:validate-data-collected-by-opq-deployment}
+
+Ground truth for the UH Manoa microgrid deployment is provided by UH system installed power meters. These meters were installed at the main of most buildings and can provide ground truth for voltage, frequency, and THD Trends, as well as provide a maximum bounds of these features enabling me to determine if the incidents we see in OPQ would have been seen by the UH meters.
+
+The UH meters provide data Trends for voltage, frequency, and THD in rolled-up one minute windows. Each window provides descriptive statistics for the feature it is measuring including minimum, maximum, average, and standard deviation of the feature values during the one minute window. By using the minimum and maximum values, I was able to provide upper and lower bounds for whether or not the PQ incidents we observed were valid or not.
+
+As an example, if an Incident is created by Mauka with a voltage sag down to 110V, then I would expect the nearest ground truth meter to also have a minimum voltage value near 110V for the same time window. If the minimum value from the UH meter does not show a voltage drop, then we know that Mauka identified a false positive.
+
+I have written a separate service for OPQ called the ``ground-truth-daemon". The role of this daemon is to query the UH Manoa metering HTTP API once per hour and retrieve the previous hours worth of data for all ground truth meters co-located with an OPQ Box or near an OPQ Box. The descriptive statistics along with the meter metadata are stored in MongoDB so that OPQ data can be compared to the ground truth data to identify false positives and false negatives. The ground truth data model was described in Table~\ref{table:ground_truth}.
+
+Since one of the core tenants of Laha is to throw away uninteresting data, we need to store all ground truth data in an effort to identify false negatives.
+
+Two types of validation are performed. First, we compared Measurements and Trends collected by OPQ to Trend data collected by the UH meters. Then, we generated a report that showed the percent different between the two sets of meters. Any differences larger than 5 percent are recorded.
+
+The second type of validation I performed was checking the bounds of Mauka generated Incidents. When a voltage Incident is generated, the sag or swell is compared against the minimum and maximum ground truth Trends. Differences larger than 5 percent were recorded. Validation for frequency and THD was performed in a similar way.
+
+Results of validating OPQ data are provided in Section~\ref{subsec:ground-truth-analysis:-opq}.
+
+\subsection{Validate data collected by Lokahi deployment}\label{subsec:validate-data-collected-by-lokahi-deployment}
+
+Ground truth for Events and Incidents are provided by cross-referencing known source signals to data collected by the Lokahi network. Lokahi Events only become Incidents when they can be cross referenced with a known source signal. Because of this, all Incidents within Lokahi are trivially validated. Thus, it becomes a question of validating the Lokahi sensors' ability to characterize infrasonic signals of interest. To this end, I will examine results provided by Asmar~\cite{asmar19} which discuss the ability for the Lokahi sensors to be able to accurately quantify and characterize infrasound. These results can be found in Section~\ref{subsec:ground-truth-analysis:-lokahi}.
+
+\section{Use Laha deployments to evaluate the main goals of the framework}\label{sec:use-laha-deployments-to-evaluate-the-main-goals-of-the-framework}
+The main goals of this network are provided in Section~\ref{sec:anticipated-contributions-of-laha}. The Laha deployments for both OPQ and Lokahi were used to evaluate each of the main goals this framework claims to provide. First, that Laha is a generally useful framework representation for DSNs. Second, that Laha provides the ability to turn primitive sensor data into actionable data and insights. Third, that Laha's tiered management of sensor data provides metrics on maximum bounds for storage requirements and graceful degradation of DSN performance.
+
+Each deployment requires different techniques for performing evaluation.
+
+In the OPQ deployment, OPQ Boxes are deployed and co-located with industry standard, calibrated, reference sensors. Each of these sensors cost thousands to obtain and install, collect all the data all the time, and can only be connected to the power main as it enters a building. These sensors provide a means for verifying signals received or not received by OPQ, as well as confirming long term trend data. I have been provided access to these sensors and stored data via the Office of Energy Management at UH Manoa. The data is accessible via an HTTP API. The Office of Energy Management at UH Manoa has also provided the full schematics for the UH power grid. This was used as a ground truth for topology estimates and distributed signal analysis. OPQ Boxes are placed in strategic locations on the UH Manoa campus specifically in order to evaluate the distributed nature of PQ signals. For example, OPQ Boxes are placed on the same electrical lines as well as separate electrical lines to observe how PQ signals travel through an electrical grid.
+
+In the Lokahi deployment, I had the opportunity to generate infrasound signals using a calibrated infrasound source~\cite{park2009rotary}. The source can be tuned to produce infrasound at configurable frequencies and amplitudes. The source works by attaching a variable pitch propeller to an electric motor that can be driven by a waveform generator. The source can generate signals that can be observed at large stand off distances, over tens of kilometers. Similar to the OPQ deployment, sensors within the Lokahi deployment were co-located with industry standard, calibrated, infrasound sensors. These sensors can provide a metric of signals that were correctly observed, incorrectly observed, or not observed at all by the Lokahi deployment. Further, infrasound itself is characterized quite well by various geophysical equations.
+
+Evaluation of the main goals of this network are provided in the following sections. Results of these evaluations can be found in Section~\ref{sec:ground-truth-analysis}, Section~\ref{sec:results-of-generality-of-this-framework}, Section~\ref{sec:results-of-converting-primitie-data-into-actional-insights}, Section~\ref{sec:dsn-system-requirements}, and Section~\ref{sec:results-of-tertiary-goals}.
+
+\subsection{Evaluation of the Generality of this Framework}\label{subsec:evaluation-of-the-generality-of-this-framework}
+I claim that the Laha framework is useful and general enough to be applied to DSNs in different domains. To test this, I designed, developed, and deployed two DSNs. The first, OPQ, measures distributed PQ signals on the electrical grid. The second, Lokahi, observes infrasound signals traveling through the atmosphere.
+
+To evaluate the generality of the Laha design, I provided metrics for whether or not each deployment is able to fulfill the goals of the given network.
+
+I expect the PQ network, OPQ, to be able to detect and classify common PQ issues. I expect OPQ to observe voltage dips, voltages swells, frequency dips, frequency swells, transients, and high levels of THD. A count of these signals were kept and compared against industry standard PQ meters co-located with each sensor. By comparing these signals to the ground truth, we were able to tabulate a number of false positives and false negatives. In order to be considered effective, I would expect to be able to classify each of these common PQ signals, collect a set of each of the PQ signals while maintaining a low number of false positives and false negatives as compared to the industry standard sensors. In general, a negative result here would be not being able to detect PQ signals of a specific type or having a high number of false positives or false negatives.
+
+Further, another stated goal of OPQ is to detect and classify distributed PQ incidents. That is, PQ signals that are observed by more than one sensor in situations where OPQ sensors are not co-located. First, I evaluated if OPQ is capable of detecting distributed PQ signals. I expect OPQ to at least observe one distributed signal during the test deployment, but would not be surprised to see many. By working with the Office for Energy Management at UH Manoa, I used a list of known PQ source events along with signals collected by OPQ and the industry standard sensors to provide a list of false positives and false negatives for the number of distributed PQ incidents observed by OPQ\@.
+
+I expect the infrasound network, Lokahi, to be able to securely detect and report on infrasound incidents from a large collection of heterogeneous smartphone based infrasound sensors. This network prioritizes availability and security even in the face of network issues or no network at all. I claim that Laha is a useful framework for a DSN such as this and evaluated if Laha is able to meet the goals of this network.
+
+To evaluate the effectiveness of Laha as implemented by Lokahi, I deployed 50 heterogeneous Lokahi smartphone sensors at predetermined distances from a calibrated infrasound source. I then used the calibrated infrasound source to generate infrasound signals of different amplitudes and frequencies. While signals are being generated, I disabled network access for the sensors to simulate real life network drop outs of sensors. I disabled the networks for time periods of 1 minute, 30 minutes, and 1 hour.
+
+Then, for each sensor, I calculated the number of false positives and false negatives for detections of infrasound signals. In order for Laha to be a useful framework for Lokahi, Lokahi must demonstrate that not only can it detect infrasound signals at different frequencies and amplitudes, but it must also do this while maintaining a low number of false positives or false negatives.
+
+Further, as availability is a major priority of this network, network outages must be handled without signal loss. To evaluate this goal, I measured the amount of false negatives (or missed signals) due to Laha's data management and the interplay with network outages. I would expect that if Lokahi implements it correctly, we should not see a rise in false negatives. A less great result would be an increase in false negatives.
+
+Finally, backed by the metrics for both deployments, I provide a critical discussion on what types of DSNs Laha is well suited for and what types of DSNs Laha is not well suited for. This includes a discussion on which parts of the Laha design are useful or a detriment to a given goal of the DSN\@.
+
+The following sections continue to discuss the evaluation strategies required to show that Laha is a generally useful representation for a DSN\@.
+
+Results providing evidence the the generality of the Laha framework can be found in Section~\ref{sec:results-of-generality-of-this-framework}.
+
+\subsection{Evaluation of Converting Primitive Data into Actionable Insights}\label{subsec:evaluation-of-converting-primitive-data-into-actionable-insights}
+An important goal of any DSN is to convert primitive sensor data into actionable insights. This is generally accomplished by adding some kind of context associated with the data such as classifications of a signal or linking the data with other data by comparing similarities in time, space, or other physical features.
+
+I claim that Laha's use of Actors acting on and moving data between levels in the Laha hierarchy provides a useful and generic approach to systematically adding context to data as it moves through the framework. Laha is designed with a specific number of levels where data within each level shares the same type. In each deployment, I evaluated the usefulness of each level with regards to adding context to the data.
+
+An early approach to organizing data for contextualization is the Data Grid project\cite{chervenak2000data} which proposed two services for building higher level extractions, storage systems and metadata management. This framework provided the context on top of data needed to easily build replication services for the data, which was important since one of the major goals of this framework was data availability and policy management. Data Grid also maintains data uniformity and does not allow complex schemas. Data Grid does not provide a mechanism for discarding noisy data. Laha differs from Data Grid by providing support for complex metadata schemas, focuses on data reduction strategies, and provides more support for driving context. A more recent paper from Wu et al.\cite{wu2014data} presents the HACE framework which is a framework designed for applying context to Big Data by making integration with other data sources and performing data fusion a first class member of the framework. This paper also examines algorithms for mining of complex and dynamic data, such as those generated from sensor networks. Laha differs from HACE by using a tiered approach to manage data volume while still hopefully generating actionable insights.
+
+In both deployments, I evaluated the number of false negatives for incident classification. Each level in the framework is responsible for not only adding context, but deciding if data should be moved upward through the levels, adding more context along the way, or discarding data because a level does not think the data is ``interesting". I kept track of the number of false negatives and which level was responsible for discarding the data with the signal. Using this approach, I evaluated the effectiveness of each level to determine which levels correctly identify signals and which levels do not correctly identify signals, thus discarding the data.
+
+In order to be useful, I expect each level to add context to the data while maintaining a low level of false negatives.
+
+Using these metrics, I provide a discussion on which domains a leveled approach may work well for versus which domains a leveled approach might not provide useful benefits. This discussion is provided in the results chapter (Section~\ref{subsec:discussion-of-laha-levels}).
+
+I claim that Laha is able to provide additional context and actionable insights through a level called Phenomena. Phenomena utilize predictive analytics to provide context and actionable insights over the sensor domain. First, I evaluated if Phenomena take place in practice for both of the Laha deployments.
+
+To evaluate Phenomena in the OPQ network, OPQ must observe a cyclical incident such as voltage swells occurring every afternoon due to solar output or an electric motor turning on at the same time every day. Once a cyclical incident is observed, OPQ must correctly create predictive Phenomena that predict the same incident happening in the future. Assuming predictive Phenomena are created, I measured the amount of false positive and false negative predictions. A positive result would show that now only is OPQ capable of making predictive Phenomena, but also that a high percentage ($>$ 50\%) of the predictions are correct.
+
+Evaluation of predictive Phenomena in the Lokahi infrasound network followed a similar strategy. However, since I can control the infrasound source, I can run an experiment that creates cyclical and non-cyclical signals. I then tested Lokahi's ability to not only create predictive Phenomena, but also show that the predictions are accurate, that is, greater than 50\% of them are correct.
+
+A negative result would be that if either of the networks are not able to create predictive Phenomena or a large number of false positives or false negatives (combining for $<$50\% prediction accuracy).
+
+Adding context to classified Incidents is the act of providing a statistical likelihood of the underlying cause of the Incident. These include things like showing that a voltage sag is caused by turning on the dryer every day at 2PM or identifying an infrasound signal as a repetitive flight pattern near an airport. Context is provided by external sources to the DSN (such as users or by performing data fusion with other correlating data sets).
+
+Evaluating contextualized Events consists of setting up experiments where I assign context for a specific set of signals and resulting Incidents. Then, testing to see if Phenomena are able to correctly apply context to Incidents when the same signals are generated again. I recorded the number of false positives and false negatives for assigning context to Incidents.
+
+A positive result would be to see the correct context applied to incidents more than half of the time. That is, I expect context to be applied correctly to at more than 50\% of Incidents for which context has been previously defined.
+
+I expect to see contextualization work better in DSNs where signals provide more measures for discrimination. For example, PQ networks contain many different types of classified PQ signals, however there is a small subset of causes attributed to each type of PQ signal classification.This decreases Laha's search space and in theory should make it easier to provide context.
+
+Results for converting primitive data into actionable insights are provided in Section~\ref{sec:results-of-converting-primitie-data-into-actional-insights}.
+
+\subsection{Evaluation of Tiered Management of Big Data}\label{subsec:eval-big-data}
+The goal of tiered management of Big Data is to add a mechanism that provides a maximum bounds on storage requirements of sensor data at each level in the Laha hierarchy while simultaneously reducing sensor noise as Laha Actors move ``interesting" data upwards. This in turn should decrease the amount of false positives since forwarded data is more likely to include signals of interest and is less likely to be sensor noise.
+
+Other approaches to Big Data management include compression\cite{tang2004compression} or storage systems where the goal is to have a distributed file system and move data close to where it is being processed, such as the Hadoop Distributed File System\cite{warrier2007much}. Other systems such as NiFi\cite{hughes2016survey} provide a nice interface for ingestion and movement of data between Big Data tools while also providing data provenance, but do not go far enough in focusing on data reduction and graceful degradation. Carney et al.\cite{carney2002monitoring} discuss how monitoring applications require management and clean up of stale sensor data.
+
+\subsubsection{Evaluation of False Positives and False Negatives}\label{eval-fp-fn}
+It is possible that Laha threw away data that did contain signals of interest. In this case, detection or classification Actors did not observe the signals because the data has been discarded leading to increased false negatives. On the other hand, by reducing false positives and increasing the signal-to-noise ratio as data moves upward, Phenomena has a better chance of optimizing triggering, detection, and classification which may in turn inform Laha to save data that would have been previously thrown away. In this way, it is possible that Laha reduces false negatives.
+
+I evaluated the number of false positives and false negatives in detections, classifications, and Phenomena compared against industry standard reference sensors. A positive outcome for this metric would be a reduction in both false positives and false negatives compared to an approach that does not use tiered data management. A negative result would be an increase in either false positives or false negatives.
+
+Results comparing collected data to ground truth data can be found in Section~\ref{sec:ground-truth-analysis}.
+
+\subsubsection{Evaluation of DSN System Requirements}\label{sssec:eval_of_dsn_system_requirements}
+I examined theoretical data storage requirements for any DSN that utilizes Laha as an abstract model.
+
+Let us consider the theoretical bounds on storage requirements at each level in the Laha hierarchy. First we will consider the storage bounds when all parameters are known and then we will look at bounds using estimated parameters for each level.
+
+Results for DSN system requirements are provided in Section~\ref{sec:dsn-system-requirements}.
+
+\paragraph{IML Requirements}
+The IML level contains instantaneous samples from a sensor. These values are generally stored in memory on the sensors. We can calculate several useful metrics for this layer.
+
+First, we can calculate the IML size for an individual sensor $S_{SEN}$, with a sample size in bytes $S_{SAMP}$, a sample rate in Hz $SR$, and a time window in seconds $T$. This is shown in Equation~\ref{iml:SSEN}.
+
+\begin{equation}\label{iml:SSEN}
+	S_{SEN} = S_{SAMP} * SR * T
+\end{equation}
+
+Next, we can calculate the IML size for the entire network $S_{IML}$ by summing up the IML size for each individual sensor $B$ in the network. Equation~\ref{iml:DSEN} provides these calculations.
+
+\begin{equation}\label{iml:DSEN}
+	S_{IML} = \sum_{i=1}^{B_{n}} S_{SEN_{i}}
+\end{equation}
+
+We can estimate upper and lower bounds when the number of sensors recording data to the IML varies over time by examining the mean number of sensors that recorded data $\mu N_{SEN}$ over a time period in seconds $T$.
+
+Equation~\ref{eq:iml:mu_size_iml} provides the calculations for finding the mean size of the IML with varying amounts of sensors.
+
+\begin{equation}\label{eq:iml:mu_size_iml}
+\mu S_{IML} = S_{SAMP} * SR * \mu N_{SEN} * T \pm \delta S_{IML}
+\end{equation}
+
+Equation~\ref{eq:iml:e1} and Equation~\ref{eq:iml:e2} provide the error bounds for calculating the mean IML size.
+
+\begin{align}
+	\delta N_{SEN} &= \frac{\sigma N_{SEN}}{\sqrt{T}} \label{eq:iml:e1} \\
+	\delta S_{IML} &= \delta N_{SEN} * |S_{SAMP} * SR * T| \label{eq:iml:e2}
+\end{align}
+
+Each sample in this level is generally stored using built in machine types that generally take 1, 2, 4, or 8 bytes. Further, depending on the network requirements, each sample may or may not have an associated timestamp. Each timestamp generally adds between 4 and 8 bytes to each sample.
+
+Table~\ref{table:iml_size} provides the expected size of the IML layer for the OPQ and Lokahi networks over time periods of one day, one week, and one year. These values are constant for all OPQ and Lokahi networks independent of deployment because they only rely on constant values defined by the sensors themselves.
+
+\begin{table}[H]
+	\centering
+	\caption{IML Constraints per Sensor}
+	\begin{tabularx}{\textwidth}{Xlllll}
+		\toprule
+		\textbf{Description} & \textbf{Rate} & \textbf{Size} & \textbf{Data/Day} & \textbf{Data/Week} & \textbf{Data/Year} \\
+		\midrule
+		OPQ Box & 12 kHz & 2 & 2.07 GB & 14.51 GB & 756.86 GB \\
+		Lokahi Sensor & 80 Hz & 4 & 0.03 GB & 0.19 GB & 10.10 GB \\
+		Lokahi Sensor & 800 Hz & 4 & 0.28 GB & 1.94 GB & 100.92 GB \\
+		Lokahi Sensor & 8 kHz & 4 & 2.76 GB & 19.35 GB & 1009.15 GB \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:iml_size}
+\end{table}
+
+It is evident that the IML layer produces a significant amount of data, most of which is noise. Left unbounded an OPQ network with 15 Boxes can easily grow beyond 11 terabytes per year and a Lokahi network with 15 sensors at the maximum sampling rate can grow to over 15 terabytes per year!
+
+\paragraph{AML Requirements}
+Aggregate Measurements provide rolled-up feature extracted values generated from the IML layer. These often include multiple features (i.e.\ voltage, frequency, THD) and descriptive statistics of each feature (i.e.\ minimum, maximum, average, variance). It is worth noting that the theoretical bounds may differ from the actual bounds in practice due to the way the underlying storage engine persists the values. These differences will be examined in the results section.
+
+Laha allows for multiple sub-levels within the AML. For instance, the OPQ DSN has both Measurements and Trends AMLs which summarize data at different window lengths. We need to take this into consideration when generating bounds for the AML\@.
+
+To simplify calculating the bounds on the AML level, we make an assumption that the variance of the size of each AML value is close to 0. The actual metrics for each AML value remain constant sized while the metadata associated with each AML may differ in size. Since each AML value contains similar metadata, the variance on the size of the metadata should remain small.
+
+Equation~\ref{eq:aml_sl} computes the size of a sub-level within the AML $S_{SL}$ by examining the size of an AML entry $S_{V}$, sub-level send rate in Hz $SR$, sensing time in seconds $T$, and a set of sensors $B$.
+
+\begin{equation}\label{eq:aml_sl}
+	S_{SL} = S_{V} * SR * T * B_{n}
+\end{equation}
+
+Equation~\ref{eq:aml} shows the size of the AML $S_{AML}$ including all sub-levels.
+
+\begin{equation}\label{eq:aml}
+	S_{AML} = \sum_{i=1}^{S_{SL_{n}}} S_{SL_{i}}
+\end{equation}
+
+Similar to what was done for the IML, we can estimate bounds assuming the number of sensors sending data is not constant. Equation~\ref{eq:aml:mu_s_sl} and Equation~\ref{eq:aml:mu_s_aml} provide the calculations for mean sub-AML level size and the mean size of the AML respectively.
+
+\begin{align}
+	\mu S_{SL} &= S_{V} * SR * T * \mu B \pm \delta S_{SL} \label{eq:aml:mu_s_sl} \\
+	\mu S_{AML} &= \sum_{i=1}^{S_{\mu SL_{n}}} \mu S_{SL_{i}} \pm \delta S_{AML} \label{eq:aml:mu_s_aml}
+\end{align}
+
+Equation~\ref{eq:aml:e0}, Equation~\ref{eq:aml:e1}, and Equation~\ref{eq:aml:e2} provide the error on mean calculations for the AML\@.
+
+\begin{align}
+	\delta B &= \frac{\sigma B}{\sqrt{T}} \label{eq:aml:e0} \\
+	\delta S_{SL} &= \delta B * |S_{V} * SR * T| \label{eq:aml:e1} \\
+	\delta S_{AML} &= \sqrt{\sum_{i=1}^{\delta S_{SL_{n}}}} (\delta S_{SL_{i}}) ^ 2  \label{eq:aml:e2}
+\end{align}
+
+Table~\ref{table:aml_size} contains the theoretical bounds of the AML layer without any optimization for OPQ and Lokahi networks. These values provide the upper bounds per sensor for periods of one day, one week, and one year. The OPQ DSN utilizes two sub-levels (one for Measurements and one for Trends). The Lokahi network contains only one level, but each sampling rate has its own IML rate. We provide the upper bounds for each possible sampling rate that Lokahi utilizes. These values are constant for all OPQ and Lokahi networks independent of deployment because they only rely on constant values defined by the sensors themselves.
+
+\begin{table}[H]
+	\centering
+	\caption{AML Constraints per Sensor}
+	\begin{tabularx}{\textwidth}{Xlllll}
+		\toprule
+		\textbf{Description} & \textbf{Rate} & \textbf{Size} & \textbf{Data/Day} & \textbf{Data/Week} & \textbf{Data/Year} \\
+		\midrule
+		OPQ $AML_{Measurements}$ 	& 1 Hz 					& 145 			& 12.52 MB 	& 87.69 MB 	& 4.6 GB 	\\
+		OPQ $AML_{Trends}$ 			& $\frac{1}{60}$ Hz 	& 325 			& 0.47 MB 	& 3.72 MB  	& 170.82 MB \\
+		OPQ $AML_{Total}$ 			&   					&   			& 12.99 MB 	& 91.41 MB 	& 4.77 GB 	\\
+		Lokahi $AML_{80Hz}$			& $\frac{1}{51.200}$ Hz	& 2546  		& 27.65 MB 	& 193.54 MB & 10.09 GB	\\
+		Lokahi $AML_{800Hz}$		& $\frac{1}{40.960}$ Hz	& 2546		& 276.48 MB & 1.94 GB 	& 100.92 GB \\
+		Lokahi $AML_{8000Hz}$		& $\frac{1}{32.768}$ Hz	& 2546		& 2.76 GB 	& 19.35 GB 	& 1.01 TB 	\\
+		\bottomrule
+	\end{tabularx}
+	\label{table:aml_size}
+\end{table}
+
+Left unoptimized and taken over the course of a year for a typical OPQ or Lokahi deployment with 15 sensors, we would expect an upper bound of 71.55 GB collected from the OPQ network and 15 TB of data to be collected from the Lokahi network. Why is the AML so much larger in Lokahi as compared to OPQ? It is due to a requirement of the Lokahi network to store raw data along with its AML windows. Not only do Lokahi AML windows contained the feature extracted features of the stream, but they also contain the raw data associated with that window.
+
+\paragraph{DL Requirements}
+The detections level contains metadata and associated sampled high fidelity data that was returned from sensors for a given time window. A single detection can contain samples from multiple data streams for a single Event of interest.
+The detections level contains metadata and associated sampled high fidelity data that was returned from sensors for a given time window. A single detection can contain samples from multiple data streams for a single Event of interest.
+
+Similarly to the AML level, we assume that the metadata for each detection remains a constant or close to constant size and we focus on the raw data which dominates the storage requirements in the DL\@.
+
+I make the assumption that the window lengths for each high-fidelity stream within a single detection are equally sized. In reality, it is possible that a sensor encounters an error and does not return data for the entire requested time window.
+
+Calculating the bounds of this collection is further complicated by the fact that Detections are not generated at a constant rate and the window length of the detections can be highly variable. Further, the number of sensors that return data for any given detection is also variable. Therefore, I provide statistical calculations for these bounds.
+
+First, let us examine calculating the bounds when all parameters are known for a sub-detection. A sub-detection is data returned from a single sensor within a detection. The bounds for each sub-detection is similar to the bounds for a single sensor in the IML, because this level contains the IML data plus some close to constant sized metadata providing context to the IML data.
+
+Equation~\ref{eq:dl:ssd} computes the size of a sub-detection $S_{SD}$ using a given sensor sampling rate in Hz $SR$, the length of the detection in seconds $T$, and the size of the sub-detection metadata $S_{SDM}$.
+
+\begin{equation}\label{eq:dl:ssd}
+	S_{SD} = S_{SAMP} * SR * T + S_{SDM}
+\end{equation}.
+
+\begin{equation}\label{eq:dl:dl}
+	S_{DL} = \sum_{i=0}^{S_{D_{n}}} S_{D_{i}}
+\end{equation}
+
+There is a clear upper bound on the size of the DL for a single sensor in the pathological case that the entire data set recorded by a single sensor is one long single Detection. In this pathological case, the upper bounds of the DL is equal to the upper bounds of the IML plus some constant metadata size. The pathological case is not incredibly useful, so, let us look at this from a statistical standpoint.
+
+We can provide estimated bounds on the DL with an estimated data rate $\mu DR$ which provides the mean number of bytes generated per second within the DL\@. It should be noted that this includes the parameters for all sub-detections as well. The calculation for the mean size of the DL is given in Equation~\ref{eq:dl:mu_s_dl}.
+
+\begin{equation}\label{eq:dl:mu_s_dl}
+	\mu S_{DL} = \mu DR * T \pm \delta S_{DL}
+\end{equation}
+
+The errors for the mean size of the DL are given in Equation~\ref{eq:dl:e0} and Equation~\ref{eq:dl:e1}.
+
+\begin{align}
+	\delta DR = \frac{\sigma DR}{\sqrt{T}} \label{eq:dl:e0} \\
+	\delta S_{DL} = \delta {DR} * |T| \label{eq:dl:e1}
+\end{align}
+
+Let us next compare the estimated sizes of the DL for the OPQ and Lokahi networks using statistics gathered for these networks. These values were obtained from actual data collected during deployments of the OPQ and Lokahi networks. Table~\ref{table:estimated_mu_dr} provides the parameters used for these comparisons.
+
+\begin{table}[H]
+	\centering
+	\caption{Estimated $DR$}
+	\begin{tabularx}{\textwidth}{lllll}
+		\toprule
+		\textbf{Network} & $\bm{\mu DR}$ & \textbf{Data/Day} & \textbf{Data/Week} & \textbf{Data/Year} \\
+		\midrule
+		OPQ & 40.69 & 3.51 MB & 24.77 MB & 1.29 GB \\
+		Lokahi & 402.82 & 34.80 MB & 243.63 MB & 12.70 GB \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:estimated_mu_dr}
+\end{table}
+
+\paragraph{IL Requirements}
+The Incidents Level provides added context on top of the DL in the form of signal of interest classifications. This level is structured similarly to the DL in that it contains trimmed down IML samples from one or more sensors over a varying time window and added context in the form of metadata. Due to these similarities, the bounds calculations are also quite similar.
+
+The IL differs from the DL in that the associated IML samples in the IL are always subsets of the samples in the DL\@. The IL also differs from the DL in the fact that the IL does not have a concept of ``sub-incidents". Every Incident in the IL is associated with exactly one Event waveform.
+
+When all parameters are known, the individual size of an Incident $S_{I}$ within the IL can be calculated over the size of each sample $S_{SAMP}$, sample rate in Hz $SR$, length of the incident $T+{I}$, and size of the associated metadata $S_{M}$ with Equation~\ref{eq:il:s_i}.
+
+\begin{equation}\label{eq:il:s_i}
+	S_{I} = S_{SAMP} * SR * T_{I} + S_{M}
+\end{equation}
+
+Then, computing the size of the entire IL can be done with a simple summation as shown in Equation~\ref{eq:il:s_il}.
+
+\begin{equation}\label{eq:il:s_il}
+	S_{IL} = \sum_{i=0}^{S_{I_{n}}} S_{I_{i}}
+\end{equation}
+
+There is a clear upper bound on the size of the IL for a single sensor in the pathological case that the entire data set recorded by a single sensor is one long single Incident. In this pathological case, the upper bounds of the IL is equal to the upper bounds of the IML plus some constant metadata size. The pathological case is not incredibly useful, so, let us look at this from a statistical standpoint.
+
+We can provide estimated bounds on the IL assuming a mean Incident rate in bytes per second $\mu IR$ as shown in Equation~\ref{eq:il:mu_s_il}.
+
+\begin{equation}\label{eq:il:mu_s_il}
+ \mu S_{IL} = \mu IR * T \pm \delta S_{IL}
+\end{equation}
+
+Equation~\ref{eq:il:e0} and Equation~\ref{eq:il:e1} provide error bounds on the estimated size of the IL\@.
+
+\begin{align}
+	\delta IR &= \frac{\sigma IR}{\sqrt{T}} \label{eq:il:e0} \\
+	\delta S_{IL} &= \delta IR * |T| \label{eq:il:e1}
+\end{align}
+
+Let us next compare the estimated sizes of the IL for the OPQ and Lokahi networks using statistics gathered for these networks. These values were obtained directly from data collected during OPQ and Lokahi deployments. Table~\ref{table:estimated_mu_ir} provides the parameters used for these comparisons.
+
+\begin{table}[H]
+	\centering
+	\caption{Estimated $IR$}
+	\begin{tabularx}{\textwidth}{llllll}
+		\toprule
+		\textbf{Network} & $\bm{\mu DR}$ & \textbf{Data/Day} & \textbf{Data/Week} & \textbf{Data/Year} \\
+		\midrule
+		OPQ & 184.41 & 15.93 MB & 111.53 MB & 5.82 GB \\
+		Lokahi & 37.12 & 3.21 MB & 22.45 MB & 1.17 GB \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:estimated_mu_ir}
+\end{table}
+
+\paragraph{PL Requirements}
+The Phenomena Level provides actionable insights and context beyond what is provided in the IL. Examples of added context include predictive analysis, Annotations, or similarity metrics between Incidents. The Phenomena level consists mainly of metadata describing the Phenomena. Different types of Phenomena require varying amounts of metadata.
+
+Equation~\ref{eq:pl} calculates the size of the PL $S_{PL}$ by summing the size of each Phenomena $S_{P}$ that is stored.
+
+\begin{equation}\label{eq:pl}
+	S_{PL} = \sum_{i=0}^{S_{P_{n}}} S_{P_{i}}
+\end{equation}
+
+The size of the PL can be estimated by Equation~\ref{eq:est_pl} where $\mu PR$ is the mean Phenomena data rate per second and $T$ is the number of seconds that the network is up.
+
+\begin{equation}
+	\mu S_{PL} = \mu PR * T
+	\label{eq:est_pl}
+\end{equation}
+
+Next, I will compare the estimated sizes of the PL for the OPQ and Lokahi networks using statistics gathered for these networks. These values were obtained directly from data collected during OPQ and Lokahi deployments. Table~\ref{table:estimated_mu_pl} provides the parameters used for these comparisons.
+
+\begin{table}[H]
+	\centering
+	\caption{Estimated $PL$}
+	\begin{tabularx}{\textwidth}{llllll}
+		\toprule
+		\textbf{Network} & $\bm{\mu DR}$ & \textbf{Data/Day} & \textbf{Data/Week} & \textbf{Data/Year} \\
+		\midrule
+		OPQ & 0.22 & 0.02 MB & 0.13 MB & 6.92 MB \\
+		Lokahi & 0.01 & 0.86 kB & 6.05 kB & 314.50 kB \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:estimated_mu_pl}
+\end{table}
+
+Why are the Phenomena data amounts so low compared to the other levels? The main reason is that Phenomena are few and far between. Another reason is that Phenomena consist mainly of metadata and do not copy data from lower levels into it. Instead, Phenomena points to data in lower levels and adjusts the TTL values of lower levels to match that of the Phenomena.
+
+\paragraph{Comparing Laha Requirements}
+
+Now that we can compute the bounds for different levels within the Laha hierarchy, let us examine how the requirements compare between each level given data that resembles the OPQ and Lokahi DSNs. This data was generated using parameters gathered from OPQ and Lokahi deployments.
+
+Analytically, when all parameters are known, the size of the entire DSN $S_{DSN}$ can be computed as shown in Equation~\ref{eq:s_dsn}.
+
+\begin{equation}\label{eq:s_dsn}
+	S_{DSN} = S_{IML} + S_{AML} + S_{DL} + S_{IL} + S_{P}
+\end{equation}
+
+Statistically speaking, the mean size and error of the entire DSN are provided by Equations~\ref{eq:dsn:mu_s_dsn} and Equation~\ref{eq:dsn:e} respectively.
+
+\begin{align}
+	\delta S_{DSN} &= \sqrt{(\delta S_{IML})^2 + (\delta S_{AML})^2 + (\delta S_{DL})^2 + (\delta S_{IL})^2 + (\delta S_{P})^2} \label{eq:dsn:e} \\
+	\mu S_{DSN} &= \mu S_{IML} + \mu S_{AML} + \mu S_{DL} + \mu S_{IL} + \mu S_{P} \pm \delta S_{DSN} \label{eq:dsn:mu_s_dsn}
+\end{align}
+
+First, let us look at the size of Laha with parameters estimated from OPQ. The estimated parameters for this scenario are given in Table~\ref{table:estimated_laha_opq}.
+
+\begin{table}[H]
+	\centering
+	\caption{OPQ Estimated Parameters}
+	\begin{tabularx}{\textwidth}{ll}
+		\toprule
+		\textbf{Field} & \textbf{Mean} \\
+		\midrule
+		$S_{SAMP}$ & 2 \\
+		$SR$ & 12000 \\
+		$S_{MEASUREMENT}$ & 145 \\
+		$R_{MEASUREMENT}$ & $\frac{1}{1}$ \\
+		$S_{TREND}$ & 365  \\
+		$R_{TREND}$ & $\frac{1}{60}$  \\
+		$\mu N_{SEN}$ & 1  \\
+		$\mu DR$ & 40.69  \\
+		$\mu IR$ & 184.41 \\
+		$\mu PR$ & 0.22 \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:estimated_laha_opq}
+\end{table}
+
+Figure~\ref{fig:plot_lala_opq} shows the estimated bounds of the entire network over the course of three years.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/plot_laha_opq.png}
+	\caption{Estimated Laha (OPQ)}
+	\label{fig:plot_lala_opq}
+\end{figure}
+
+We can gather that the bounds on the entire OPQ network given estimated parameters from the network are 2310 gigabytes over a period of 3 years. It is clear that the IML provides most of this data. We can also see that over time, the DL dominates all other levels except the IML\@.
+
+By representing the data as a pie chart (Figure~\ref{fig:plot_lala_opq_pie}), we can gain a better understanding of how these levels compare at the end of a year. The first (left most) pie chart shows that the IML dominates the overall data size. This makes sense because this level represents raw samples which is always going to be the largest set of data.
+
+By removing the IML from the results, the second pie chart (right most) shows how the other levels compare to each other. From this, we can gather that the DL is the next largest. This makes sense because the DL represents windows of samples that may or may not include Incidents, and therefore the DL should always be larger than the IL which is essentially the DL with further filtering and classification.
+
+We also observe that the size of the AML also takes up the next largest percentage of space. This is mainly due to the fact that OPQ collects aggregate Measurements once per second. Left unbounded, this collection can become quite sizable.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/plot_laha_opq_pie.png}
+	\caption{Estimated Laha (OPQ)}
+	\label{fig:plot_lala_opq_pie}
+\end{figure}
+
+Finally, we summarize the results in Table~\ref{table:summarized_laha_results_opq}.
+
+\begin{table}[H]
+	\centering
+	\caption{Summarized Laha Results (OPQ)}
+	\begin{tabularx}{\textwidth}{ll}
+		\toprule
+		\textbf{Laha Level} & \bm{$\mu Size$} \textbf{GB} \\
+		\midrule
+		IML & 2270.59 \\
+		AML (Measurements) & 13.71 \\
+		AML (Trends) & 0.57  \\
+		AML (Total) & 14.29  \\
+		DL & 3.84  \\
+		IL & 22.21 \\
+		PL & 0.02  \\
+		Laha (Total) & 2310.97  \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:summarized_laha_results_opq}
+\end{table}
+
+Let us next perform the same evaluation, but for the Lokahi network. Table~\ref{table:estimated_laha_lokahi} provides the estimated parameters gathered from the Lokahi deployment. Since we are examining upper bounds, we will only use one of Lokahi's sampling rates (the highest 8000 Hz) in the evaluation.
+
+\begin{table}[H]
+	\centering
+	\caption{Lokahi Estimated Parameters}
+	\begin{tabularx}{\textwidth}{ll}
+		\toprule
+		\textbf{Field} & \textbf{Mean} \\
+		\midrule
+		$S_{SAMP}$ & 4 \\
+		$SR$ & 8000 \\
+		$S_{TREND}$ & 2471  \\
+		$R_{TREND}$ & $\frac{1}{32.768}$  \\
+		$\mu N_{SEN}$ & 1  \\
+		$\mu DR$ & 402.82  \\
+		$\mu IR$ & 37.11 \\
+		$\mu PR$ & 0.01 \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:estimated_laha_lokahi}
+\end{table}
+
+Figure~\ref{fig:plot_lala_lokahi} shows the estimated unbounded Laha growth for Lokahi.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/plot_laha_lokahi.png}
+	\caption{Estimated Laha (Lokahi)}
+	\label{fig:plot_lala_lokahi}
+\end{figure}
+
+Figure~\ref{fig:plot_lala_lokahi_pie} shows the makeup of unbounded data within Laha for Lokahi.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/plot_laha_lokahi_pie.png}
+	\caption{Estimated Laha (Lokahi)}
+	\label{fig:plot_lala_lokahi_pie}
+\end{figure}
+
+Finally, we summarize the results in Table~\ref{table:summarized_laha_results_lokahi}.
+
+\begin{table}[H]
+	\centering
+	\caption{Summarized Laha Results (OPQ)}
+	\begin{tabularx}{\textwidth}{ll}
+		\toprule
+		\textbf{Laha Level} & \bm{$\mu Size$} \textbf{GB} \\
+		\midrule
+		IML & 2819.53 \\
+		AML (Total) & 6.64  \\
+		DL & 35.49  \\
+		IL & 3.27  \\
+		PL & 0.001  \\
+		Laha (Total) & 2864.95  \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:summarized_laha_results_lokahi}
+\end{table}
+
+Over the course of 3 years using estimated parameters supplied by the Lokahi network, the network is expected to grow close to 2.8 TB.
+
+\subsubsection{Evaluation of TTL}\label{sssec:evaluation_of_ttl}
+In the previous section, I examined the data requirements for Laha with the assumption that data is never discarded. In practice, this approach is unsustainable and will quickly lead to network degradation in terms of storage, memory, and processing requirements. To address this issue, Laha provides the concept of TTL (Time-to-Live) which is the amount of time that data is stored before it is garbage collected.
+
+Each level within the Laha hierarchy provides a dynamic and configurable TTL. Data is garbage collected when it becomes older than its TTL. The TTL for data is adjusted when higher levels in the hierarchy identity something of interest. For instance, if a Detection is identified in the DL, then all data in the IML and AML that were used in the creation of the Detection are given a TTL that matches the TTL of the Detection. Similarly, if an Incident is identified in the IL, then all data in the IML, AML, and DL are given TTLs that match that of the Incident. This process continues recursively throughout all levels of the Laha hierarchy.
+
+Table~\ref{table:ttl_summary} reviews the default TTLs provided at each level of the Laha hierarchy.
+
+\begin{table}[H]
+	\centering
+	\caption{Default Laha TTL}
+	\begin{tabularx}{\textwidth}{ll}
+		\toprule
+		\textbf{Laha Level} & \textbf{Default TTL} \\
+		\midrule
+		IML & 15 Minutes \\
+		AML (Measurements) & 1 Day \\
+		AML (Trends) & 2 Weeks \\
+		DL & 1 Month \\
+		IL & 1 Year \\
+		PL & 2 Years \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:ttl_summary}
+\end{table}
+
+In the following sub-sections, I will look at the minimum, estimated, and maximum bounds for each level in the Laha hierarchy with TTL enabled. The minimum bounds will always be the data bounded by TTL without any data being saved by Events further up the hierarchy. The estimated bounds will be calculated using estimated parameters that quantify the amount of data in each level that is preserved by upper levels. The maximum bounds will be discussed in terms of pathological cases where all data is preserved and no data is discarded. The maximum bounds for all levels is equivalent to the bound of those levels without TTL optimization.
+
+\paragraph{Simulating Laha}
+
+I decided to simulate Laha using parameters gathered from the OPQ and Lokahi networks to gain insights into data storage requirements. These simulations provide estimated bounds of data on each level of the Laha hierarchy. The simulation runs at a granularity of a second and simulates the IML (raw samples), AML (Measurements and Trends), DL (Events), IL (Incidents), and PL Phenomena. The simulation maintains an in-memory database of simulated data that is sorted by TTL. Items are discarded from the database when their TTL expires. Higher levels save data from the lower levels at a similar rate as observed in the OPQ and Lokahi networks.
+
+The following is a description of how the simulation works for the OPQ network. The simulator for the Lokahi network works similarly, but with a different estimated parameter set.
+
+At each time step:
+\begin{enumerate}
+	\item 12000 samples are produced with a TTL of 15 minutes
+	\item 1 Measurement is produced with a TTL of 24 hours, 1 month, 1 year, or 2 years depending on $P_{ORPHAN}(measurement)$, $P_{EVENT}(measurement)$, $P_{INCIDENT}(measurement)$, $P_{PHENOMENA}(measurement)$
+	\item 1 Trend is produced if the time step if divisible by 60 with a TTL of 2 weeks, 1 month, 1 year, or 2 years depending on $P_{ORPHAN}(trend)$, $P_{EVENT}(trend)$, $P_{INCIDENT}(trend)$, $P_{PHENOMENA}(trend)$
+	\item 1 Event is produced if $P_{EVENT\_STEP}$ with a TTL of 1 month, 1 year, or 2 years depending on $P_{ORPHAN}(event)$, $P_{INCIDENT}(event)$, $P_{PHENOMENA}(event)$
+	\item 1 Incident is produced if $P_{INCIDENT\_STEP}$ with a TTL of 1 year or 2 years depending on $P_{ORPHAN}(incident)$, $P_{PHENOMENA}(incident)$
+	\item 1 Phenomena is produced if $P_{PHENOMENA\_STEP}$ with a TTL of 2 years
+	\item Garbage collection is performed if the time step is divisible by 600 ticks (10 minutes)
+	\item Total items and size for each level are written to file every $N$ time steps
+\end{enumerate}
+
+Where $P_{ORPHAN}(data)$ is the probability that the referenced data does not belong to a higher level, $P_{EVENT}(data)$ is the probability that the referenced data was saved by an Detection (Event), $P_{INCIDENT}(data)$ is the probability that the referenced data was saved by an Incident, $P_{PHENOMENA}(data)$ is the probability that the referenced data was saved by a Phenomena, $P_{EVENT\_STEP}$ is the probability that an Event will be produced for any given time step, $P_{INCIDENT\_STEP}$ is the probability that an Incident will be produced for a given time step, and $P_{PHENOMENA\_STEP}$ is the probability that a Phenomena will be produced for a given time step.
+
+Table~\ref{table:sim_params} provides the estimated parameters used to run the OPQ and Lokahi simulations.
+
+\begin{table}[H]
+	\centering
+	\caption{Simulation Parameters}
+	\begin{tabularx}{\textwidth}{Xll}
+		\toprule
+		\textbf{Parameter} & \textbf{OPQ} & \textbf{Lokahi} \\
+		\midrule
+		Sample Rate Hz & 12000 & 80, 800, 8000 \\
+		Sample Size Bytes & 2 & 4 \\
+		Measurement Rate & $\frac{1}{1}$ & N/A \\
+		Measurement Size Bytes & 145 & N/A \\
+		Trend Rate & $\frac{1}{1}$ & $\frac{1}{51.2}$, $\frac{1}{40.96}$, $\frac{1}{32.768}$ \\
+		Trend Size Bytes & 365 & 2471 \\
+		\% Data in Events & 0.16 & 6.26 \\
+		\% Detections in Incidents & 55.78 & N/A \\
+		Mean Event Len Seconds & 13.79 & 2010 \\
+		Mean Incident Len Seconds & 0.53 & 3389 \\
+		Mean Event Size Bytes & 330893 & 12923754 \\
+		Mean Incident Size Bytes & 12647 & 46169741 \\
+		Event DR/second & 40.66 &  0.000031 \\
+		Incident DR/second & 184.41 &  0.0000008 \\
+		Phenomena DR/second & 0.22 & 0.01 \\
+		Simulation Tick Granularity & 1 second & 1 second \\
+		Simulation Ticks & seconds/3 years, seconds/3 years, \\
+		Simulation GC Interval & seconds/10 minutes, seconds/10 minutes \\
+		Simulation Write Data Ticks & seconds/hour, seconds/hour \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:sim_params}
+\end{table}
+
+The full statistics can be found in the appendix in Section~\ref{appendix:simulation_parameters}.
+
+\paragraph{Evaluation of IML with TTL}
+The IML (Instantaneous Measurements Level) stores raw samples from the DSN. Traditionally, this is the largest and most noisy data set produced by the DSN and thus has a very short TTL (which is often limited by the amount of on-board sensor memory). I showed in the previous section that without TTL, this level grows very rapidly. The IML is unique in that it is the only level that does not grow beyond its TTL. Instead, when Detections, Incidents, or Phenomena are identified, data is coped from the IML into either the DL, IL, or PL. This simplifies calculating the bounds of this level.
+
+Calculating lower bounds of the IML for a network can be accomplished by simply bounding its growth by its TTL\@. By substituting $T$ in Equation~\ref{iml:SSEN} and Equation~\ref{eq:iml:mu_size_iml} with the the number of seconds in the IML TTL (15 minutes).
+
+Figure~\ref{fig:sim_iml_opq} shows the simulated IML data growth for a single sensor from the OPQ network over the period of one day. We can observe that the IML converges to 25 MB after 15 minutes. The spikes once the data converges is the delta added by a garbage collector that only runs once every 10 minutes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_iml_opq.png}
+	\caption{Simulated IML for OPQ}
+	\label{fig:sim_iml_opq}
+\end{figure}
+
+Figure~\ref{fig:sim_iml_lokahi} shows the simulated IML data growth for a single sensor from the Lokahi network over the period of one day. Sensors within the Lokahi network have the ability to operate at different sampling rates (80 Hz, 800 Hz, or 8000 Hz) which affects the size of the IML as well as the size of every level above the IML. The simulated run of Lokahi shows the IML size differences between the different sampling rates. For one sensor, the IML converges towards 0.5 MB, 3.5 MB, and 33 MB for each sampling rate after 15 minutes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_iml_lokahi.png}
+	\caption{Simulated IML for Lokahi}
+	\label{fig:sim_iml_lokahi}
+\end{figure}
+
+\paragraph{Evaluation of AML with TTL}
+The AML (Aggregate Measurement Level) collects windowed features estimated from the IML data. The OPQ network provides two AMLs, Measurements which are rolled into one second windows and Trends which are rolled into one minute windows. The Lokahi network provides a single AML (Trends) with windows that vary depending on the sensor sample rate.
+
+Table~\ref{table:ttls_aml} displays default AML TTL values for the OPQ and Lokahi networks.
+
+\begin{table}[H]
+	\centering
+	\caption{Default AML TTLs}
+	\begin{tabularx}{\textwidth}{Xl}
+		\toprule
+		\textbf{Network} & \textbf{TTL} \\
+		\midrule
+		OPQ (Measurements) & 1 Day \\
+        OPQ (Trends) & 2 Weeks \\
+        Lokahi & 2 Weeks \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:ttls_aml}
+\end{table}
+
+The minimum bounds of the AML with TTL can be found by using Equation~\ref{eq:aml:mu_s_sl} and Equation~\ref{eq:aml:mu_s_aml} and substituting $T$ for the AML TTL\@.
+
+Next, I examine the estimated bounds of the AML by looking at the estimated amount of AML data that is saved by higher levels in the hierarchy.
+
+Calculation of the estimated bounds can be found by Equation~\ref{eq:s_aml_ttl_full}.
+
+\begin{equation}\label{eq:s_aml_ttl_full}
+	\mu S_{AML\_TLL} = \mu S_{AML} + \mu DL_{AML} + \mu IL_{AML} + \mu PL_{AML}
+\end{equation}
+
+Where $\mu S_{AML}$ is calculated from Equation~\ref{eq:aml:mu_s_aml} and $T$ is substituted with the appropriate TTL for a given AML and $\mu DL_{AML}$ is the estimated amount of AML data saved by the DL, $\mu IL_{AML}$ is the estimated amount of AML data saved by the IL, and $\mu PL_{AML}$ is the estimated amount of AML data saved by the PL\@.
+
+Unlike IML data which is copied when a Detection, Incident, or Phenomena is created, AML data simply has its TTL modified to match the TTL of either the Detection, Incident, or Phenomena being created. This is true of all other upper levels as well. What this means analytically is that AML data will live for as long as the highest level that that AML data reached within the Laha hierarchy. For instance, if a Detection is observed, the AML data will first receive the same TTL as the Detection. However, if an Incident is later generated from that Detection, then the AML data will receive TTLs equal to the TTL of the Incident. This must be taken into account so that AML data is not included multiple times in the calculations.
+
+Since the estimated amount of AML data saved at each level is difficult to calculate directly, we provide the results from simulating the AML for OPQ and Lokahi.
+
+I had to create a long simulation to observe how data saved by Detections, Incidents, and Phenomena converge over the course of the largest TTL (2 years). OPQ utilized two different types of AML data, Measurements and Trends. Each of these AML sub-types have their own TTL (1 day and 2 weeks respectively) and their own size. This was taken into consideration for the simulation and we can calculate the AML over both sub-types.
+
+Further, the simulation tracks the amount of data at each level that is ``saved" by a higher level. If data is not ``saved" by a higher level then it retains its default TTL and I call it ``orphaned data". If data is saved by a higher lever, it gains the TTL of the highest level it is saved in and I refer to the data as ``highest\_level data". For example, ``Orphaned Measurements" refers to Measurements that have not been saved by a higher level and ``Incident Measurements" refer to Measurements that have been saved by an Incident. I will continue to use these terms to discuss the TTL bounds for the rest of the TTL evaluation.
+
+Figure~\ref{fig:sim_aml_opq} shows the size of the AML as simulated for the OPQ network over the course of three years. This figure shows the AML bounds for both Measurements and Trends separately and shows the bounds of the entire AML in the bottom panel. The figure shows how Measurements and Trends grow until they hit the TTL they were given. A single simulated device on the OPQ network converges to near 17 MB for Measurements and 7 MB for Trends giving a total estimated bounds of near 25 MB\@.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_aml_opq.png}
+	\caption{Simulated AML for OPQ}
+	\label{fig:sim_aml_opq}
+\end{figure}
+
+Figure~\ref{fig:sim_aml_lokahi} shows the size of the AML as simulated for the Lokahi network over the course of three years. The Lokahi network does not have Measurements and only provides for a single AML sub-type, Trends. The figure shows the AML size for each available Lokahi sampling rate. The simulated AML for the Lokahi network converges to between 100 MB and 220 MB for a single sensor.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_aml_lokahi.png}
+	\caption{Simulated AML for Lokahi}
+	\label{fig:sim_aml_lokahi}
+\end{figure}
+
+It should be noted that the size difference between sampling rates is not dependent on the number of samples. In fact, the size of each Trend remains close to constant independent of the sampling rate. Rather, Trends within Lokahi are produced at different rates depending on the sampling rate. The Trend rates were chosen to support a power of 2 number of samples for efficient post processing. Table~\ref{table:lokahi_aml_rate} shows the AML Trend rates for Lokahi.
+
+\begin{table}[H]
+	\centering
+	\caption{Lokahi AML Rate}
+	\begin{tabularx}{\textwidth}{Xl}
+		\toprule
+		\textbf{Sensor Sampling Rate Hz} & \textbf{Sensor Trend Rate Hz} \\
+		\midrule
+		80 & $\frac{1}{51.2}$ \\
+		800 & $\frac{1}{40.96}$ \\
+		8000 & $\frac{1}{32.768}$ \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:lokahi_aml_rate}
+\end{table}
+
+\paragraph{Evaluation of DL with TTL}
+
+The DL (Detections Level) contains metadata and windows of raw samples that may or may not contain signals of interest. Detections are generated when a Triggering algorithm notices deviations from nominal within the feature extracted data streams. The term ``Event" can also be used for describing a Detection. The default TTL given to Detections is one month.
+
+The lower bounds of the DL can be found by bounding the level by its TTL and assuming that no Detections are saved by Incidents or Phenomena. This can be accomplished by substituting $T$ in Equation~\ref{eq:dl:mu_s_dl} with the Detection's TTL (1 month).
+
+The estimated bounds can be found with Equation~\ref{eq:s_dl_ttl_full} where $\mu S_{DL}$ can be found by Equation~\ref{eq:dl:mu_s_dl}, $\mu IL_{DL}$ is the size of the DL saved by the IL, and $\mu PL_{DL}$ is the size of the DL saved by the PL\@.
+
+\begin{equation}\label{eq:s_dl_ttl_full}
+	\mu S_{DL\_TLL} = \mu S_{DL} + \mu IL_{DL} + \mu PL_{DL}
+\end{equation}
+
+Figure~\ref{fig:sim_dl_opq} shows the simulated DL for OPQ over the course of 3 years. In OPQ Detections can be orphaned or they can be saved by Incidents. The amount of Orphaned Detections converged to near 60 MB while the bulk of Detection data is due to Detections being saved by Incidents (a whopping ~700 MB of data) bringing the total DL bounds to near 800 MB\@.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_dl_opq.png}
+	\caption{Simulated DL for OPQ}
+	\label{fig:sim_dl_opq}
+\end{figure}
+
+Figure~\ref{fig:sim_dl_lokahi} shows the simulated DL for Lokahi over the course of 3 years. In Lokahi, Detections are not saved by Incidents, but rather the creation of an Incident replaces the Detection that the Incident came from. The consequence of this is that Detections only live for as long as their TTL and are never assigned a TTL of an Incident.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_dl_lokahi.png}
+	\caption{Simulated DL for Lokahi}
+	\label{fig:sim_dl_lokahi}
+\end{figure}
+
+What does affect the size of the DL in Lokahi is the sampling rate. Even if a similar number of Events are generated, higher sampling rates here will take up more space since the samples are copied into the Events.
+
+\paragraph{Evaluation of IL with TTL}
+
+The IL (Incident Level) contains metadata and windows of raw samples over classified signals of interest. Incidents are created when classification algorithms find signals of interest in Detection windows. The default TTL of the IL is one year.
+
+The minimum bounds of the IL occur when IL data is strictly bounded by its TTL. This can be found by substituting $T$ in Equation~\ref{eq:il:mu_s_il} with the IL TTL (1 year).
+
+The estimated bounds can be found with Equation~\ref{eq:s_il_ttl_full} where $\mu S_{IL}$ can be found by Equation~\ref{eq:il:mu_s_il} and $\mu PL_{IL}$ is the mean amount of IL data saved by the PL\@.
+
+\begin{equation}\label{eq:s_il_ttl_full}
+	\mu S_{IL\_TLL} = \mu S_{IL}  + \mu PL_{IL}
+\end{equation}
+
+Figure~\ref{fig:sim_il_opq} shows the simulated IL for the OPQ network over the course of 3 years. The IL converges after 1 year to near 5800 MB for a single simulated OPQ sensor.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_il_opq.png}
+	\caption{Simulated IL for OPQ}
+	\label{fig:sim_il_opq}
+\end{figure}
+
+Figure~\ref{fig:sim_il_lokahi} shows the simulated IL for the Lokahi network over the course of 3 years. Similar to the DL, the IL is affected by sensor sampling rate. The figure shows that the IL within the simulated Lokahi network converges to near 20 MB at 80 Hz, 200 MB at 800 Hz, and 2000 MB at 8000 Hz. The amount of incidents remains stable between sample rates, but the amount of data differs.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_il_lokahi.png}
+	\caption{Simulated IL for Lokahi}
+	\label{fig:sim_il_lokahi}
+\end{figure}
+
+\paragraph{Evaluation of PL with TTL}
+
+The PL (Phenomena Level) contains metadata which provides actionable insights and context on top of Incidents. Phenomena are generated when patterns (such as periodicity) are observed in lower levels of the Laha hierarchy. The default TTL for Phenomena is 2 years.
+
+The minimum bounds on the PL can be found by bounding the PL by its TTL (2 years).
+
+Figure~\ref{fig:sim_pl_opq} shows the simulated growth of the PL for the OPQ network over the course of 3 years.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_pl_opq.png}
+	\caption{Simulated PL for OPQ}
+	\label{fig:sim_pl_opq}
+\end{figure}
+
+Figure~\ref{fig:sim_pl_lokahi} shows the simulated growth of the PL for the Lokahi network over the course of 3 years for a single sensor.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_pl_lokahi.png}
+	\caption{Simulated PL for Lokahi}
+	\label{fig:sim_pl_lokahi}
+\end{figure}
+
+We can observe that the size of the PL within Lokahi is similar between sampling rates. This is due to the fact that Phenomena within Lokahi are not affected by sampling rate.
+
+\paragraph{Evaluation of Laha with TTL}
+
+The Laha hierarchy contains the levels IML, AML, DL, IL, and PL as discussed in the previous sections. This section evaluates the bounds on the entirety of Laha by looking at all the levels in summation.
+
+Interestingly enough, the minimum bounds of Laha can be found by summing the minimum bounds of the IML and AML. IML and AML values are always produced, but if no Events, Incidents, or Phenomena are identified, data will never be saved from IML or AML\@.
+
+Figure~\ref{fig:sim_laha_opq} shows the simulated Laha bounds for OPQ over the course of 3 years. The figure shows that Laha for OPQ converges to near 6.5 GB per device after 1 year.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_laha_opq.png}
+	\caption{Simulated Laha for OPQ}
+	\label{fig:sim_laha_opq}
+\end{figure}
+
+Figure~\ref{fig:sim_laha_lokahi} shows the simulated Laha bounds for OPQ over the course of 3 years. The figure shows that Laha for Lokahi converges to near 250 MB at 80 Hz, 1000 MB at 800 Hz, and 8 GB at 8000 Hz per device after 1 year.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/sim_laha_lokahi.png}
+	\caption{Simulated Laha for Lokahi}
+	\label{fig:sim_laha_lokahi}
+\end{figure}
+
+\paragraph{Comparing Laha with and without TTL}
+
+Let us first examine OPQ\@.
+
+Table~\ref{table:opq_laha_comparison} shows three features. The total number of data ran through the simulation at each level, the total number of data within Laha utilizing TTL, and the delta. As can be observed (and hopefully expected), we see large estimated data savings when utilizing TTL versus not utilizing TTL\@.
+
+\begin{table}[H]
+	\centering
+	\caption{OPQ Laha Comparison}
+	\begin{tabularx}{\textwidth}{Xlll}
+		\toprule
+		\textbf{Laha Level} & \textbf{Without TTL (MB)} & \textbf{With TTL (MB)} & \textbf{Delta (MB/\%)} \\
+		\midrule
+		IML & 2239488 & 35 & 2239453/-99.99 \\
+		AML & 14097 & 25 & 14072/-99.82\\
+		DL & 3931 & 750 & 3181/-80.92 \\
+		IL & 17208 & 5700 & 11508/-66.87 \\
+		PL & 1.38 & 0.80 MB & 0.58/-53.51 \\
+		Total & 2274724 & 6510 & 2268214/-99.71 \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:opq_laha_comparison}
+\end{table}
+
+The OPQ simulation showed that of all of the Measurements and Trends, about 90.70\% of them were orphaned, 6.33\% were saved by Events, 2.97\% of them were saved by Incidents, and 0.19\% where saved by Phenomena. Of the Events, about 67.98\% were orphaned, about 31.98\% were saved by Incidents and close to 0.04\% were saved by Phenomena. Of the Incidents, about 99.9\% were orphaned while about 0.1\% were saved by Phenomena.
+
+Let us next examine Lokahi with and without TTL. Table~\ref{table:lokahi_laha_comparison} shows three features. The total number of data ran through the simulation at each level, the total number of data within Laha utilizing TTL, and the delta. It should be noted that this example only looks at Lokahi's highest sampling rate of 8000 Hz.
+
+\begin{table}[H]
+	\centering
+	\caption{Lokahi Laha Comparison}
+	\begin{tabularx}{\textwidth}{Xlll}
+		\toprule
+		\textbf{Laha Level} & \textbf{Without TTL} & \textbf{With TTL} & \textbf{Delta (MB/\%)} \\
+		\midrule
+		IML & 90484 & 35 & 90449/-99.96 \\
+		AML & 6987 & 220 & 6767/-96.85 \\
+		DL & 180160 & 5000 & 175160/-97.22 \\
+		IL & 9326 & 3000 & 6362/-67.95 \\
+		PL & 0.94 & 0.20 & 0.74/-78.72  \\
+		Total & 286957 & 8255 & 278702/-97.12 \\
+		\bottomrule
+	\end{tabularx}
+	\label{table:lokahi_laha_comparison}
+\end{table}
+
+The Lokahi simulation showed that of all the Trends, about 93.21\% of them were orphaned, 6.27\% of them were saved by an Event, and about 0.26\% of them were saved by an Incident and Phenomena.
+
+In this section, we evaluated the data storage requirements with and without TTL. We showed significant data savings when using TTL as compared to when TTL was not used. Parameters for these evaluations were found both by the physical properties of the sensors as well as the rate at which data is moved between Laha levels.
+
+\section{Evaluation of Tertiary Goals}\label{sec:evaluation-of-tertiary-goals}
+In order to achieve the main goals of this framework, I claim that either all or a subset of the following tertiary goals must be fulfilled as discussed in Section~\ref{subsec:tertiary-goals-and-claims}: optimization of triggering, detection, classification, sensor energy usage, bandwidth, predictive analytics, and the ability to derive models of the underlying sensing field topology.
+
+To evaluate these tertiary goals, I selected and implemented DSN optimization techniques from current literature. I then compared and contrasted the usefulness of different techniques and discuss how each of these techniques perform in the different sensor domains.
+
+Finally, I discuss how each of these tertiary goals make progress towards overall goals of this sensor network. Results of these evaluations are provided in Section~\ref{sec:results-of-tertiary-goals}.
+
+\subsection{Evaluation of Adaptive Optimizations for Triggering}\label{subsec:evaluation-of-adaptive-optimizations-for-triggering}
+Triggering is the act of observing a feature extracted data stream for interesting features and triggering sensors to provide raw data for a requested time window for higher level analysis. Adaptively optimizing triggering is a way to tune triggering algorithms and parameters with the aim of decreasing false positives and false negatives. In this context, a false positive is triggering on a data stream that does not contain a signal of interest and a false negative is not triggering on a data stream that does contain a signal of interest.
+
+Adaptive triggering is only useful in networks that utilize triggering. Specifically, this technique can not be applied to DSNs that take a collect everything all the time approach.
+
+Triggering can also have significant impacts on overall sensor power requirements and DSN bandwidth requirements. Many of the optimizing triggering algorithms present in the literature exist to minimize sensor energy requirements and bandwidth requirements. This is addressed in great detail in the literature review by Anastasi et al~\cite{anastasi_energy_2009}. This is accomplished by reducing communications between sensor nodes and the sink. It is argued in~\cite{pottie2000wireless} that the cost of transmitting a single bit of information from a sensor cost approximately the same as running 1000 operations on that sensor now. However, there is some contention on this topic as~\cite{alippi_adaptive_2010} argues that in some modern sensors computational requirements can equal or eclipse those of  sensor communication.
+
+Even if a DSN utilizes triggering, it is not clear that adaptive triggering even takes place. The first question I evaluated is, does adaptive optimization of triggering take place at all given the domain of the DSN? That is, does the nature of the underlying sensor field contribute to optimization of triggering? I compared if and how optimizations take place in the two reference networks for the domains of PQ and infrasound.
+
+In order to evaluate triggering efficiency within our Laha deployments, Laha only adaptively modifies triggering for half of the devices in the OPQ deployment. In the Lokahi deployment, I  ran the same experiment twice. The first run did not optimize triggering and the second run did optimize triggering.
+
+Once the experiments were run, I first determined if optimization of triggering has occurred, and if it did, compared the number of false negatives and false positives against the runs that did not use optimized triggering or where optimization did not occur.
+
+In the results chapter (Chapter~\ref{ch:results}), I will show that a side effect of Laha's optimized triggering is reduced bandwidth and sensor energy requirements. To this end, I calculated metrics for total data sent and received at the sink node of each network for each device in the network. A positive result would show decreased bandwidth usage for devices that utilize optimized triggering. A negative result would show similar or more bandwidth usage for devices that utilize optimized triggering.
+
+Results will further show that another benefit of Laha's optimized triggering is reduced sensor energy requirements. The evaluation for this metric occurred with the Lokahi network where sensors can be dependent on batteries. I ran two experiments. For each experiment, all sensors were charged to battery level of 100\%. In the first experiment, I did not utilize optimized triggering. In the second experiment I did utilize optimized triggering. In both experiments, I measured the final battery level after the experiment and also measure how quickly the battery depletes for each sensor. This is possible because data in the Lokahi network contains timestamped entries with battery levels.
+
+Results of adaptive optimizations for triggering can be found in Section~\ref{subsec:results-of-adaptive-optimizations-for-triggering}.
+
+\subsection{Evaluation of Adaptive Optimizations for Detection and Classifications}\label{subsec:evaluation-of-adaptive-optimizations-for-detection-and-classifications}
+Detections occur when triggering observes something ``interesting" in the feature extracted data stream. A Detection is a contiguous window of raw sensor data that was requested by triggering that may or may not contain signals of interest. Optimizing detections involves optimized the window sizes to increase the signal-to-noise ratio of the window. Fine grained features are then computed by Detection Actors and moved to the Incidents Level where classification of signals takes place. Optimizing Detections involves trimming detection windows to increase signal-to-noise. Optimizing of classifications for Incidents involves tuning parameter sets for the underlying classification algorithms.
+
+Predictive and Locality Phenomena as well as topology optimizations were used to provide optimizations to the Detections and Incidents levels.
+
+Evaluation of adaptive optimizations for detection and classification within the Laha network were conducted differently for each Laha deployment.
+
+In the Lokahi deployment, I controlled the production of infrasound signals using the available infrasound source. I ran two experiments, where the amplitudes and frequencies of the signals are the same and the locations of the devices remain invariant. In the first experiment, Laha did not use optimized detection or classification provided by Phenomena. In the second experiment, Laha did use optimized detection and classification techniques provided by Phenomena.
+
+With known frequencies and amplitudes of the infrasound signals, I can compare the rate of detections and classifications between the optimized and unoptimized experimental runs. I expect to see a greater number of and more accurate detections and classifications from the optimized experiment.
+
+In the OPQ deployment, I compared the same metrics as the Lokahi deployment, but instead of controlling the source signal, I co-located OPQ Boxes with industry standard meters. In each pair of co-located OPQ Boxes, one was analyzed using Phenomena optimized detection and classification algorithms and the other was analyzed using unoptimized detection and classification algorithms.
+
+I collected and evaluated the number of false positives and false negatives for Incidents generated with optimization and without optimization. A positive outcome would include a decrease in either false positives, false negatives, or both. A negative result would be an increase in either or both false positives or false negatives.
+
+I also calculated the signal-to-noise ratio in Detections to determine if optimization of detections is working. A positive outcome is an increase in the signal-to-noise ration and a negative outcome would be similar or a decrease in signal-to-noise ratio.
+
+Results of adaptive optimizations for detection are provided in Section~\ref{subsec:results-of-adaptive-optimizations-for-detection-and-classification}.
+
+\subsection{Evaluation of Model of Underlying Sensor Field Topology}\label{subsec:evaluation-of-model-of-underlying-sensor-field-topology}
+Laha should be able to build a model of the underlying sensing field topology. This is not the topology of the physical layout of the sensors (this is generally already known a priori or by collecting location information), but rather the topology by which signals travel. For example, in a PQ network the topology is the physical power grid and switches that PQ signals travel through. In an infrasound network, the topology is the atmosphere through which sound waves travel. Laha aims to build a statistical model of the distances between sensors according to the topology of the sensing field by observing recurrent incidents over time. This can perhaps shed some light on understanding the topology of a sensing field without knowing anything about it before hand.
+
+Much of the literature on topology management is written to decrease sensor energy requirements by exploiting the density of sensors within a sensing field topology. For example, the ASCENT\cite{cerpa2004ascent} framework provides adaptive self configuring sensors that exploit topology denseness to decrease sensor energy usage. Several other frameworks have been designed with the same goal of reducing energy usage by exploiting topology\cite{schurgers2002stem,schurgers2002topology}.
+
+To evaluate the model of the sensing field topology, I took two different approaches for each Laha deployment. In both deployment, the sensing field topology is known beforehand to provide a ground truth. I then compared Laha's computed signal distance between sensors to the actual signal distance between sensors as provided by the ground truths.
+
+In the Lokahi deployment, sensors were strategically placed at different distances from an infrasound source. Some sensors were close to each other geographically, but separated by terrain that infrasound signals could not easily travel through. By moving the infrasound source, I can expect to see infrasound signals arriving or not arriving at the sensors depending on the source and direction of the signal along with the physical features of the land. By performing multiple experiments, I provided a model of the physical environment topology that Laha has built. I compared Laha's model to the known topology and provide a statistical error analysis.
+
+In the OPQ deployment, sensors were strategically placed on electrical lines to observe how distributed PQ signals move through a power grid. In this deployment, Laha built a topology model that does not show physical geographic distance between sensors, but instead built a model of the electrical distance between sensors. This data was evaluated by comparing the electrical distances found by the Laha model to the actual UH power grid as referenced by the schematic provided by the Office of Energy Management at UH Manoa. A statistical error analysis of the differences between electrical distances between the model and the schematic is provided as an evaluation metric.
+
+A positive outcome would be to show that there is high correlation between the Laha signal distances and the ground truth distances. A negative outcome would show low correlation.
+
+Assuming high correlation and a statistical model of the sensing field, I evaluated if Laha is able to use this information to optimize triggering, classification, or predictive analytics. In order to evaluate this, I collected the number of false positives and false negatives at all levels in the Laha hierarchy while optimizing from topology and without optimizing from topology. I expect to see less false positives and less false negatives when utilizing topology optimizations. A negative result would be a larger number of false positives or false negatives.
+
+I expect to only see results in networks where signals travel fast enough to create a statistical difference between arrival times at the various sensors. In sensing fields where signals travel slowly and uniformly (i.e.\ a temperature collection DSN), it may be more difficult or impossible to actually determine the sensing field topology.
+
+Results of the underlying sensing field topology are provided in Section~\ref{subsec:results-of-model-of-underlying-sensor-field-topology}.

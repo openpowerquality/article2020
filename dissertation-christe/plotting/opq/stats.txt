@@ -1,0 +1,48 @@
+total events 216167
+min ts ms 1554050690476 max ts ms 1576544275608
+total duration s 22493585.132
+total data duration box events s 2961617.8760000006
+percent data duration box events 0.1316649995374335
+mean data duration box events s, std 13.700601275865422, 16.225139670205277
+percent data duration events 0.09301198295969353
+total data 71078829024.0
+mean data, std 328814.43062077, 389403.3520849267
+mean data per second 3159.959988898403
+mean events per second 0.009610162129845402
+
+total incidents 446795
+min ts ms 1552622075631.3333 max ts ms 1576544275608.6667
+total duration s 23922199.977333497
+total data duration s 239217.01282348626
+percent data duration 0.00999979153464759
+mean data duration s, std 0.5354066469487937, 1.3573240876400612
+total data 5741208307.763672
+mean data, std 12849.759526771051, 32575.77810336147
+mean data per second 239.9949968315422
+mean incidents per second 0.018677002968930212
+
+aml mean data duration per month 265870.837801242
+aml percent event to incident 0.32006272927875207
+
+
+93000000/93312000 99.7%
+        total_samples=10800000 21.60MB
+        total_measurements=1168456 169.43MB orphaned_measurements=78367 6.71% 11.36MB event_measurements=164040 14.04% 23.79MB incident_measurements=923886 79.07% 133.96MB phenomena_measurements=2163 0.19% 0.31MB
+        total_trends=36347 13.27MB orphaned_trends=18241 50.19% 6.66MB event_trends=2781 7.65% 1.02MB incident_trends=15286 42.06% 5.58MB phenomena_trends=39 0.11% 0.01MB
+        total_events=112941 37948.18MB orphaned_events=17130 15.17% 5755.68MB incident_events=95588 84.64% 32117.57MB phenomena_events=223 0.20% 74.93MB
+        total_incidents=579004 7439.62MB phenomena_incidents=1287 0.22% 16.54MB
+        total_phenomena=1287 0.81MB
+        total_laha=45609.44MB total_iml=21.60MB total_aml=182.69MB total_dl=37948.18MB total_il=7439.62MB total_pl=0.81MB
+
+total_samples=1119744000000 2239488.00MB
+total_measurements=93312000 13530.24MB orphaned_measurements=84630948 90.70% 12271.49MB event_measurements=5904083 6.33% 856.09MB incident_measurements=2773723 2.97% 402.19MB phenomena_measurements=3246 0.00% 0.47MB
+total_trends=1555200 567.65MB orphaned_trends=1410763 90.71% 514.93MB event_trends=98449 6.33% 35.93MB incident_trends=45928 2.95% 16.76MB incident_phenomena=60 0.00% 0.02MB
+total_events=896161 301110.10MB orphaned_events=609242 67.98% 204705.31MB incident_events=286578 31.98% 96290.21MB phenomena_events=341 0.04% 114.58MB
+total_incidents=1741111 22371.54MB phenomena_incidents=1944 0.11% 24.98MB
+total_incidents=1944 1.22MB
+total_storage_items=190818416
+
+
+Total Phenomena: 2946
+Total bytes: 1853989
+DR/s: 0.21875293620997627

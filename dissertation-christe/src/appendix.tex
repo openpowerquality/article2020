@@ -1,0 +1,584 @@
+\appendixpage
+
+\chapter{Mauka Default Configuration}\label{appendix:MaukaConfig}
+
+This appendix contains the default configuration for the OPQ Mauka middleware component. This is included to show what default values Mauka utilized over the course of the OPQ deployment. These values are used to configure Mauka's communication protocols and to configure parameters used for the analysis of PQ by Mauka plugins and Phenomena.
+
+\begin{lstlisting}
+{
+	// Enables debugging for Mauka plugins
+	"mauka.debug": true,
+
+	// List of plugins to debug
+	"mauka.debug.plugins": ["MakaiEventPlugin", "StatusPlugin"],
+
+	// Should the event broker be started with Mauka?
+	"mauka.startEventBroker": true,
+
+	// Should the pub/sub broker be started with Mauka?
+	"mauka.startPubSubBroker": true,
+
+	// Should the plugins be started with Mauka?
+	"mauka.startPlugins": true,
+
+	// Makai's event endpoint
+	"zmq.event.interface"           : "tcp://localhost:10000",
+
+	// Makai's triggering endpoint
+	"zmq.trigger.interface"         : "tcp://localhost:9899",
+
+	// Mauka's pub/sub broker producer endpoint
+	"zmq.mauka.broker.pub.interface": "tcp://*:9883",
+
+	// Mauka's pub/sub broker consumer endpoint
+	"zmq.mauka.broker.sub.interface": "tcp://*:9882",
+
+	// Mauka's plugin producer endpoint
+	"zmq.mauka.plugin.pub.interface": "tcp://localhost:9882",
+
+	// Mauka's plugin consumer endpoint
+	"zmq.mauka.plugin.sub.interface": "tcp://localhost:9883",
+
+	// Plugin manager response endpoint
+	"zmq.mauka.plugin.management.rep.interface": "tcp://*:12000",
+
+	// Plugin manager request endpoint
+	"zmq.mauka.plugin.management.req.interface": "tcp://localhost:12000",
+
+	// MongoDB host
+	"mongo.host": "localhost",
+
+	// MongoDB port
+	"mongo.port": 27017,
+
+	// MongoDB database
+	"mongo.db": "opq",
+
+	// Plugin heartbeat interval in seconds
+	"plugins.base.heartbeatIntervalS": 60.0,
+
+	// ITIC segmentation threshold
+	"plugins.IticPlugin.segment.threshold.rms": 0.1,
+
+	// FrequencyVariationPlugin reference frequency
+	"plugins.FrequencyVariationPlugin.frequency.ref": 60.0,
+
+	// FrequencyVariationPlugin threshold low
+	"plugins.FrequencyVariationPlugin.frequency.variation.threshold.low": 0.1,
+
+	// FrequencyVariationPlugin threshold high
+	"plugins.FrequencyVariationPlugin.frequency.variation.threshold.high": 0.1,
+
+	// FrequencyVariationPlugin interruption threshold
+	"plugins.FrequencyVariationPlugin.frequency.interruption": 58.0,
+
+	// FrequencyVariationPlugin maximum lull in windows
+	"plugins.FrequencyVariationPlugin.max.lull.windows": 3,
+
+	// TransietPlugin noise floor
+	"plugins.TransientPlugin.noise.floor" : 6.0,
+
+	// TransietPlugin minimum oscillatory cycles
+	"plugins.TransientPlugin.oscillatory.min.cycles" : 3,
+
+	// TransietPlugin low frequency max hz
+	"plugins.TransientPlugin.oscillatory.low.freq.max.hz" : 5000.0,
+
+	// TransietPlugin medium frequency max hx
+	"plugins.TransientPlugin.oscillatory.med.freq.max.hz" : 500000.0,
+
+	// TransietPlugin high frequency max hz
+	"plugins.TransientPlugin.oscillatory.high.freq.max.hz" : 5000000.0,
+
+	// TransietPlugin Zero crossing threshold
+	"plugins.TransientPlugin.arcing.zero.crossing.threshold" : 10,
+
+	// TransietPlugin Maximum lull in milliseconds
+	"plugins.TransientPlugin.max.lull.ms" : 4.0,
+
+	// TransietPlugin periodic notching standard deviation
+	"plugins.TransientPlugin.max.periodic.notching.std.dev" : 2.0,
+
+	// TransietPlugin periodicity threshold
+	"plugins.TransientPlugin.auto.corr.thresh.periodicity" : 0.4,
+
+	// MakaiEventPlugin wait this many seconds before accessing data
+	"plugins.MakaiEventPlugin.getDataAfterS": 10.0,
+
+	// MakaiEventPlugin filter order for frequency extraction
+	"plugins.MakaiEventPlugin.filterOrder":4,
+
+	// MakaiEventPlugin cutoff frequency for frequency extraction
+	"plugins.MakaiEventPlugin.cutoffFrequency": 500.0,
+
+	// MakaiEventPlugin number of cycles per frequency measurements
+	"plugins.MakaiEventPlugin.frequencyWindowCycles": 1,
+
+	// MakaiEventPlugin down sample rate for frequency extraction
+	"plugins.MakaiEventPlugin.frequencyDownSampleRate": 2,
+
+	// ThdPlugin threshold percent
+	"plugins.ThdPlugin.threshold.percent": 5.0,
+	// ThdPlugin window size in milliseconds
+	"plugins.ThdPlugin.window.size.ms": 200,
+
+	// Mauka's health endpoint
+	"plugins.StatusPlugin.port": 8911,
+
+	// How often system statistics should be summarized
+	"plugins.SystemStatsPlugin.intervalS": 60,
+
+	// How often system statistics should be queried
+	"plugins.SystemStatsPlugin.systemStatsIntervalS": 5,
+
+	// Default configuration for Laha if one does not exist in the databasr
+	"laha.config.default": {
+		"ttls": {
+		"box_samples": 900,
+		"measurements": 86400,
+		"trends": 604800,
+		"events": 2592000,
+		"incidents": 31536000
+		}
+	}
+}
+\end{lstlisting}
+
+\chapter{ITIC Curve Polygon Points}
+\label{appendix:Itic}
+
+This appendix provides the polygons used by the ITIC plugin. Polygons are represented as a set of points. Easy x value represents a duration in electrical cycles and each y value represents a percentage from nominal.
+
+\begin{lstlisting}
+PROHIBITED_REGION_POLYGON = [
+	[HUNDREDTH_OF_A_CYCLE, 500],
+	[1, 200],
+	[3, 140],
+	[3, 120],
+	[20, 120],
+	[500, 120],
+	[500, 110],
+	[10000, 110],
+	[10000, 500],
+	[HUNDREDTH_OF_A_CYCLE, 500]
+]
+"""Polygon representing the prohibited region"""
+
+NO_DAMAGE_REGION_POLYGON = [
+	[20, 0],
+	[20, 40],
+	[20, 70],
+	[500, 70],
+	[500, 80],
+	[10000, 80],
+	[10000, 90],
+	[10000, 0],
+	[20, 0]
+]
+"""Polygon representing the no damage region"""
+
+NO_INTERRUPTION_REGION_POLYGON = [
+	[0, 0],
+	[0, 500],
+	[HUNDREDTH_OF_A_CYCLE, 500],
+	[1, 200],
+	[3, 140],
+	[3, 120],
+	[20, 120],
+	[500, 120],
+	[500, 110],
+	[10000, 110],
+	[10000, 90],
+	[10000, 80],
+	[500, 80],
+	[500, 70],
+	[20, 70],
+	[20, 40],
+	[20, 0],
+	[0, 0]
+]
+"""Polygon representing the no interruption region"""
+\end{lstlisting}
+
+\chapter{Lokahi Data Packet Protocol}
+\label{lokahi-data-packet-protocol}
+
+This appendix provides the data protocol utilized by Lokahi sensors. This appendix is included to show what metadata and data fields are present in Lokahi data packets. The protocol is described using protocol buffers version 3.
+
+\begin{lstlisting}
+syntax = "proto3";
+
+option java_package = "io.redvox.apis";
+
+message RedvoxPacket {
+// Identity information
+uint32 api = 1;                   // The API version of this protocol
+string uuid = 2;                  // A unique identifier assigned by the client and not user configurable
+string redvox_id = 3;             // Device id of the client, user configurable. Alpha-numeric + underscores "_" only.
+string authenticated_email = 4;   // If the client has authenticated, store authenticated email
+string authentication_token = 5;  // JWT obtained from authentication
+string firebase_token = 23;       // Token obtained from Google's Firebase
+
+// Packet information
+bool is_backfilled = 6; // Is this live data or backfilled (filled in by the server)
+bool is_private = 7;    // Is this data private or public?
+bool is_scrambled = 8;  // Is the audio channel scrambled?
+
+// Device information
+string device_make = 9;           // e.g. HTC, iPhone, Samsung, etc
+string device_model = 10;         // e.g. PixelXL, 6s, etc
+string device_os = 11;            // e.g. iOS, Android
+string device_os_version = 12;    // Operating system version
+string app_version = 13;          // App version
+float battery_level_percent = 24; // Battery level of device (0.0%-100.0%)
+float device_temperature_c = 25;  // Temperature of device in Celsius
+
+// Server information
+string acquisition_server = 14;           // Full protocol, url, port, and endpoint. e.g. wss://redvox.io:9000/api/900
+string time_synchronization_server = 15;  // Full protocol, url, port, and endpoint.
+string authentication_server = 16;        // Full protocol, url, port, and endpoint.
+
+// Timestamps
+int64 app_file_start_timestamp_epoch_microseconds_utc = 17; // Timestamp of packet creation
+int64 app_file_start_timestamp_machine = 18;                // Internal machine time of packet creation
+int64 server_timestamp_epoch_microseconds_utc = 19;         // Time at which this packet arrives at the server (filled in by the server)
+
+// Data payloads
+repeated EvenlySampledChannel evenly_sampled_channels = 20;      // List of evenly sampled channels. i.e. channels with a stable sample rate such as microphone data
+repeated UnevenlySampledChannel unevenly_sampled_channels = 21;  // List of unevenly sampled channels. i.e. those without a stable sample rate such as barometer or GPS
+repeated string metadata = 22;                                   // Any extra misc metadata that needs associated with this packet
+}
+
+// An array of int32s
+message Int32Payload {
+	repeated int32 payload = 1;
+}
+
+// An array of uint32s
+message UInt32Payload {
+	repeated uint32 payload = 1;
+}
+
+// An array of int64s
+message Int64Payload {
+	repeated int64 payload = 1;
+}
+
+// An array of uint64s
+message UInt64Payload {
+	repeated uint64 payload = 1;
+}
+
+// An array of float32s
+message Float32Payload {
+	repeated float payload = 1;
+}
+
+// An array of float64s
+message Float64Payload {
+	repeated double payload = 1;
+}
+
+// An array of bytes
+message BytePayload {
+enum BytePayloadType {
+	BYTES = 0;
+	UINT8 = 1;
+	UNINT16 = 2;
+	UNINT24 = 3;
+	UINT32 = 4;
+	UINT64 = 5;
+	INT8 = 6;
+	INT16 = 7;
+	INT24 = 8;
+	INT32 = 9;
+	INT64 = 10;
+	FLOAT32 = 11;
+	FLOAT64 = 12;
+	OTHER = 13;
+}
+
+enum ChannelType {
+	MICROPHONE = 0;
+	BAROMETER = 1;
+	LATITUDE = 2;
+	LONGITUDE = 3;
+	SPEED = 4;
+	ALTITUDE = 5;
+	RESERVED_0 = 6;
+	RESERVED_1 = 7;
+	RESERVED_2 = 8;
+	TIME_SYNCHRONIZATION = 9;
+	ACCURACY = 10;
+	ACCELEROMETER_X = 11;
+	ACCELEROMETER_Y = 12;
+	ACCELEROMETER_Z = 13;
+	MAGNETOMETER_X = 14;
+	MAGNETOMETER_Y = 15;
+	MAGNETOMETER_Z = 16;
+	GYROSCOPE_X = 17;
+	GYROSCOPE_Y = 18;
+	GYROSCOPE_Z = 19;
+	OTHER = 20;
+	LIGHT = 21;
+	IMAGE = 22;
+	INFRARED = 23;
+}
+
+// A channel with evenly sampled data. i.e., one with a stable sample rate such as microphone
+// Note: Multiple values can be associated with each channel. If you specify more than one channel type, then the payload should have interleaving values.
+// See unevenly sampled channels for a better explanation of this.
+message EvenlySampledChannel {
+	repeated ChannelType channel_types = 1;                   // Channel types locked to one sample rate
+	string sensor_name = 2;                                   // Name of sensor
+	double sample_rate_hz = 3;                                // Sample rate in Hz
+	int64 first_sample_timestamp_epoch_microseconds_utc = 4;  // Timestamp of first sample in channel
+	oneof payload {                                           // Channel payload, client picks most appropriate payload type
+		BytePayload byte_payload = 5;
+		UInt32Payload uint32_payload = 6;
+		UInt64Payload uint64_payload = 7;
+		Int32Payload int32_payload = 8;
+		Int64Payload int64_payload = 9;
+		Float32Payload float32_payload = 10;
+		Float64Payload float64_payload = 11;
+	}
+	repeated double value_means = 12;   // Mean values in payload, one mean per channel
+	repeated double value_stds = 13;    // Standard deviations in payload, one per channel
+	repeated double value_medians = 14; // Median values in payload, one per channel
+	repeated string metadata = 15;      // Extra metadata to associate with this channel
+}
+
+// A channel without evenly sampled data. i.e., one with a non-stable sample rate such as barometer or GPS
+// Note: Multiple values can be associated with each timestamp such as in the case of a GPS returning lat, lng, speed, and altitude at the same time
+// For each value, specify a channel type, then in the payload, interleave the values.
+// e.g. channel_types = [LATITUDE, LONGITUDE, SPEED, ALTITUDE], then the payload becomes for each timestamp/sample i
+//  payload = [latitude[0], longitude[0], speed[0], altitude[0], latitude[1], longitude[1], speed[1], altitude[1], ..., latitude[i], longitude[i], speed[i], altitude[i]]
+message UnevenlySampledChannel {
+	repeated ChannelType channel_types = 1;         // Channel types associated with provided timestamps
+	string sensor_name = 2;                         // Name of sensor
+	repeated int64 timestamps_microseconds_utc = 3; // List of timestamps for each sample
+	oneof payload {                                 // Channel payload
+		BytePayload byte_payload = 4;
+		UInt32Payload uint32_payload = 5;
+		UInt64Payload uint64_payload = 6;
+		Int32Payload int32_payload = 7;
+		Int64Payload int64_payload = 8;
+		Float32Payload float32_payload = 9;
+		Float64Payload float64_payload = 10;
+	}
+	double sample_interval_mean = 11;               // Mean of sample internval as determined from timestamps
+	double sample_interval_std = 12;                // Standard deviation of sample interval from timestamps
+	double sample_interval_median = 13;             // Median of sample interval from timestamps
+	repeated double value_means = 14;               // Mean values in payload, one mean per channel
+	repeated double value_stds = 15;                // Standard deviations in payload, one per channel
+	repeated double value_medians = 16;             // Medians in payload, one per channel
+	repeated string metadata = 17;                  // Extra metadata to associate with this channel
+}
+
+// Returned to client after each packet send
+message RedvoxPacketResponse {
+	// Response types
+	enum Type {
+	OK = 0;
+	ERROR = 1;
+}
+// Error types
+	enum Error {
+	NOT_AUTHENTICATED = 0;
+	OTHER = 1;
+}
+
+\end{lstlisting}
+
+\chapter{Lokahi Acquisition Sample Config}
+\label{lokahi_acquisition_config}
+
+This appendix provides a sample configuration for Lokahi's data acquisition service. This is provided to show the options that are available and the flexibility of the Lokahi data acquisition service. In particular, this configuration can be used to tune how data acquisition moves data between other distributed services within the Lokahi network.
+
+\begin{lstlisting}
+# Acquisition WebSocket server configuration
+[server]
+host = "localhost"                  # The host the acquisition server should bind to
+port = 9000                         # The port the acquisition server should bind to
+url_endpoint = "/acquisition/v900/" # The URL endpoint to listen for connections on
+max_payload_size = 4194304          # Max size of a packet, 4MB
+
+# These settings allow the packet to be updated by the acquisition server before using the packet.
+[packet_updates]
+update_server_timestamp = true              # If set to true, server will update packets arrival timestamp
+update_packet_sizes = true                  # If set to true, the original packet sizes will be stored in the metadata
+redact_authentication_token = true          # If set to true, the authentication token will be redacted.
+redact_firebase_token = true                # If set to true, the firebase token will be redacted.
+add_metadata = []                           # Metadata strings to be added to the packet
+add_ignore_server_timestamp_metadata = true # If set to true, metadata will be adding indicating any other servers should ignore setting the server timestamp
+
+# LZ4 compression settings. Compression takes place after the packet is updated but before it is forwared to the rest
+# of the processing pipeline.
+[lz4]
+use_default = true      # If set, the default LZ4 compression routine will be used. If not set, compression_level is used.
+compression_level = 16  # Compression level between 1-16. 1=fast compression, bigger size. 16=slow compression, smaller size. Only used if use_default is false.
+
+# Settings for JSON web tokens
+[jwt]
+enabled = false                                         # If set, this server will check the JWT for authentication/authorization and reject packets that fail the check. Disabling this will let all packets through.
+java_library_path = "../jwt/jwt-auth-0.1.0-all.jar"     # Path to the JWT authentication .jar library
+public_key_path = "./redvox_io_production_key.public"   # Path to public key.
+blacklist_public = false                                # If set, public devices will be blacklisted
+
+# File system handler.
+# This handler allows received packets to be written to disk at the provided base paths.
+[[fs_handlers]]
+enabled = true                      # Setting this enables the fs_handler
+base_path = "/Users/anthony/scrap"  # A base path that the redvox packet will be written to.
+devices_whitelist = []
+devices_blacklist = []
+owners_whitelist = []
+owners_blacklist = []
+
+# WebSocket handler.
+# This handler allows received packets to be relayed to other WS acquisition servers at the provided addresses.
+[[ws_handlers]]
+enabled = false                                                     # If set, this actor will be enabled
+ws_address = "wss://milton.soest.hawaii.edu:8000/acquisition/v900"  # Address to relay this data to
+devices_whitelist = []
+devices_blacklist = []
+owners_whitelist = []
+owners_blacklist = []
+
+# AWS S3 handlers.
+# When enabled, these will upload redvox packets to AWS S3.
+[[s3_handlers]]
+enabled = false         # If set, this actor will be enabled
+region = "UsWest1"      # S3 region
+access_key = ""         # S3 access key
+secret_access_key = ""  # S3 secret key
+bucket = "foo"          # S3 data bucket
+devices_whitelist = []
+devices_blacklist = []
+owners_whitelist = []
+owners_blacklist = []
+
+[[mongodb_handlers]]
+enabled = false                                     # If set, this actor will be enabled
+host = ""                                           # MongoDB host
+port = 0                                            # MongoDB port
+username = ""                                       # MongoDB username
+password = ""                                       # MongoDB password
+authentication_db = ""                              # MongoDB authentication db
+storage_db = ""                                     # MongoDB storage db
+storage_coll = "RedvoxPacketApi900"                 # MongoDB packet collection
+historical_device_coll = "HistoricalDevice"         # MongoDB historical collection
+redvox_device_api900_coll = "RedvoxDeviceApi900"    # MongoDB device collection
+devices_whitelist = []
+devices_blacklist = []
+owners_whitelist = []
+owners_blacklist = []
+
+[[kafka_handlers]]
+enabled = true                                      # If set, this actor will be enabled
+bootstrap_server = ""                               # Kafka bootstrap server
+topic = ""                                          # Kafka topic
+mongodb_partition_provider_host = ""                # MongoDB host
+mongodb_partition_provider_port = 0                 # MongoDB port
+mongodb_partition_provider_username = ""            # MongoDB username
+mongodb_partition_provider_password = ""            # MongoDB password
+mongodb_partition_provider_authentication_db = ""   # MongoDB auth db
+set_key_format_full = true                          # If set, will use full file path, otherwise just file name for key
+devices_whitelist = []
+devices_blacklist = []
+owners_whitelist = []
+owners_blacklist = []
+encrypt_with_key = ""                               # If provided, encrypt using this user's GPG key
+\end{lstlisting}
+
+\chapter{Simulation Parameters}\label{appendix:simulation_parameters}
+
+This appendix provides the full simulation parameters that were used to simulate Laha for the OPQ and Lokahi networks. This appendix also provides detailed results from the simulation runs.
+
+\begin{lstlisting}
+OPQ Params
+total events 151516
+total duration s 1575423519.721
+total data duration s 2670727.5250000004
+percent data duration 0.001695244162327203
+mean data duration s, std 13.787246528315524
+total data 64097460600.0
+mean data, std 330893.91667957255
+mean data per second 40.685859895852865
+mean events per second 0.0001229574127687932
+percent events to incident 0.5578222761952533
+
+total incidents 332475
+total duration s 22801438.273333497
+total data duration s 175202.14854980464
+percent data duration 0.00011120955499054127
+mean data duration s, std 0.5269633763434984
+total data 4204851565.1953125
+mean data, std 12647.121032243966
+mean data per second 184.41168117508303
+mean incidents per second 0.014581317021077251
+
+total_samples=1119744000000 2239488.00MB
+total_measurements=93312000 13530.24MB orphaned_measurements=84630948 90.70% 12271.49MB event_measurements=5904083 6.33% 856.09MB incident_measurements=2773723 2.97% 402.19MB phenomena_measurements=3246 0.00% 0.47MB
+total_trends=1555200 567.65MB orphaned_trends=1410763 90.71% 514.93MB event_trends=98449 6.33% 35.93MB incident_trends=45928 2.95% 16.76MB incident_phenomena=60 0.00% 0.02MB
+total_events=896161 301110.10MB orphaned_events=609242 67.98% 204705.31MB incident_events=286578 31.98% 96290.21MB phenomena_events=341 0.04% 114.58MB
+total_incidents=1741111 22371.54MB phenomena_incidents=1944 0.11% 24.98MB
+total_incidents=1944 1.22MB
+total_phenomena=1287 0.81MB
+total_storage_items=190818416
+
+
+Lokahi Params
+Total events: 1648
+Event durations sum: 3311651
+Event durations mean: 2009.4969660194174
+Event durations std: 1264.0847076240766
+Percent event data duration: 0.06263335103845011
+Event bytes sum: 21298346800.0
+Event bytes mean: 12923754.126213592
+Event bytes std: 15901090.780444184
+Event bytes sem: 391695.25751799915
+mean events per second 3.116867161164198e-05
+Event DR/s: 402.81624834955454
+Event DR/s sem: 2186.7919171970652
+
+Total incidents: 41
+Incident durations sum: 138960
+Incident durations mean: 3389.268292682927
+Incident durations std: 13217.736124052872
+Percent incident data duration: 0.002724681841042579
+Incident bytes sum: 1892959407.0
+Incident bytes mean: 46169741.63414634
+Incident bytes std: 85727404.3195229
+Incident bytes sem: 13388371.229525428
+mean incidents per second 8.03914475264434e-07
+Incident DR/s: 37.11652361890925
+Incident DR/s sem: 12004.184732882764
+
+avg trend size bytes = 2471
+
+80
+total_samples=146371840 585.49MB
+total_measurements=0 0.00MB orphaned_measurements=0 NaN% 0.00MB event_measurements=0 NaN% 0.00MB incident_measurements=0 NaN% 0.00MB
+total_trends=1829648 4521.06MB orphaned_trends=1607403 87.85% 3971.89MB event_trends=114361 6.25% 282.59MB incident_trends=107884 5.90% 266.58MB
+total_events=2945 1894.22MB orphaned_events=2945 100.00% 1894.22MB incident_events=0 0.00% 0.00MB
+total_incidents=78 84.59MB
+total_storage_items=3662319
+
+800
+total_samples=1820722400 7282.89MB
+total_measurements=0 0.00MB orphaned_measurements=0 NaN% 0.00MB event_measurements=0 NaN% 0.00MB incident_measurements=0 NaN% 0.00MB
+total_trends=2275903 5623.76MB orphaned_trends=1999646 87.86% 4941.13MB event_trends=142319 6.25% 351.67MB incident_trends=133938 5.89% 330.96MB
+total_events=2835 18234.72MB orphaned_events=2835 100.00% 18234.72MB incident_events=0 0.00% 0.00MB
+total_incidents=69 748.29MB
+total_storage_items=4554710
+
+8000
+total_samples=22621096000 90484.38MB
+total_measurements=0 0.00MB orphaned_measurements=0 NaN% 0.00MB event_measurements=0 NaN% 0.00MB incident_measurements=0 NaN% 0.00MB
+total_trends=2827637 6987.09MB orphaned_trends=2484447 87.86% 6139.07MB event_trends=177355 6.27% 438.24MB incident_trends=165835 5.86% 409.78MB
+total_events=2801 180160.32MB orphaned_events=2801 100.00% 180160.32MB incident_events=0 0.00% 0.00MB
+total_incidents=86 9326.53MB
+total_storage_items=5658161
+
+\end{lstlisting}
