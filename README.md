@@ -18,3 +18,13 @@ pdflatex article.tex
 
 * Remember to revert \documentclass before submission.
 
+## Next Steps
+
+Outline:
+
+  * Intro, end with research questions?
+  * Architecture
+  * Related Work
+  * Pilot Study
+  * Results
+  * Conclusions and Future Directions
