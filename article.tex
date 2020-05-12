@@ -2,7 +2,8 @@
 %  In case you need support, please attach all files that are necessary for compiling as well as the log file, and specify the details of your LaTeX setup (which operating system and LaTeX version / tools you are using).
 
 %=================================================================
-\documentclass[energies,article,submit,moreauthors,pdftex]{Definitions/mdpi}
+% \documentclass[energies,article,submit,moreauthors,pdftex]{Definitions/mdpi}
+\documentclass[preprints,article,accept,moreauthors,pdftex]{Definitions/mdpi}
 
 %=================================================================
 \firstpage{1}
@@ -59,7 +60,38 @@ johnson@hawaii.edu}
 %The order of the section titles is: Introduction, Materials and Methods, Results, Discussion, Conclusions for these journals: aerospace,algorithms,antibodies,antioxidants,atmosphere,axioms,biomedicines,carbon,crystals,designs,diagnostics,environments,fermentation,fluids,forests,fractalfract,informatics,information,inventions,jfmk,jrfm,lubricants,neonatalscreening,neuroglia,particles,pharmaceutics,polymers,processes,technologies,viruses,vision
 
 \section{Introduction}
-The introduction should briefly place the study in a broad context and highlight why it is important. It should define the purpose of the work and its significance. The current state of the research field should be reviewed carefully and key publications cited. Please highlight controversial and diverging hypotheses when necessary. Finally, briefly mention the main aim of the work and highlight the principal conclusions. As far as possible, please keep the introduction comprehensible to scientists outside your particular field of research. Citing a journal paper \cite{ref-journal}. And now citing a book reference \cite{ref-book}. Please use the command \citep{ref-journal} for the following MDPI journals, which use author-date citation: Administrative Sciences, Arts, Econometrics, Economies, Genealogy, Humanities, IJFS, JRFM, Languages, Laws, Religions, Risks, Social Sciences.
+
+%{\em The introduction should briefly place the study in a broad context and highlight why it is important. It should define the purpose of the work and its significance. The current state of the research field should be reviewed carefully and key publications cited. Please highlight controversial and diverging hypotheses when necessary. Finally, briefly mention the main aim of the work and highlight the principal conclusions.}
+
+Power quality is not currently a concern for most people in developed nations. Just like most people in developed nations assume that their tap water is of adequate quality to drink, most also assume that their electricity is of adequate quality to power their homes and appliances without causing harm. And, in both cases, most people assume that public utilities will monitor and correct any quality problems if they occur.
+
+
+
+Successfully maintaining adequate power quality and providing sufficient amounts of it to meet the rising needs of consumers has been a triumph of electrical utilities for over 100 years. In recent times, however, there have been changes to the nature of electrical generation and consumption that make power quality of increasing public concern and interest. First, there is a global need to shift to renewable energy sources. Second, modern consumer electronics place more stringent demands on power quality.  Third, effective policy making in this modern context requires better public access to power quality data.
+
+{\em We need more renewable energy.} There is now a global movement away from centralized, fossil-fuel based forms of electrical energy generation and toward distributed, renewable alternatives such as wind and solar. But the economic, environmental, and political advantages of renewable energy comes with significant new technical challenges. Wind and solar are intermittent (for example, solar energy cannot be harvested at night) and unpredictable (for example, wind and solar energy fluctuate based upon cloud cover and wind speed). In addition, renewable energy generation can be distributed throughout the grid (such as in the case of residential rooftop photovoltaic (PV) systems).
+
+One impact of adding renewable energy generation to an electrical grid is that maintaining adequate power quality is much more challenging. This problem is inversely proportional to the size of the electrical grid. For example, in Hawaii on the island of Oahu, the public demand for rooftop solar exceeds Hawaiian Electric Company's ability to utilize it and maintain adequate power quality. As a result, in many neighborhoods, new rooftop solar installation is prohibited because Hawaiian Electric fears its impact on not only local power quality but global grid stability \cite{TBD}.
+
+{\em Consumer electronics require higher quality power.} The rise of consumer electronics has raised the bar for what constitutes ``adequate" power quality. Only a few decades ago, computers were a rare presence outside of labs and large institutions. Today, computers are everywhere: embedded in phones, washers, refrigerators, thermostats, and so forth. These electronic devices not only have higher power quality requirements, but some of them actually introduce power quality problems in the form of harmonic distortion. Poor power quality can result in electronic devices failing unpredictably, and/or decreasing their lifespan.
+
+{\em Power quality data should be publicly available.} Electrical utilities are not required to be totally transparent about the quality of power they provide to consumers. For example, in Hawaii, utilities are required to make a "best effort" to provide non-harmful voltage and frequency values, but are only required to publicly report on power outages of more than 3 minutes. There is no requirement for utilities to report potentially harmful forms of voltage, frequency, THD, or transients. Indeed, in Hawaii, there is not yet infrastructure in place that would enable utilities to collect that information, even if they were asked to report on it. For more details, see Hawaiian Electric Tariff Rule No. 2 Character of Service and Hawaiian Electric Tariff Rule No. 16 Interruption of Service.
+
+OPQ intends to provide an unbiased, independent, third party source of accurate power quality data. This can be used by consumers to better understand the performance of their public utilities, by researchers to devise improvements to grid control, and by public policy makers responsible for designing and implementing regulatory frameworks for electrical utilities.  The OPQ Project has produced a suite of innovations that can help address each of these issues.
+
+{\em OPQ Box.} First, our power quality monitoring hardware device, called "OPQ Box" can be produced for approximately US\$75. This is from 10 to 100 times less expensive than commercial power quality monitors. This means, for example, that instead of monitoring power quality at the level of individual buildings, OPQ makes it economically feasible to monitor power quality on each floor or even in each room of a building. Similarly, instead of monitoring power quality at the substation level of the grid, OPQ Boxes make it feasible to deploy dozens or hundreds into a community to obtain fine-grained data about the impact of solar or other renewables as directly perceived by the customer.
+
+{\em Cloud native.} Second, our architecture is "cloud native", which means that OPQ Boxes are not designed for "stand alone", autonomous use. Instead, our hardware boxes and cloud-based services perform real-time, two-way communication over the Internet to determine what power quality data must be gathered and analyzed. This creates the ability to control individual OPQ Boxes based upon the global state of all OPQ Boxes. It means our cloud services can obtain and analyze high fidelity wave form data only when desired, without the prohibitive network overhead of constantly communicating this data from boxes to the cloud. This enables OPQ installations to be simultaneously responsive and scalable.
+
+{\em Extensibility.} Third, all OPQ software subsystems are designed for extensibility and interoperation. Our middleware components (Mauka and Makai) provide a plugin architecture. Our visualization component (View) is built from modular UI elements using React. We are also developing API endpoints for interoperation with other software systems. This means that OPQ is not a monolithic, closed system with a frozen feature set, but rather a design environment for experimentation with advanced classification and analysis of power quality data.
+
+{\em Open Source.} Fourth, our software and hardware designs and implementations are made available using open source licenses. This means that organizations choosing OPQ do not face the business risk of committing resources to a single vendor with proprietary hardware and software. Our goal is to facilitate the creation of a community of researchers and industry practitioners to replicate, extend, and apply the insights gained from the OPQ system.
+
+Finally, while we believe OPQ offers a compelling combination of capabilities, we want to be clear that all designs involve trade-offs. As we will show below, other commercial and research solutions have features not provided by OPQ that may be important depending upon an organization's specific needs. In some cases, OPQ may not be the appropriate choice. In other cases, a hybrid solution consisting of OPQ in combination with other technologies for power monitoring may be most appropriate. Our goal in this paper is to describe OPQ well enough for organizations to make a thoughtful decision about the use of our technology.
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}

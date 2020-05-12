@@ -11,3 +11,10 @@ Power Quality Event Detection: https://www.mdpi.com/1996-1073/11/1/145
 ```
 pdflatex article.tex
 ```
+
+## Resources and To Do
+
+* https://en.wikipedia.org/wiki/Solar_power_in_Hawaii
+
+* Remember to revert \documentclass before submission.
+
