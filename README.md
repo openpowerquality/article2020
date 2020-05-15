@@ -18,6 +18,12 @@ pdflatex article.tex
 
 * Remember to revert \documentclass before submission.
 
+* https://www.utilitydive.com/news/solar-installers-flee-hawaii-as-interconnection-queue-backs-up/314160/
+
+* Tariffs https://www.hawaiianelectric.com/electrical-services/power-quality
+
+* 2011 https://ieeexplore.ieee.org/abstract/document/6033630 “Back-to-basics”: Operationalizing data mining and visualization techniques for utilities
+
 ## Next Steps
 
 Outline:
