@@ -4,12 +4,12 @@ Repo for the article on the pilot study project and results of Ph.D. work, to be
 
 ## Creating the draft
 
-Run latex, bibtex, and latex twice more to resolve all references and citations:
+Run pdflatex, bibtex, and pdflatex twice more to resolve all references and citations:
 ```
 make all
 ```
 
-Run just latex (no new references or citations to resolve):
+Run just pdflatex (no new references or citations to resolve):
 
 ```
 make
