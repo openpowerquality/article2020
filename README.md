@@ -1,8 +1,6 @@
 # article2020
 
-Repo for the article on the pilot study project and results of Ph.D. work
-
-https://www.mdpi.com/journal/energies
+Repo for the article on the pilot study project and results of Ph.D. work, to be submitted to [Energies](https://www.mdpi.com/journal/energies).
 
 ## Creating the draft
 
