@@ -1,25 +1,25 @@
 \section{System Architecture}
 \label{sec:system-architecture}
 
-At its most basic, the OPQ system architecture is extremely simple: OPQ Boxes are plugged into wall outlets, they monitor the quality of power at their wall outlets, and the results are communicated via the Internet to a software system called OPQ Cloud. To see the results, users login to the system using a browser.
+At its most basic, the OPQ system architecture is this: OPQ Boxes are plugged into wall outlets, they monitor the quality of power at their wall outlets, and the results are communicated via the Internet to a software system called OPQ Cloud. To see the results, users login to the system using a browser.
 
-A slightly less basic description is this: the OPQ system architecture consists of four major open source hardware and software components that provide end-to-end support for the capture, triggering, analysis, and reporting of consumer level local and global PQ events.
+A slightly less basic description is this: the OPQ system architecture consists of four major open source hardware and software components that provide end-to-end support for the capture, triggering, analysis, and reporting of consumer level local and global PQ events:
 
 \begin{enumerate}
 
-\item OPQ Box is a hardware device that detects the electrical waveform from a standard residential outlet and communicates both low and high fidelity representations of the waveform to other OPQ system components.
+\item OPQ Box is a hardware device that detects the electrical waveform from a standard residential outlet and communicates both low and high fidelity representations of the waveform to other OPQ system components either at predefined intervals or upon request.
 
 \item OPQ Makai monitors incoming low fidelity data from OPQ Boxes, requests high fidelity data when necessary, and stores the results in a MongoDB database.
 
-\item OPQ Mauka analyzes data, creates "events" when it detects anomolies, and can tell OPQ Makai to request high fidelity data from one or more OPQ Boxes to facilitate analysis.
+\item OPQ Mauka analyzes low level data and analyzes it to produce higher-level representations according to the information architecture described below, and can tell OPQ Makai to request high fidelity data from one or more OPQ Boxes to facilitate analysis.
 
-\item OPQ View is a visualization platform for displaying the results for data capture and analysis.
+\item OPQ View is a browser-based visualization platform for displaying the results for data capture and analysis.
 
 \end{enumerate}
 
 \begin{figure}
 \center \includegraphics[width=5in]{images/system-diagram.png}
-\caption{High level architecture of the OPQ System}
+\caption{High level system architecture of an OPQ Sensor Network}
 \label{fig:architecture}
 \end{figure}
 
