@@ -268,7 +268,6 @@ If the aggregation service determines that an anomaly has occurred, it is able t
 If the RDRB buffer contains data for the requested temporal range, OPQ Box transmits the available data to the aggregation service via a push pull ZeroMq channel.
 Protobuf message serialization is used to encode messages across the OPQ ecosystem.
 
-
 In order to make a distributed measurement, all of the OPQ Boxes on the OPQ network need to maintain an accurate time reference.
 Time synchronization across multiple OPQ Boxes is accomplished using the Network Time Protocol.
 The expansion port of the OPQ Box supports a GPS receiver.
@@ -276,4 +275,15 @@ However, since GPS receivers require line of sight to the sky, it was not used f
 NTP performance has been verified against GPS resulting in time error of $8ms\pm 5ms$ which is typical for NTP running over the Internet with a close by NTP server.
 This error is visualized in a Figure~\ref{fig:opq:6:2}.
 With a large coincidental $V_{pp}$ drop across two devices, a 7ms phase error is clearly visible.
+
+\subsubsection{Manufacturing}
+
+Currently, there is no mechanism for mass production of OPQ Boxes, but all of the plans are available under an Open Source license, so interested organizations with some basic hardware engineering skills can build their own boxes.
+
+Complete specifications for the OPQ Box hardware, firmware, and software are available \cite{negrashov_opq_2020}. As of the time of writing, a single OPQ Box can be manufactured for approximately \$100 in parts. The cost drops significantly with scale, for example, 100 OPQ Boxes can be manufactured for a cost of approximately $75 in parts.
+
+
+
+
+
 
