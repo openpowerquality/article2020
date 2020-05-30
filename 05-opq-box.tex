@@ -5,7 +5,7 @@ OPQ Box is a hardware device designed to provide inexpensive, extensible and acc
 A block diagram of OPQ Box is shown in Figure~\ref{fig:opq:1:1}.
 A complete device is shown in Figure~\ref{fig:opq:1:2}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\begin{subfigure}{.5\textwidth}
 	  \centering
@@ -47,7 +47,7 @@ Internally, the digitization process runs asynchronously with respect to the DSP
 We verified that the sampling jitter of the ADC is less than 1us, however, due to the limited precision of our equipment, an exact figure was not established.
 The data stream in its digital form is transferred to the Raspberry Pi single board computer (SBC) for analysis.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
   \includegraphics[width=0.9\textwidth]{images/opq-box/opqbox_software.png}
   \end{center}
@@ -88,32 +88,33 @@ Since a sinusoid has two zero crossings for a full cycle, the frequency can be c
  f = \frac{1}{\frac{2}{n}\sum\limits_{k=0}^{k=n}{\Delta t_{k}}}
 \end{equation}
 
-\begin{figure}[ht!]
+\begin{figure}[ht]
 	\centering
-	\begin{subfigure}{.8\textwidth}
+	\begin{subfigure}{.4\textwidth}
 	  \centering
 	  \includegraphics[width=1\linewidth]{images/opq-box/filter1_gain.png}
 	  \caption{}
 	  \label{fig:opq:4:1}
 	\end{subfigure}%
 
-	\begin{subfigure}{.8\textwidth}
+	\begin{subfigure}{.4\textwidth}
 	  \centering
 	  \includegraphics[width=1\linewidth]{images/opq-box/filter1_response.png}
 	  \caption{}
 	  \label{fig:opq:4:2}
 	\end{subfigure}
 \end{figure}
-\begin{figure}[ht!]\ContinuedFloat
+
+\begin{figure}[ht]\ContinuedFloat
 	\centering
-	\begin{subfigure}{.75\textwidth}
+	\begin{subfigure}{.4\textwidth}
 	  \centering
 	  \includegraphics[width=1\linewidth]{images/opq-box/filter2_gain.png}
 	  \caption{}
 	  \label{fig:opq:4:3}
 	\end{subfigure}%
 
-	\begin{subfigure}{.75\textwidth}
+	\begin{subfigure}{.4\textwidth}
 	  \centering
 	  \includegraphics[width=1\linewidth]{images/opq-box/filter2_response.png}
 	  \caption{}
@@ -154,7 +155,7 @@ Similarly to the frequency calculation, OPQ Box uses a 10 cycle window for a sin
 An example of a power quality disturbance which exhibits low $V_{rms}$ is shown in Figure~\ref{fig:opq:6:1} and~\ref{fig:opq:6:2}.
 These disturbances are the result of a lighting strike recorded by two OPQ Box devices on Nov 1, 2017.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 		\centering
 	\begin{subfigure}{.5\textwidth}
 	  \centering
@@ -187,7 +188,7 @@ Operationally, OPQ Box computes THD for 10 cycles of the fundamental frequency.
 First an FFT transforms the real voltage samples into its frequency components.
 Next, the square of the harmonic bins is accumulated and scaled by the magnitude of the fundamental power.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=1\linewidth]{images/opq-box/thd_two_devices_24_hours.png}
 	\caption{A common THD trend across two OPQ Box devices deployed in two buildings on the University of Hawaii campus.}
@@ -209,7 +210,7 @@ The filtered signal is shown in Figure~\ref{fig:opq:8:4}, with the fundamental r
 OPQ Box scans for the highest sample in the filtered waveform and uses its magnitude as a transient detection metric.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\begin{subfigure}{.5\textwidth}
 		\centering
@@ -246,7 +247,7 @@ This effect can be seen in Figure~\ref{fig:opq:9}.
 This figure shows both the THD and transient detection metric during a transient event.
 A small transient of approximately 1.6V was observed occurring at 2600s, while the sensitivity of the transient metric is clearly visible, particularly between 3000s and 4500s.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\begin{center}
 		\includegraphics[width=1\textwidth]{images/opq-box/trans_thd_det.pdf}
 	\end{center}
@@ -280,7 +281,7 @@ With a large coincidental $V_{pp}$ drop across two devices, a 7ms phase error is
 
 Currently, there is no mechanism for mass production of OPQ Boxes, but all of the plans are available under an Open Source license, so interested organizations with some basic hardware engineering skills can build their own boxes.
 
-Complete specifications for the OPQ Box hardware, firmware, and software are available \cite{negrashov_opq_2020}. As of the time of writing, a single OPQ Box can be manufactured for approximately \$100 in parts. The cost drops significantly with scale, for example, 100 OPQ Boxes can be manufactured for a cost of approximately $75 in parts.
+Complete specifications for the OPQ Box hardware, firmware, and software are available \cite{negrashov_opq_2020}. As of the time of writing, a single OPQ Box can be manufactured for approximately \$100 in parts. The cost drops significantly with scale, for example, 100 OPQ Boxes can be manufactured for a cost of approximately \$75 in parts.
 
 
 

@@ -1,5 +1,7 @@
-\section{System Architecture}
-\label{sec:system-architecture}
+\section{OPQ Architecture}
+\label{sec:architecture}
+
+\subsection{System Architecture}
 
 At its most basic, the OPQ system architecture is this: OPQ Boxes are plugged into wall outlets, they monitor the quality of power at their wall outlets, and the results are communicated via the Internet to a software system called OPQ Cloud. To see the results, users login to the system using a browser.
 
@@ -30,14 +32,13 @@ OPQ Makai, OPQ Mauka, and OPQ View are all cloud-based software services that co
 
 This architecture has a number of benefits. The combination of low and high fidelity data reduces both network overhead and storage requirements, which increases the scalability of the system in terms of the number of OPQ Boxes that can be tied to a single OPQ Cloud instance. OPQ Makai and OPQ Mauka have a plugin architecture, making it easier to extend their functionality to incorporate new triggers for high quality data (in the case of OPQ Makai) and new events and analyses (in the case of OPQ Mauka). Finally, the open source licensing of both hardware and software makes it possible to incorporate new ideas, bug fixes, and enhancements from technologists across the power quality community.
 
-\section{Information Architecture}
-\label{sec:information-architecture}
+\subsection{Information Architecture}
 
 OPQ's "information architecture" is designed to facilitate the process of generating actionable, useful insights into the nature of the electrical grid starting with the data collected from a wall outlet. The information architecture must address several requirements. First, it must support analyses that require access to high fidelity data, which in the case of power quality is wave form data produced by sampling the wave form 256 times per cycle, which means there are approximately 1.3 billion data points generated per day per OPQ Box. Second, for typical grids that are generally stable, only an extremely small fraction of these data points are actually interesting. Third, as will be discussed in more detail later, what constitutes ``interesting'' data in one box might be dependent upon the state of data in other nearby boxes. Finally, network and storage limitations preclude a solution in which all data is sent from OPQ Boxes to the cloud, and so the information architecture must provide a ``smart'' mechanism for identifying data of interest on the boxes, as well as discarding data in the cloud if it is found to be not useful.
 
 To address these requirements, the OPQ information architecture is organized as a five layer pyramid as summarized in Table \ref{fig:information-architecture}. This table illustrates an important conceptual feature of the OPQ information architecture called ``TTL'', or Time To Live. The OPQ information architecture implements an active, ``use it or lose it'' approach to information management, in which a data item must either be associated with a higher level of the system within its Time To Live, or else it will be automatically deleted. So, for example, the high fidelity waveform data on an OPQ Box have a TTL of one hour: if that data is not requested from a box by a higher layer in the information architecture within an hour of it being generated, it will be lost. Similarly, data points in the Measurement layer will be deleted after one day if they are not associated with an Event.
 
-\begin{table}[H]
+\begin{table}[ht]
 \caption{OPQ Information Architecture Levels}
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g., \tablesize{\footnotesize}. If commented out \small will be used.
