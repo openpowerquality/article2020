@@ -17,7 +17,9 @@ Figure \ref{fig:mauka-data-model} illustrates the hierarchical data model for OP
 \label{fig:mauka-data-model}
 \end{figure}
 
-{\bf Anthony: Please review the following paragraphs for accuracy and quality.}
+\begin{tcolorbox}
+Anthony: Please review the following paragraphs for accuracy and quality.
+\end{tcolorbox}
 
 In essence, the raw data sent to the cloud from OPQ Boxes is initially stored in the Instantaneous Measurements Layer (IML). IML Actors process this data to determine if additional data from OPQ Boxes are warranted, and request this data if necessary. This data, along with the instantaneous data, is then stored at the Aggregate Measurement Layer (AML).  All data from the IML layer is discarded after one hour if it is not found to be interesting and thus promoted to the AML level. Once at the AML Layer, AML actors process the augmented data sets to determine if they constitute an actual power quality anomaly, and if multiple OPQ Boxes appear to be implicated in the anomaly. If so, all of the associated AML data is promoted to the Incident Layer (IL).  AML data must be promoted within one day or else it is discarded.  Finally, IL Actors are responsible for looking for ways to make Incidents actionable, and if successful, will promote the IL data to the Phenomena Layer (PL). For example, if the same boxes are generating the same Incidents on a periodic basis, then these Incidents could be promoted to a Phenomena that can predict when the next occurrence of this Incident might occur.
 

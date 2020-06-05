@@ -11,7 +11,9 @@ The final component of the OPQ Sensor Network system architecture is called OPQ 
 
 The home page provides three components:  a "System Stats" window which indicates the number of data elements currently at each level of the OPQ Mauka data hierarchy, a "System Health" window that indicates whether or not the Cloud services appear to be running correctly and the status of communication with all known OPQ Boxes on the sensor network, and a "Box Trends" visualization that provides the ability to quickly see trends in the four basic measures (Voltage, Frequency, THD, and Transients) over time.
 
-{\em Anthony: a couple of questions about this home page image. First, no phenomena? What's up with that? Second, although the TTL for Measurements is set to 1 day, the System Status window says there are 16M measurements. It seems to me that with 1 measurement per second per box, we should only have around 1.2M per day, so at most double that given the TTL.  Can you explain to me what's happening? }
+\begin{tcolorbox}
+Anthony: a couple of questions about this home page image. First, no phenomena? What's up with that? Second, although the TTL for Measurements is set to 1 day, the System Status window says there are 16M measurements. It seems to me that with 1 measurement per second per box, we should only have around 1.2M per day, so at most double that given the TTL.  Can you explain to me what's happening?
+\end{tcolorbox}
 
 Figure \ref{fig:opq-view-box-map} shows a map-based view of the sensor network. This figure shows the location of 11 OPQ Boxes on the University of Hawaii campus at one point during Fall of 2019. Depending on the zoom level of the interface, some boxes are collapsed into disks with a number indicating the number of boxes at that location. Zooming in reveals more information about the box including near-real time values for voltage and frequency, as is shown for the box in the upper right corner of the figure.
 
@@ -31,7 +33,7 @@ Figure \ref{fig:opq-view-incident-summary} shows a visual display of a single In
 
 The above images provide a sense for how OPQ View helps users to understand, monitor, and assess an OPQ Sensor Network and the underlying power quality of the grid it is attached to. There are several features in OPQ View for user and box management; for details, please see the OPQ View documentation.
 
-While OPQ View provides a variety of useful visualization and analysis features, users wishing to understand the power quality of their grid are not restricted to its current feature set. The OPQ database schema is public, and if a new analysis is desired, it is straightforward to query the database directly for the data of interest and build a new analysis off of it. 
+While OPQ View provides a variety of useful visualization and analysis features, users wishing to understand the power quality of their grid are not restricted to its current feature set. The OPQ database schema is public, and if a new analysis is desired, it is straightforward to query the database directly for the data of interest and build a new analysis off of it.
 
 
 
