@@ -1,8 +1,31 @@
 \section{Results from the Pilot Deployment}
 \label{sec:pilot-study}
 
-To evaluate the capabilities of the OPQ Sensor Network, 15 OPQ Boxes were deployed at the University of Hawaii Manoa campus over the course of three months in the Fall of 2019.  This location was advantageous because it is an isolated microgrid connected to the Oahu powergrid only via a single 46kV feeder as shown in Figure 4.5. Another advantage of the UH campus is the high number of smart meters deployed across various levels of the power delivery infrastructure. While the purpose of these meters is to monitor the power consumption, they do include some rudimentary power quality monitoring capabilities. Data from the campus deployed meters was used as ground truth for comparison against the measurements, and for analysis performed by the OPQ project. The location of smart meters in the grid topology is shown in Figure 4.5 as the M nodes. As evident by the meter location none of them were monitoring the consumer level power and mainly focused on the higher voltage power delivery. This placement was a consequence of the smart meters’ role as a consumption monitor, and thus the deployment of the OPQ Boxes at the residential level complemented UH power quality monitoring capabilities without introducing redundancies.
-                                                                                                                                    The University of Hawaii power grid supplies a highly diverse infrastructure. Beyond traditional residential equipment such as computers and consumer grade electronics, the UH power grid powers scientific and laboratory equipment, machine shops, and server farms. All of these elements have varying requirements/tolerances for power quality anomalies as well as different levels of power quality “pollution”. Furthermore, some of the electricity consumers in the UH campus are entirely unique. For example, the free electron laser located in the Watanabe Hall is one of the only free electron lasers in the world, and the impact/sensitivity of power quality on the instrument are completely unstudied.
+To evaluate the capabilities of the OPQ Sensor Network, 15 OPQ Boxes were deployed at the University of Hawaii Manoa campus over the course of three months in the Fall of 2019.  The University of Hawaii campus is an isolated microgrid connected to the Oahu powergrid only via a single 46kV feeder. The UH Campus also has traditional, revenue-grade electrical meters deployed across various levels of the power delivery infrastructure. While the primary purpose of these meters is to monitor power consumption, they do include power quality monitoring capabilities. Data from these meters were used as ground truth for validation studies of the OPQ sensor network.
+
+The University of Hawaii power grid is interesting in that it supplies a highly diverse infrastructure. Beyond traditional residential equipment such as computers and consumer grade electronics, the UH power grid powers scientific and laboratory equipment, machine shops, and server farms. All of these elements have varying requirements/tolerances for power quality anomalies as well as different levels of power quality “pollution”. Furthermore, some of the electricity consumers in the UH campus are entirely unique. For example, the free electron laser located in the Watanabe Hall is one of only ten in the world, and the impact/sensitivity of power quality on the instrument are completely unstudied.
+
+The pilot study had the following major goals:
+
+\begin{enumerate}
+
+\item {\em Evaluation of sensor data accuracy and quality.} While we conducted extensive laboratory tests of the sensor network, the pilot study enabled us to evaluate the accuracy and utility of our hardware devices and power quality data collection procedures in a real-world setting. Does an OPQ sensor network measure power quality (and detect anomalies) as well or better than conventional building-level electrical meters?
+
+\item {\em Evaluation of the triggering system.} The OPQ Makai triggering system provides a novel two-way communication between sensors and the cloud, resulting in a triggering system with unique capabilities.  Does the data collected by this triggering system provide analysis opportunities not available through more conventional approaches?
+
+\item {\em Evaluation of the information architecture.} OPQ Mauka implements a tiered, hierarchical information architecture.  The pilot study enabled us to evaluate this information architecture.  Would this information architecture prove useful with real world data? Could actionable insights emerge from low-level sensor data?
+
+\item {\em Evaluation of cloud data storage management.} OPQ Mauka manages data storage through a "time to live" (TTL) mechanism, which results in data being discarded if it is not found to be useful and thus "promoted" to a higher level of the information hierarchy within a defined period of time.  The pilot study enables us to evaluate this approach. Does this mechanism allow sensor network designers to determine upper bounds on storage requirements? Is information thrown away prematurely because it was not found to be useful within the time limits?
+
+\end{enumerate}
+
+\subsection{Descriptive statistics}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
+
+Could you provide descriptive statistics for this section? This includes the start and end dates of the pilot study, the total number of data elements collected at each level of the information hierarchy, and for incidents and phenomena, the total number of each type of incident and event.
+\end{tcolorbox}
+
 
 \subsection{OPQ Boxes provide valid and reliable collection of power quality data}
 
