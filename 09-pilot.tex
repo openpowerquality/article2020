@@ -1,7 +1,7 @@
 \section{Results from the Pilot Deployment}
 \label{sec:pilot-study}
 
-To evaluate the capabilities of the OPQ Sensor Network, 15 OPQ Boxes were deployed at the University of Hawaii Manoa campus over the course of three months in the Fall of 2019.  The University of Hawaii campus is an isolated microgrid connected to the Oahu powergrid only via a single 46kV feeder. The UH Campus also has traditional, revenue-grade electrical meters deployed across various levels of the power delivery infrastructure. While the primary purpose of these meters is to monitor power consumption, they do include power quality monitoring capabilities. Data from these meters were used as ground truth for validation studies of the OPQ sensor network.
+To evaluate the capabilities of the OPQ Sensor Network, 16 OPQ Boxes were deployed at the University of Hawaii Manoa campus over the course of three months in the Fall of 2019.  The University of Hawaii campus is an isolated microgrid connected to the Oahu powergrid only via a single 46kV feeder. The UH Campus also has commercial electrical meters (a mixture of GE PQMII and GE EPM 7000) deployed across various levels of the power delivery infrastructure. While the primary purpose of these meters is to monitor power consumption, they do include power quality monitoring capabilities. Data from these meters were used as ground truth for validation studies of the OPQ sensor network.
 
 The University of Hawaii power grid is interesting in that it supplies a highly diverse infrastructure. Beyond traditional residential equipment such as computers and consumer grade electronics, the UH power grid powers scientific and laboratory equipment, machine shops, and server farms. All of these elements have varying requirements/tolerances for power quality anomalies as well as different levels of power quality “pollution”. Furthermore, some of the electricity consumers in the UH campus are entirely unique. For example, the free electron laser located in the Watanabe Hall is one of only ten in the world, and the impact/sensitivity of power quality on the instrument are completely unstudied.
 
@@ -21,15 +21,55 @@ The pilot study had the following major goals:
 
 \subsection{Descriptive statistics}
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
+The pilot study started on October 7, 2019 and ended on February 4, 2020. We deployed 16 OPQ Boxes across campus. As noted above, each OPQ Box collects 200 measurements per grid cycle, for a total of approximately 1B raw measurements per day per box.  Values for the maximum and minimum voltage, frequency, and THD, along with the presence or absence of transients, is sent once a second to the cloud by each box. Thus, each box sends approximately 86,400 measures per day to the cloud at a minimum. Over the course of the pilot study, a total of approximately 116M aggregate measures were sent by all of the OPQ Boxes.
 
-Could you provide descriptive statistics for this section? This includes the start and end dates of the pilot study, the total number of data elements collected at each level of the information hierarchy, and for incidents and phenomena, the total number of each type of incident and event. Perhaps the size of the database?
-\end{tcolorbox}
+Figure \ref{fig:statistics} provides two additional sets of summary statistics regarding the pilot study.  Figure (a) shows the number of anomalous events (i.e. where threshold values for frequency, voltage, THD, or transients were exceeded) along with the number of OPQ Boxes that experienced the power quality anomaly during that same time period. So, for example, 170,925 power quality anomalies were experienced by only one of the 16 OPQ boxes, and 463 anomalous power quality measurements were experienced by all 16 OPQ Boxes.
 
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+        \begin{tabularx}{\textwidth}{XXXX|}
+            \toprule
+            \textbf{Events} & \textbf{Boxes} & \textbf{Events} & \textbf{Boxes} \\
+            \midrule
+            170,925 & 1 & 203 & 9 \\
+            1,654 & 2 & 160 & 10 \\
+            1,109 & 3 & 162 & 11 \\
+            853 & 4 & 130 & 12 \\
+            593 & 5 & 169 & 13 \\
+            416 & 6 & 210 & 14 \\
+            354 & 7 & 477 & 15 \\
+            246 & 8 & 463 & 16 \\
+             &  &  &  \\
+            \bottomrule
+        \end{tabularx}
+	  \caption{Summary statistics: Events}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+	 \begin{tabularx}{\textwidth}{lX}
+               \toprule
+               \textbf{Incident} & \textbf{Total}  \\
+               \midrule
+               Frequency Swell & 291,235 \\
+               Frequency Sag & 244,286  \\
+               Excessive THD & 21,395 \\
+               Voltage Sag & 620 \\
+               ITIC (No Damage) & 93 \\
+               SEMI F47 (Violation) & 24 \\
+               Voltage Interruption & 16 \\
+               Frequency Interruption & 14 \\
+               Voltage Swell & 8 \\
+               \bottomrule
+           \end{tabularx}
+   	  \caption{Summary statistics: Incidents}
+	\end{subfigure}
+	\caption{Summary statistics of (a) boxes involved in events and (b) incident type occurrences}
+	\label{fig:statistics}
+\end{figure}
 
-\subsection{OPQ Boxes provide valid and reliable collection of power quality data}
+\subsection{OPQ provides valid and reliable collection of power quality data}
 
-The first goal of the pilot study was to assess how well an OPQ sensor network is able to collect basic power quality data. To do this, we compared data on voltage and frequency collected by OPQ Boxes with data on voltage and frequency collected by the revenue-grade building level power monitors.  The results are shown in Figure \ref{fig:opqbox-f-v-validation}.
+The first goal of the pilot study was to assess how well an OPQ sensor network is able to collect basic power quality data. To do this, we compared data on voltage and frequency collected by OPQ Boxes with data on voltage and frequency collected by the existing UH power monitors.  The results are shown in Figure \ref{fig:opqbox-f-v-validation}.
 
 \begin{figure}[ht]
 	\centering
@@ -49,7 +89,7 @@ The first goal of the pilot study was to assess how well an OPQ sensor network i
 	\label{fig:opqbox-f-v-validation}
 \end{figure}
 
-As the charts illustrate, there is very little difference between the frequency and voltage values collected by OPQ Boxes and the building meters.
+As the charts illustrate, there is very close correspondence between the building meters and the OPQ Boxes. For frequency differences, the value of $\sigma$ is 0.0079 Hz, and for voltage, $\sigma$ is 0.1703 V. (Note that typical thresholds for frequency and voltage PQ anomalies is 1 Hz and 6 V, so OPQ Box values appear accurate enough for their intended purpose.)
 
 Validating THD and transient data, the other two basic power quality measures collected by OPQ Boxes, was more challenging.
 
@@ -74,7 +114,7 @@ Unfortunately, we unable to perform validation of transient data collection, bec
 Could you add an additional sentence or two to the above paragraph about transient data validation? Maybe more about why we couldn't do it, or what the implications of non-validation might be?
 \end{tcolorbox}
 
-\subsection{OPQ Makai's triggering system provides advantages with respect to bandwidth and computation}
+\subsection{OPQs triggering system provides advantages with respect to bandwidth and computation}
 
 The pilot study provided an opportunity to collect data on the resources required by an OPQ sensor network with respect to cloud-level network resources and server-level computation overhead.
 
@@ -90,9 +130,50 @@ To assess computational cost, we again analyzed the data stream for a typical da
 Please finish the above paragraph by describing in words the histogram in slide 38 of your thesis defense presentation, where you show that Napali uses much less computational resources.
 \end{tcolorbox}
 
+\subsection{OPQ enables subthreshold event detection based on temporal locality}
+
+One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.  In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity wave form data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data. In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth.
+
+During the pilot study, we discovered several situations in which the OPQ sensor network was able to characterize power quality anomalies in the UH microgrid in a manner that the building level meters could not. For example...
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=SERGE]
+Please finish the above paragraph by describing one situation of subthreshold event detection and why it was cool.
+\end{tcolorbox}
+
 \subsection{The OPQ Information Architecture provides a means to produce actionable insights}
 
+Figure \ref{fig:level-statistics} provides some descriptive statistics on the number of entities created at each level of the OPQ Information Architecture.
+
+\begin{figure}[ht]
+  \centering
+		 \begin{tabularx}{.4\textwidth}{lX}
+       \toprule
+       \textbf{Level} & \textbf{Total}  \\
+       \midrule
+       Phenomena & 10.4K \\
+       Incidents & 415K \\
+       Detections & 91.4K \\
+       AML (Trends) & 1.94M \\
+       AML (Measurements) & 116 M \\
+       IML  & 100B \\
+       \bottomrule
+     \end{tabularx}
+	\caption{Entities created at each level of the OPQ Information Architecture during the pilot study}
+	\label{fig:level-statistics}
+\end{figure}
+
+
+
 \subsection{The OPQ Information Architecture provides predictable upper bounds on storage resources}
+
+Figure \ref{fig:data-management-graph} shows a graph of storage requirements both with and without TTL-based data removal.
+
+\begin{figure}[ht]
+  \centering
+	\includegraphics[width=0.4\linewidth]{images/pilot/data-management-graph.png}
+	\caption{Storage requirements with and without TTL}
+	\label{fig:data-management-graph}
+\end{figure}
 
 \subsection{OPQ Mauka provides useful adaptive optimization capabilities}
 
