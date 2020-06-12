@@ -131,6 +131,7 @@ Please finish the above paragraph by describing in words the histogram in slide 
 \end{tcolorbox}
 
 \subsection{OPQ enables subthreshold event detection based on temporal locality}
+\label{sec:subthreshold-events}
 
 One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.  In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity wave form data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data. In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth.
 
@@ -142,7 +143,7 @@ Please finish the above paragraph by describing one situation of subthreshold ev
 
 \subsection{The OPQ Information Architecture provides a means to produce actionable insights}
 
-Figure \ref{fig:level-statistics} provides some descriptive statistics on the number of entities created at each level of the OPQ Information Architecture.
+Figure \ref{fig:level-statistics} provides some descriptive statistics on the total number of entities created at each layer of the OPQ Information Architecture over the course of the pilot study. Note that the number of entities at a given layer at a given point in time is typically far less, due to the use of TTL to discard entities not promoted to higher layers.
 
 \begin{figure}[ht]
   \centering
@@ -162,11 +163,11 @@ Figure \ref{fig:level-statistics} provides some descriptive statistics on the nu
 	\label{fig:level-statistics}
 \end{figure}
 
-
+Figure \ref{fig:level-statistics} shows that all layers of the hierarchy were actively used. In addition, the system was able to produce actionable insights by automatically detecting periodic phenomena for two boxes, and then predicting future occurrences of power quality anomalies with over a 50\% success rate (in other words, the current implementation of predictive phenomena leads to a significant false positive rate, predicting twice as many future power quality anomalies as actually occurred). Improving the predictive capabilities is a topic of future research.
 
 \subsection{The OPQ Information Architecture provides predictable upper bounds on storage resources}
 
-Figure \ref{fig:data-management-graph} shows a graph of storage requirements both with and without TTL-based data removal.
+Figure \ref{fig:data-management-graph} shows a graph that illustrates storage requirements both with and without TTL-based data removal.  As the graph shows, over the course of the three month period, we estimate that cloud-level storage requirements would have reached approximately 2.5TB if all data was kept.  However, due to TTL, the amount of data held in the cloud at the conclusion of the case study was only 100 GB.
 
 \begin{figure}[ht]
   \centering
@@ -175,7 +176,29 @@ Figure \ref{fig:data-management-graph} shows a graph of storage requirements bot
 	\label{fig:data-management-graph}
 \end{figure}
 
-\subsection{OPQ Mauka provides useful adaptive optimization capabilities}
+It is difficult to compute a strict upper bound on storage requirements for an OPQ network, because the amount of storage does depend on the number of power quality anomalies experienced by the grid. That said, we did notice that storage requirements were rising much more slowly at the end of the pilot.
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
+Could you add a sentence or two to explain the assumptions under which the 2.5 TB storage requirement was calculated?
+
+Could you provide a paragraph to add more concrete details to this section? For example, how much additional storage was required, say, each week, by the end of the study period?
+
+\end{tcolorbox}
+
+
+\subsection{OPQ provides useful adaptive optimization capabilities}
+
+The top layer of OPQ's information architecture supports adaptive optimization: the ability to analyze previously collected data and use it to change the settings associated with data collection from OPQ Boxes.  One way we used this capability was to identify periodic phenomena, then predict when it was going to occur in future, and then change the settings associated with Boxes to support better data collection during periods in which a power quality anomaly was predicted.
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
+Can you provide a "for example" of this with more concrete details, hopefully indicating how this adaptive optimization actually yielded better results?
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=ANTHONY AND SERGE]
+Any other pilot study results that I've forgotten to include?
+\end{tcolorbox}
+
+
 
 
 
