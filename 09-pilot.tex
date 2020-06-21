@@ -178,14 +178,23 @@ Figure \ref{fig:data-management-graph} shows a graph that illustrates storage re
 	\label{fig:data-management-graph}
 \end{figure}
 
-It is difficult to compute a strict upper bound on storage requirements for an OPQ network, because the amount of storage does depend on the number of power quality anomalies experienced by the grid. That said, we did notice that storage requirements were rising much more slowly at the end of the pilot.
+It is difficult to compute a strict upper bound on storage requirements for an OPQ network, because the amount of storage does depend on the number of power quality anomalies experienced by the grid. That said, we did notice that storage requirements were rising much more slowly at the end of the pilot when utilizing TTL as compared to not utilizing TTL.
 
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
-Could you add a sentence or two to explain the assumptions under which the 2.5 TB storage requirement was calculated?
+The largest contribution to data storage is the raw power data. In a system without TTL, raw data storage rapidly grows. The bounds on raw storage can be calculated by taking into account the sampling rate and sample size for active OPQ Boxes as described in Equation ~\ref{eq:RawDataBytes}.
 
-Could you provide a paragraph to add more concrete details to this section? For example, how much additional storage was required, say, each week, by the end of the study period?
+\begin{equation}
+    RawDataBytes = NumBoxes * TimeSeconds * SampleRate * SampleSize
+    \label{eq:RawDataBytes}
+\end{equation}
 
-\end{tcolorbox}
+Given that OPQ Boxes were configured to sample at 12 kHz at 2 bytes per sample during the deployment, we can calculate the bounds on raw storage for 16 OPQ Boxes over 3 months without TTL as 3.1 TiB. Figure~\ref{fig:data-management-graph} shows slightly less data as OPQ Boxes were added to the deployment over the course of the month and we did not have all 16 OPQ Boxes recording continuously since the begining of the pilot study.
+
+%\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
+%Could you add a sentence or two to explain the assumptions under which the 2.5 TB storage requirement was calculated?
+%
+%Could you provide a paragraph to add more concrete details to this section? For example, how much additional storage was required, say, each week, by the end of the study period?
+%
+%\end{tcolorbox}
 
 
 \subsection{OPQ provides useful adaptive optimization capabilities}
