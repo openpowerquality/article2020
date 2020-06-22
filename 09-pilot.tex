@@ -104,17 +104,16 @@ Figure \ref{fig:opqbox-thd-validation} shows the results of comparing values of 
 	\label{fig:opqbox-thd-validation}
 \end{figure}
 
-Unlike frequency and voltage, where there was very close alignment between OPQ Boxes and building meters, THD data shows two peaks, one of which is indicates a kind of "offset" of approximately 0.13% by the OPQ Boxes from the building meters.
+During the hours of 6pm and 6am, OPQBox and the building level meter displayed a high level of agreement as shown in the blue histogram in Figure \ref{fig:opqbox-thd-validaton}.
+On the other hand, during the hours of 6pm and 6am, there was a static disparity of 0.13\% between the two meters as portrayed  in the red histogram.
+This is likely attributed to the meter location in the power transmission hierarchy.
+While the OPQ Box is plugged the $120V_{ac}$ line, the building meter is monitoring the $480V_{ac}$ three phase line.
+An additional active conditioning system installed along side the transformer responsible for compensating for reactive power in the building is the likely culprit in the disparity.
 
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=SERGE]
-Could you augment the above paragraph with a few sentences about why you think the THD validation looked like it did? I know you covered this in your defense but I forgot.
-\end{tcolorbox}
-
-Unfortunately, we unable to perform validation of transient data collection, because building meters did not provide us with access to that information.
-
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=SERGE]
-Could you add an additional sentence or two to the above paragraph about transient data validation? Maybe more about why we couldn't do it, or what the implications of non-validation might be?
-\end{tcolorbox}
+Unfortunately, we unable to perform validation of transient data collection, because building meters did not provide us with access to that information. 
+However, synthetic test performed in the lab against a calibration source, showed that OPQ Box is able to measure transient magnitude with $\sigma=0.125V$, significantly higher then the triggering threshold.
+It should be noted that the internal transient metric provided by the OPQ Box is only used for event detection, while higher level analytics compute their own transient classification parameters.
+As such, the transient detection capabilities of the OPQ Box are more then sufficient for its role in the OPQ ecosystem.
 
 \subsection{OPQs triggering system provides advantages with respect to bandwidth and computation}
 
