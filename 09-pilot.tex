@@ -121,26 +121,18 @@ The pilot study provided an opportunity to collect data on the resources require
 
 To assess network bandwidth utilization, we analyzed the data stream of frequency and voltage collected by OPQ Boxes, and the resulting network bandwidth utilized by the OPQ Makai triggering algorithm. Over the course of a typical day, OPQ Makai requested approximately 136 MB of data from the deployed OPQ Boxes.  We then calculated how much data would be sent by a power quality meter using more conventional triggering approach in which exceeding a threshold would automatically result in sending waveform data, and found that, under the same conditions, approximately 1025 MB would be sent to the cloud, or eight times the network bandwidth.
 
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=SERGE]
-Please review and improve the above paragraph.
-\end{tcolorbox}
-
-To assess computational cost, we again analyzed the data stream for a typical day...
-
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=SERGE]
-Please finish the above paragraph by describing in words the histogram in slide 38 of your thesis defense presentation, where you show that Napali uses much less computational resources.
-\end{tcolorbox}
+Computational cost, is proportional to the amount of date acquired. Since the meter level analytics are at best only good enough for event detection, further analysis is required for event classification.
+This implies that the OPQ Makai triggering algorithm is at least 8 times more efficient then the self triggered counterpart. 
+Furthermore, in the self triggered case, data at the lowest granularity consists of waveforms from an individual device.
+These waveforms need to be matched together in order to extract grid-wide anomalies.
+On the other hand, OPQ Makai events contain data from all devices which experienced an anomaly, thus saving additional CPU time. 
 
 \subsection{OPQ enables subthreshold event detection based on temporal locality}
 \label{sec:subthreshold-events}
 
-One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.  In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity wave form data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data. In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth.
+One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.  In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity wave form data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data. In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth. This is accomplished by maintaining an model of the OPQ Box metrics for each device. Once a single device passes a threshold, OPQ Makai will search the network for all other devices which exhibit measurements which deviate significantly from the device model. If more devices are located, data from all the affected devices will be captured. Otherwise the event is deemed local and ignored.
 
-During the pilot study, we discovered several situations in which the OPQ sensor network was able to characterize power quality anomalies in the UH microgrid in a manner that the building level meters could not. For example...
-
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=SERGE]
-Please finish the above paragraph by describing one situation of subthreshold event detection and why it was cool.
-\end{tcolorbox}
+Sub-threshold triggering allowed us to cluster devices based on severity of the disturbances they experienced. These clusters closely corresponded to the topology of the power grid. This in turn made it possible to perform limited localization of PQ incidents without prior knowledge of the grid layout.
 
 \subsection{The OPQ Information Architecture provides a means to produce actionable insights}
 
