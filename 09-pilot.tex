@@ -186,7 +186,7 @@ The largest contribution to data storage is the raw power data. In a system with
     \label{eq:RawDataBytes}
 \end{equation}
 
-Given that OPQ Boxes were configured to sample at 12 kHz at 2 bytes per sample during the deployment, we can calculate the bounds on raw storage for 16 OPQ Boxes over 3 months without TTL as 3.1 TiB. Figure~\ref{fig:data-management-graph} shows slightly less data as the number of OPQ Boxes was not constant during the pilot study (Figure~\ref{fig:active-opq-boxes})
+Given that OPQ Boxes were configured to sample at 12 kHz at 2 bytes per sample during the deployment, we can calculate the bounds on raw storage for 16 OPQ Boxes over 3 months without TTL as 3.1 TiB. Figure~\ref{fig:data-management-graph} shows slightly less data as the number of OPQ Boxes was not constant during the pilot study (Figure~\ref{fig:active-opq-boxes}). By implementing TTL, significant data savings are made by discarding of IML data that is mostly noise.
 
 \begin{figure}[ht]
     \centering
@@ -195,23 +195,21 @@ Given that OPQ Boxes were configured to sample at 12 kHz at 2 bytes per sample d
     \label{fig:active-opq-boxes}
 \end{figure}
 
+Given a network of 16 OPQ Boxes over the pilot deployment period with TTL, the combined data storage from all levels reached an asymptotic limit of near 100 GB. The layout of data storage is provided per data storage level in Figure~\ref{fig:opq-data-storage}. The high rate of detections made by OPQ utilize most of the space. The reason for this is that Events store associated IML data along with each detection for high-fidelity analysis. It's also possible to observe how the AML and IML levels level off asymptomatically over time. This is a result of TTL discarding not useful data.
 
-%\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
-%Could you add a sentence or two to explain the assumptions under which the 2.5 TB storage requirement was calculated?
-%
-%Could you provide a paragraph to add more concrete details to this section? For example, how much additional storage was required, say, each week, by the end of the study period?
-%
-%\end{tcolorbox}
-
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/pilot/laha-levels-storage.png}
+    \caption{Combined OPQ Data Storage}
+    \label{fig:opq-data-storage}
+\end{figure}
 
 \subsection{OPQ provides useful adaptive optimization capabilities}
 \label{sec:adaptive-optimization}
 
 The top layer of OPQ's information architecture supports adaptive optimization: the ability to analyze previously collected data and use it to change the settings associated with data collection from OPQ Boxes.
 
-%One way we used this capability was to identify periodic phenomena, then predict when it was going to occur in future, and then change the settings associated with Boxes to support better data collection during periods in which a power quality anomaly was predicted.
-
-Two areas where adaptive optimizations were utilized are identifying periodic phenomena and predictions of future phenomena. Periodic phenomena are PQ related signals that occur at regular intervals. One example of periodic phenomena is a cyclic volage sag that was observed at one of our sensors with a period of about 34 minutes during our pilot study (Figure~\ref{fig:periodic-voltage-sags}). This periodic phenomena not only provided a classification of an interesting pattern, but also helped optimize the OPQ system for capture of future phenomena. Several system wide optimizations are utilized.
+Two areas where adaptive optimizations were utilized are identifying periodic phenomena and predictions of future phenomena. Periodic phenomena are PQ related signals that occur at regular intervals. One example of periodic phenomena is a cyclic voltage sag that was observed at one of our sensors with a period of about 34 minutes during our pilot study (Figure~\ref{fig:periodic-voltage-sags}). This periodic phenomena not only provided a classification of an interesting pattern, but also helped optimize the OPQ system for capture of future phenomena. Several system wide optimizations are utilized.
 
 \begin{figure}[H]
     \centering
@@ -231,7 +229,7 @@ As an example, Figure~\ref{fig:future-phenomena} shows the percentage of correct
     \label{fig:future-phenomena}
 \end{figure}
 
-Second, the increase in detection sensitivity makes it more likely that sub-threshold signals of interest will be classified. As example, the increased detection sensitivity allowed us to observe and classify a periodic voltage sag that would not have have been detected by our normal classifier due to the small magnitude of the sag. The detection is provided in Figure~\ref{fig:sub-threshold-detection}.
+Second, the increase in detection sensitivity makes it more likely that sub-threshold signals of interest will be classified. As example, the increased detection sensitivity allowed us to observe and classify a periodic voltage sag that would not have been detected by our normal classifier due to the small magnitude of the sag. The sub-threshold detection is shown in Figure~\ref{fig:sub-threshold-detection}.
 
 \begin{figure}[H]
     \centering
@@ -240,11 +238,7 @@ Second, the increase in detection sensitivity makes it more likely that sub-thre
     \label{fig:sub-threshold-detection}
 \end{figure}
 
-This creates a positive feedback loop where as periodic phenomena become more accurate, future phenomena become more accurate. As future phenomena become more accurate, periodic phenomena become more accurate.
-
-%\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
-%Can you provide a "for example" of this with more concrete details, hopefully indicating how this adaptive optimization actually yielded better results?
-%\end{tcolorbox}
+This creates a positive feedback loop whereas periodic phenomena become more accurate, future phenomena become more accurate. As future phenomena become more accurate, periodic phenomena become more accurate.
 
 \begin{tcolorbox}[title=ANTHONY AND SERGE]
 Any other pilot study results that I've forgotten to include?
