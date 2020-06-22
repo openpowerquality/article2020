@@ -30,11 +30,6 @@ Figure \ref{fig:architecture} illustrates how these components work together to 
 
 OPQ Makai, OPQ Mauka, and OPQ View are all cloud-based software services that collectively form a single "instance" with respect to data transmission, storage, analysis, and visualization. We refer to this collection of software-side components as OPQ Cloud. Every OPQ Box connects to a single instance of an OPQ Cloud. It is possible to have multiple OPQ Cloud instances. For example, a company might install an OPQ Cloud instance behind their firewall along with OPQ Boxes to provide a private mechanism for collecting and analyzing power quality data.
 
-\begin{tcolorbox}[title=ANTHONY AND SERGE]
-You might notice that there is no mention of "Napali" or "Laha" in this paper. I could not think of a good way to add them in that would not additionally complicate any already terminologically complicated topic. To me, they feel like "overlays" onto the four component architecture described here and thus not strictly necessary to understand the system, but let me know if you disagree.
-\end{tcolorbox}
-
-
 This architecture has a number of benefits. The combination of low and high fidelity data reduces both network overhead and storage requirements, which increases the scalability of the system in terms of the number of OPQ Boxes that can be tied to a single OPQ Cloud instance. OPQ Makai and OPQ Mauka have a plugin architecture, making it easier to extend their functionality to incorporate new triggers for high quality data (in the case of OPQ Makai) and new events and analyses (in the case of OPQ Mauka). Finally, the open source licensing of both hardware and software makes it possible to incorporate new ideas, bug fixes, and enhancements from technologists across the power quality community.
 
 \subsection{Information Architecture}
