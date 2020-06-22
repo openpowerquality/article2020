@@ -19,10 +19,6 @@ Figure \ref{fig:mauka-data-model} illustrates the hierarchical data model for OP
 \label{fig:mauka-data-model}
 \end{figure}
 
-%\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=ANTHONY]
-%Please review the following paragraphs for accuracy and quality.
-%\end{tcolorbox}
-
 The lowest layer of the hierarchy is the Instantaneous Measurements Layer (IML). The IML contains "raw" data, in other words, the digitize waveform.  IML data exists both on each OPQ Box (where it is available for up to the previous 60 minutes). It also exists in the cloud, in the event that OPQ's triggering mechanism has caused a temporal interval of waveform data to be uploaded. IML data in the cloud has a TTL of 15 minutes: unless the wave form data is found to be useful by a cloud service within 15 minutes, it can be discarded.
 
 The second layer is the Aggregate Measurements Level (AML). The AML stores power quality summary statistics sent either once per second or once per minute by each OPQ Box. These summary statistics include the maximum, minimum, and average values of voltage, frequency, and THD over the time window, as well as the presence or absence of transients. It is AML data that is used to initiate the triggering process of uploading IML data from the cloud.
