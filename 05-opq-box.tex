@@ -28,14 +28,14 @@ A complete device is shown in Figure~\ref{fig:opq:1:2}.
 
 The power system of the OPQ Box electrically isolates most of the device from the AC mains power.
 An isolated AC-DC converter generates $5V_{dc}$ from the mains $120V_{ac}$.
-5V is used to power the Raspberry Pi, the equipment connected to the expansion port, the 3.3V regulators and voltage reference and an isolated DC/DC converter.
+5V is used to power the Raspberry Pi, the equipment connected to the expansion port, the 3.3V regulators and voltage reference, and an isolated DC/DC converter.
 3.3V is used to power the isolated end of the isolation amplifier as well as the STM32F3 analog to digital converter/digital signal processor (ADC/DSP).
 The hot side of the isolation amplifier is powered from the isolated DC/DC converter.
 This allows OPQ Box to function with a battery attached to the expansion port, so that it may retain data and continue to operate during a power outage.
 
 The analog signal path of the OPQ Box is complicated by the fact that the STM32F3 ADC/DSP is electrically isolated from the mains power.
 A previous iteration of the OPQ Box overcame this by employing a small circuit board mount isolation transformer.
-Unfortunately it was found that the frequency response of these transformers varied wildly between individuals, thus incurring a lengthy calibration process for each device.
+Unfortunately, it was found that the frequency response of these transformers varied wildly between individuals, thus incurring a lengthy calibration process for each device.
 The current OPQ Box design solved this issue by using an AMC1100 isolation amplifier as the isolation component.
 Internally, the AMC1100 consists of a single die comprised of a $\Sigma\Delta$ analog to digital and digital to analog converters.
 These converters are separated by a silicon glass region on the integrated circuit which acts as a coupling capacitor.
@@ -95,7 +95,7 @@ Since our sampling rate is quite high (12kSps) and the fundamental frequency is 
 Instead, filtering is accomplished via a set of two low pass finite impulse response (FIR) filters.
 First filter has a passband of 0-600Hz allowing us to downsample the waveform to 1200 samples per second.
 Next filter has a passband of 0-100Hz allowing for further removal of high frequency noise.
-Finally zero crossing are extracted and used for the frequency calculation.
+Finally, zero crossings are extracted and used for the frequency calculation.
 The zero crossings themselves were calculated by using linear interpolation between two points which bracket the time axis.
 
 \subsubsection{Root Mean Square Voltage}\label{subsec:root-mean-square-voltage}
@@ -111,7 +111,7 @@ Instead, OPQ Box computes $V_{rms}$ as follows:
 \begin{equation} \label{eq:3}
 	V_{rms} = \sqrt{\frac{1}{n}\sum\limits_{k=0}^{k=n}V_{k}^{2}}
 \end{equation}
-Similarly to the frequency calculation, OPQ Box uses a 10 cycle window for a single $V_{rms}$ calculation, however unlike the frequency calculation the input is not filtered a priori.
+Similarly to the frequency calculation, OPQ Box uses a 10 cycle window for a single $V_{rms}$ calculation. Unlike the frequency calculation, the input is not filtered a priori.
 
 An example of a power quality disturbance which exhibits low $V_{rms}$ is shown in Figure~\ref{fig:opq:6:1} and~\ref{fig:opq:6:2}.
 These disturbances are the result of a lighting strike recorded by two OPQ Box devices on Nov 1, 2017.
@@ -147,7 +147,7 @@ Where $V_{f}$ is the fundamental 60Hz power and $V_{n}$ is the power at $n^{th}$
 It should be noted that in the power quality domain THD is expressed as a percentage as opposed to $\frac{dB}{\sqrt{Hz}}$ as used in other disciplines.
 Operationally, OPQ Box computes THD for 10 cycles of the fundamental frequency.
 First an FFT transforms the real voltage samples into its frequency components.
-Next, the square of the harmonic bins is accumulated and scaled by the magnitude of the fundamental power.
+Next, the square of the harmonic bins are accumulated and scaled by the magnitude of the fundamental power.
 
 \begin{figure}[ht]
 	\centering
@@ -208,7 +208,7 @@ The computed fundamental frequency and $V_{rms}$ are transmitted to the Makai se
 Data transmission is handled using ZeroMq software stack with Curve25519 elliptic curve encryption.
 Each device holds a unique private and public key, as well as the servers' public key, allowing both the Makai service and the OPQ Box to verify its peer.
 Internally, metrics transmission uses ZeroMq's PUB/SUB protocol.
-This protocol is a publish subscribe topology, with each message containing the topic, and a payload.
+This protocol is a publish subscribe topology, with each message containing the topic and a payload.
 Additionally, ZeroMq allows for multiple sub peers with subscriptions forwarded to the publisher automatically via a side channel.
 This allows for the aggregation service to be spread across multiple nodes, with minimal network overhead.
 
@@ -220,7 +220,7 @@ In order to make a distributed measurement, all of the OPQ Boxes on the OPQ netw
 Time synchronization across multiple OPQ Boxes is accomplished using the Network Time Protocol.
 The expansion port of the OPQ Box supports a GPS receiver.
 However, since GPS receivers require line of sight to the sky, it was not used for deployment.
-NTP performance has been verified against GPS resulting in time error of $8ms\pm 5ms$ which is typical for NTP running over the Internet with a close by NTP server.
+NTP performance has been verified against GPS resulting in time error of $8ms\pm 5ms$ which is typical for NTP running over the Internet with a nearby NTP server.
 This error is visualized in a Figure~\ref{fig:opq:6:2}.
 With a large coincidental $V_{pp}$ drop across two devices, a 7ms phase error is clearly visible.
 
