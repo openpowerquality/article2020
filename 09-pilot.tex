@@ -9,13 +9,13 @@ The pilot study had the following major goals:
 
 \begin{enumerate}
 
-\item {\em Evaluation of sensor data accuracy and quality.} While we conducted extensive laboratory tests of the sensor network, the pilot study enabled us to evaluate the accuracy and utility of our hardware devices and power quality data collection procedures in a real-world setting. Does an OPQ sensor network measure power quality (and detect anomalies) as well or better than conventional building-level electrical meters?
+\item {\em Evaluation of sensor data accuracy and quality.} While we conducted extensive laboratory tests of the sensor network, the pilot study enabled us to evaluate the accuracy and utility of our hardware devices and power quality data collection procedures in a real-world setting. Does an OPQ sensor network measure power quality (and detect anomalies) as well (or better) than conventional building-level electrical meters?
 
 \item {\em Evaluation of the triggering system.} The OPQ Makai triggering system provides a novel two-way communication between sensors and the cloud, resulting in a triggering system with unique capabilities.  Does the triggering system provide efficiencies not available from more conventional approaches? Does it provide data enabling analysis opportunities not available through more conventional approaches?
 
 \item {\em Evaluation of the information architecture.} OPQ Mauka implements a tiered, hierarchical information architecture.  The pilot study enabled us to evaluate this information architecture.  Would this information architecture prove useful with real world data? Could actionable insights emerge from low-level sensor data?
 
-\item {\em Evaluation of cloud data storage management.} OPQ Mauka manages data storage through a "time to live" (TTL) mechanism, which results in data being discarded if it is not found to be useful and thus "promoted" to a higher level of the information hierarchy within a defined period of time.  The pilot study enables us to evaluate this approach. Does this mechanism allow sensor network designers to determine upper bounds on storage requirements? Is information thrown away prematurely because it was not found to be useful within the time limits?
+\item {\em Evaluation of cloud data storage management.} OPQ Mauka manages data storage through a "time-to-live" (TTL) mechanism, which results in data being discarded if it is not found to be useful and thus ``promoted" to a higher level of the information hierarchy within a defined period of time.  The pilot study enables us to evaluate this approach. Does this mechanism allow sensor network designers to determine upper bounds on storage requirements? Is information thrown away prematurely because it was not found to be useful within the time limits?
 
 \end{enumerate}
 
@@ -23,7 +23,7 @@ Our pilot study is significant because much of the literature on power quality a
 
 \subsection{Descriptive statistics}
 
-The pilot study started on October 7, 2019 and ended on February 4, 2020. We deployed 16 OPQ Boxes across campus. As noted above, each OPQ Box collects 200 measurements per grid cycle, for a total of approximately 17M raw measurements per day per box.  Values for the maximum and minimum voltage, frequency, and THD, along with the presence or absence of transients, is sent once a second to the cloud by each box. Thus, each box sends approximately 86,400 measures per day to the cloud at a minimum. Over the course of the pilot study, a total of approximately 116M aggregate measures were sent by all of the OPQ Boxes.
+The pilot study started on October 7, 2019 and ended on February 4, 2020. We deployed 16 OPQ Boxes across campus. As noted above, each OPQ Box collects 200 measurements per grid cycle, for a total of approximately 1B raw measurements per day per box.  Values for the maximum and minimum voltage, frequency, and THD, along with the presence or absence of transients, is sent once a second to the cloud by each box. Thus, each box sends approximately 86,400 measures per day to the cloud at a minimum. Over the course of the pilot study, a total of approximately 116M aggregate measures were sent by all of the OPQ Boxes.
 
 Figure \ref{fig:statistics} provides two additional sets of summary statistics regarding the pilot study.  Figure (a) shows the number of anomalous events (i.e. where threshold values for frequency, voltage, THD, or transients were exceeded) along with the number of OPQ Boxes that experienced the power quality anomaly during that same time period. So, for example, 170,925 power quality anomalies were experienced by only one of the 16 OPQ boxes, and 463 anomalous power quality measurements were experienced by all 16 OPQ Boxes.
 
@@ -111,9 +111,9 @@ While the OPQ Box is plugged the $120V_{ac}$ line, the building meter is monitor
 An additional active conditioning system installed along side the transformer responsible for compensating for reactive power in the building is the likely culprit in the disparity.
 
 Unfortunately, we unable to perform validation of transient data collection, because building meters did not provide us with access to that information.
-However, synthetic test performed in the lab against a calibration source, showed that OPQ Box is able to measure transient magnitude with $\sigma=0.125V$, significantly higher then the triggering threshold.
+However, synthetic tests performed in the lab against a calibration source, showed that OPQ Box is able to measure transient magnitude with $\sigma=0.125V$, significantly higher then the triggering threshold.
 It should be noted that the internal transient metric provided by the OPQ Box is only used for event detection, while higher level analytics compute their own transient classification parameters.
-As such, the transient detection capabilities of the OPQ Box are more then sufficient for its role in the OPQ ecosystem.
+As such, the transient detection capabilities of the OPQ Box are more than sufficient for its role in the OPQ ecosystem.
 
 \subsection{OPQs triggering system provides advantages with respect to bandwidth and computation}
 
@@ -130,20 +130,20 @@ On the other hand, OPQ Makai events contain data from all devices which experien
 \subsection{OPQ enables subthreshold event detection based on temporal locality}
 \label{sec:subthreshold-events}
 
-One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.
+One interesting capability enabled by two-way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.
 In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity waveform data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data.
 In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth.
-This is accomplished by maintaining an model of the OPQ Box metrics for each device.
+This is accomplished by maintaining a model of the OPQ Box metrics for each device.
 Once a single device passes a threshold, OPQ Makai will search the network for all other devices which exhibit measurements which deviate significantly from the device model.
 If more devices are located, data from all the affected devices will be captured.
-Otherwise the event is deemed local and ignored.
+Otherwise, the event is deemed local and ignored.
 
 Sub-threshold triggering allows for clustering of OPQ Boxes based on their electrical distance without a priori knowledge of the power grid topology.
 A distance metric comprised of the magnitude of the $V_{rms}$  disturbance between every pair of OPQ Boxes was used as the clustering parameter.
 This distance metric describes how much local disturbances observed by a device affect every other device on the network.
-Hierarchical clustering employed on the aforementioned distance metric results in a the hierarchy shown in Figure \ref{fig:clustering}.
+Hierarchical clustering employed on the aforementioned distance metric results in the hierarchy shown in Figure \ref{fig:clustering}.
 These clusters closely corresponded to the topology of the power grid.
-For example the two top level clusters correspond to the two 12kV feeders which power the university campus.
+For example the two top-level clusters correspond to the two 12kV feeders which power the university campus.
 As such, disturbances which originate on one feeder, have a minimal impact on the other.
 On the other hand, devices 1009 and 1008 are located in adjacent buildings, and a common 480V feeder, resulting in large level of commonality in observed anomalies.
 Sub-threshold triggering along with clustering in turn made it possible to perform limited localization of PQ incidents without prior knowledge of the grid layout.
@@ -268,9 +268,6 @@ Second, the increase in detection sensitivity makes it more likely that sub-thre
 
 This creates a positive feedback loop whereas periodic phenomena become more accurate, future phenomena become more accurate. As future phenomena become more accurate, periodic phenomena become more accurate.
 
-\begin{tcolorbox}[title=ANTHONY AND SERGE]
-Any other pilot study results that I've forgotten to include?
-\end{tcolorbox}
 
 
 
