@@ -23,7 +23,7 @@ Our pilot study is significant because much of the literature on power quality a
 
 \subsection{Descriptive statistics}
 
-The pilot study started on October 7, 2019 and ended on February 4, 2020. We deployed 16 OPQ Boxes across campus. As noted above, each OPQ Box collects 200 measurements per grid cycle, for a total of approximately 1B raw measurements per day per box.  Values for the maximum and minimum voltage, frequency, and THD, along with the presence or absence of transients, is sent once a second to the cloud by each box. Thus, each box sends approximately 86,400 measures per day to the cloud at a minimum. Over the course of the pilot study, a total of approximately 116M aggregate measures were sent by all of the OPQ Boxes.
+The pilot study started on October 7, 2019 and ended on February 4, 2020. We deployed 16 OPQ Boxes across campus. As noted above, each OPQ Box collects 200 measurements per grid cycle, for a total of approximately 17M raw measurements per day per box.  Values for the maximum and minimum voltage, frequency, and THD, along with the presence or absence of transients, is sent once a second to the cloud by each box. Thus, each box sends approximately 86,400 measures per day to the cloud at a minimum. Over the course of the pilot study, a total of approximately 116M aggregate measures were sent by all of the OPQ Boxes.
 
 Figure \ref{fig:statistics} provides two additional sets of summary statistics regarding the pilot study.  Figure (a) shows the number of anomalous events (i.e. where threshold values for frequency, voltage, THD, or transients were exceeded) along with the number of OPQ Boxes that experienced the power quality anomaly during that same time period. So, for example, 170,925 power quality anomalies were experienced by only one of the 16 OPQ boxes, and 463 anomalous power quality measurements were experienced by all 16 OPQ Boxes.
 
@@ -104,7 +104,7 @@ Figure \ref{fig:opqbox-thd-validation} shows the results of comparing values of 
 	\label{fig:opqbox-thd-validation}
 \end{figure}
 
-During the hours of 6pm and 6am, OPQBox and the building level meter displayed a high level of agreement as shown in the blue histogram in Figure \ref{fig:opqbox-thd-validaton}.
+During the hours of 6pm and 6am, OPQBox and the building level meter displayed a high level of agreement as shown in the blue histogram in Figure \ref{fig:opqbox-thd-validation}.
 On the other hand, during the hours of 6pm and 6am, there was a static disparity of 0.13\% between the two meters as portrayed  in the red histogram.
 This is likely attributed to the meter location in the power transmission hierarchy.
 While the OPQ Box is plugged the $120V_{ac}$ line, the building meter is monitoring the $480V_{ac}$ three phase line.
@@ -130,9 +130,45 @@ On the other hand, OPQ Makai events contain data from all devices which experien
 \subsection{OPQ enables subthreshold event detection based on temporal locality}
 \label{sec:subthreshold-events}
 
-One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.  In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity wave form data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data. In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth. This is accomplished by maintaining an model of the OPQ Box metrics for each device. Once a single device passes a threshold, OPQ Makai will search the network for all other devices which exhibit measurements which deviate significantly from the device model. If more devices are located, data from all the affected devices will be captured. Otherwise the event is deemed local and ignored.
+One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.
+In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity wave form data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data.
+In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth.
+This is accomplished by maintaining an model of the OPQ Box metrics for each device.
+Once a single device passes a threshold, OPQ Makai will search the network for all other devices which exhibit measurements which deviate significantly from the device model.
+If more devices are located, data from all the affected devices will be captured.
+Otherwise the event is deemed local and ignored.
 
-Sub-threshold triggering allowed us to cluster devices based on severity of the disturbances they experienced. These clusters closely corresponded to the topology of the power grid. This in turn made it possible to perform limited localization of PQ incidents without prior knowledge of the grid layout.
+Sub-threshold triggering allows for clustering of OPQ Boxes based on their electrical distance without a priori knowledge of the power grid topology.
+A distance metric comprised of the magnitude of the $V_{rms}$  disturbance between every pair of OPQ Boxes was used as the clustering parameter.
+This distance metric describes how much local disturbances observed by a device affect every other device on the network.
+Hierarchical clustering employed on the aforementioned distance metric results in a the hierarchy shown in Figure \ref{fig:clustering}.
+These clusters closely corresponded to the topology of the power grid.
+For example the two top level clusters correspond to the two 12kV feeders which power the university campus.
+As such, disturbances which originate on one feeder, have a minimal impact on the other.
+On the other hand, devices 1009 and 1008 are located in adjacent buildings, and a common 480V feeder, resulting in large level of commonality in observed anomalies.
+Sub-threshold triggering along with clustering in turn made it possible to perform limited localization of PQ incidents without prior knowledge of the grid layout.
+In example, consider a $V_{rms}$ sag observed by the OPQ network shown in Figure \ref{fig:localisation}.
+This event had the largest impact on devices 1008 and 1009 which as shown via hierarchical clustering are closely coupled.
+From this information it is possible to conclude that the event depicted in Figure \ref{fig:localisation} originated from inside the UH power grid relatively close to devices 1008 and 1009.
+
+\begin{figure}[ht]
+
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{images/pilot/clustring.png}
+        \caption{Hierarchical clustering of OPQ Boxes.}
+        \label{fig:clustering}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{images/pilot/localisation.png}
+        \caption{Localisation of a disturbance.}
+        \label{fig:localisation}
+    \end{subfigure}
+    \caption{Hierarchical clustering of OPQ Boxes, and localization of a disturbance.}
+    \label{fig:localization-clustering}
+\end{figure}
 
 \subsection{The OPQ Information Architecture provides a means to produce actionable insights}
 

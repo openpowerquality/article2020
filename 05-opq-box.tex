@@ -88,53 +88,14 @@ Since a sinusoid has two zero crossings for a full cycle, the frequency can be c
  f = \frac{1}{\frac{2}{n}\sum\limits_{k=0}^{k=n}{\Delta t_{k}}}
 \end{equation}
 
-\begin{figure}[ht]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-	  \centering
-	  \includegraphics[width=1\linewidth]{images/opq-box/filter1_gain.png}
-	  \caption{}
-	  \label{fig:opq:4:1}
-	\end{subfigure}%
-
-	\begin{subfigure}{.4\textwidth}
-	  \centering
-	  \includegraphics[width=1\linewidth]{images/opq-box/filter1_response.png}
-	  \caption{}
-	  \label{fig:opq:4:2}
-	\end{subfigure}
-\end{figure}
-
-\begin{figure}[ht]\ContinuedFloat
-	\centering
-	\begin{subfigure}{.4\textwidth}
-	  \centering
-	  \includegraphics[width=1\linewidth]{images/opq-box/filter2_gain.png}
-	  \caption{}
-	  \label{fig:opq:4:3}
-	\end{subfigure}%
-
-	\begin{subfigure}{.4\textwidth}
-	  \centering
-	  \includegraphics[width=1\linewidth]{images/opq-box/filter2_response.png}
-	  \caption{}
-	  \label{fig:opq:4:4}
-	\end{subfigure}
-	\caption{Filters used for mains frequency calculation. (a) Downsampling filter gain. (b) Downsampling filter impulse response. (c) Lowpass filter gain. (d) Lowpass filter impulse response.}
-	\label{fig:opq:4}
-\end{figure}
-
 Where the $\Delta t_{k}$ is the k'th time between two adjacent zero crossings.
 
 In order to improve the accuracy of the frequency calculation one must first filter out as much noise as possible.
 Since our sampling rate is quite high (12kSps) and the fundamental frequency is quite low (60Hz), it is very computationally expensive to perform this filtering in a single step.
-Instead, filtering is accomplished via a set of two finite impulse response (FIR) filters shown in Figure~\ref{fig:opq:4:2} and~\ref{fig:opq:4:4}.
-First, the Down sampling filter is applied to the raw waveform, which results in the frequency response shown in Figure~\ref{fig:opq:4:1}.
-As is evident by the plot, the frequency content of the result is 0-600Hz, Thus, it can be downsampled to the $\frac{N}{10}$, or 200 samples without aliasing.
-
-Next, the low pass filter is applied to the downsampled waveform with the frequency response shown in Figure~\ref{fig:opq:4:3}.This resulting frequency content is 0-100Hz, thus all of the higher frequency harmonics and noise are removed.
-
-Finally, the twice filtered downsampled waveform is used to estimate the fundamental frequency according to the Equation~\ref{eq:1}.
+Instead, filtering is accomplished via a set of two low pass finite impulse response (FIR) filters.
+First filter has a passband of 0-600Hz allowing us to downsample the waveform to 1200 samples per second.
+Next filter has a passband of 0-100Hz allowing for further removal of high frequency noise.
+Finally zero crossing are extracted and used for the frequency calculation.
 The zero crossings themselves were calculated by using linear interpolation between two points which bracket the time axis.
 
 \subsubsection{Root Mean Square Voltage}\label{subsec:root-mean-square-voltage}
@@ -201,8 +162,7 @@ It is assumed that the large drop observed daily from approximately 6pm to 6am c
 
 \subsubsection{Transient Detection}\label{subsec:transient-detection}
 
-OPQ Box transient detection is performed via filtering out of the fundamental frequency via an FIR high pass pass filter and searching for a maximum value in the remainder.
-The high pass filter has a cutoff of $400Hz$, and the filter coefficients and response are shown in Figure~\ref{fig:opq:8:2} and Figure~\ref{fig:opq:8:1} respectively.
+OPQ Box transient detection is performed via filtering out of the fundamental frequency via an FIR high pass pass filter with a cutoff frequency of $400Hz$ and searching for a maximum value in the remainder.
 The result of the high pass filter operation is shown in Figure~\ref{fig:opq:8}.
 Figure~\ref{fig:opq:8:3} shows a synthetic signal generated via a SDG1025 signal generator and fed into the OPQ Box.
 This signal contains a $5V_{pp}$ transient injected at 11ms.
@@ -212,19 +172,6 @@ OPQ Box scans for the highest sample in the filtered waveform and uses its magni
 
 \begin{figure}[ht]
 	\centering
-	\begin{subfigure}{.5\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/opq-box/thd_hpf_resp.pdf}
-		\caption{}
-		\label{fig:opq:8:1}
-	\end{subfigure}%
-	\begin{subfigure}{.5\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/opq-box/thd_hpf.pdf}
-		\caption{}
-		\label{fig:opq:8:2}
-	\end{subfigure}
-
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=0.86\linewidth]{images/opq-box/box_eval/5v_transient.pdf}
@@ -281,7 +228,7 @@ With a large coincidental $V_{pp}$ drop across two devices, a 7ms phase error is
 
 Currently, there is no mechanism for mass production of OPQ Boxes, but all of the plans are available under an Open Source license, so interested organizations with some basic hardware engineering skills can build their own boxes.
 
-Complete specifications for the OPQ Box hardware, firmware, and software are available \cite{negrashov_opq_2020}. As of the time of writing, a single OPQ Box can be manufactured for approximately \$100 in parts. The cost drops significantly with scale, for example, 100 OPQ Boxes can be manufactured for a cost of approximately \$75 in parts.
+Complete specifications for the OPQ Box hardware, firmware, and software are available \cite{negrashov_opq_2020}. As of the time of writing, a single OPQ Box can be manufactured for approximately \$100 in parts. The cost drops significantly with scale, for example, 100 OPQ Boxes can be manufactured for a cost of approximately \$75 in parts per device.
 
 
 
