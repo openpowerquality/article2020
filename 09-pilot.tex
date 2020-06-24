@@ -110,7 +110,7 @@ This is likely attributed to the meter location in the power transmission hierar
 While the OPQ Box is plugged the $120V_{ac}$ line, the building meter is monitoring the $480V_{ac}$ three phase line.
 An additional active conditioning system installed along side the transformer responsible for compensating for reactive power in the building is the likely culprit in the disparity.
 
-Unfortunately, we unable to perform validation of transient data collection, because building meters did not provide us with access to that information. 
+Unfortunately, we unable to perform validation of transient data collection, because building meters did not provide us with access to that information.
 However, synthetic test performed in the lab against a calibration source, showed that OPQ Box is able to measure transient magnitude with $\sigma=0.125V$, significantly higher then the triggering threshold.
 It should be noted that the internal transient metric provided by the OPQ Box is only used for event detection, while higher level analytics compute their own transient classification parameters.
 As such, the transient detection capabilities of the OPQ Box are more then sufficient for its role in the OPQ ecosystem.
@@ -122,16 +122,16 @@ The pilot study provided an opportunity to collect data on the resources require
 To assess network bandwidth utilization, we analyzed the data stream of frequency and voltage collected by OPQ Boxes, and the resulting network bandwidth utilized by the OPQ Makai triggering algorithm. Over the course of a typical day, OPQ Makai requested approximately 136 MB of data from the deployed OPQ Boxes.  We then calculated how much data would be sent by a power quality meter using more conventional triggering approach in which exceeding a threshold would automatically result in sending waveform data, and found that, under the same conditions, approximately 1025 MB would be sent to the cloud, or eight times the network bandwidth.
 
 Computational cost, is proportional to the amount of date acquired. Since the meter level analytics are at best only good enough for event detection, further analysis is required for event classification.
-This implies that the OPQ Makai triggering algorithm is at least 8 times more efficient then the self triggered counterpart. 
+This implies that the OPQ Makai triggering algorithm is at least 8 times more efficient then the self triggered counterpart.
 Furthermore, in the self triggered case, data at the lowest granularity consists of waveforms from an individual device.
 These waveforms need to be matched together in order to extract grid-wide anomalies.
-On the other hand, OPQ Makai events contain data from all devices which experienced an anomaly, thus saving additional CPU time. 
+On the other hand, OPQ Makai events contain data from all devices which experienced an anomaly, thus saving additional CPU time.
 
 \subsection{OPQ enables subthreshold event detection based on temporal locality}
 \label{sec:subthreshold-events}
 
 One interesting capability enabled by two way communication between OPQ Boxes and their cloud-based services is what we term {\em subthreshold event detection based on temporal locality}.
-In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity wave form data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data.
+In a nutshell, when one OPQ Box determines that a power quality measure has exceeded a threshold, one of the actions of the sensor network is to request high fidelity waveform data from neighboring boxes for the same temporal period, regardless of whether those boxes are reporting over-threshold data.
 In the event that any of those boxes actually do report over-threshold data, then the request ripples outward to the boxes neighboring that box, and so forth.
 This is accomplished by maintaining an model of the OPQ Box metrics for each device.
 Once a single device passes a threshold, OPQ Makai will search the network for all other devices which exhibit measurements which deviate significantly from the device model.
