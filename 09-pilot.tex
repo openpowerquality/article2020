@@ -121,11 +121,8 @@ The pilot study provided an opportunity to collect data on the resources require
 
 To assess network bandwidth utilization, we analyzed the data stream of frequency and voltage collected by OPQ Boxes, and the resulting network bandwidth utilized by the OPQ Makai triggering algorithm. Over the course of a typical day, OPQ Makai requested approximately 136 MB of data from the deployed OPQ Boxes.  We then calculated how much data would be sent by a power quality meter using more conventional triggering approach in which exceeding a threshold would automatically result in sending waveform data, and found that, under the same conditions, approximately 1025 MB would be sent to the cloud, or eight times the network bandwidth.
 
-Computational cost, is proportional to the amount of date acquired. Since the meter level analytics are at best only good enough for event detection, further analysis is required for event classification.
-This implies that the OPQ Makai triggering algorithm is at least 8 times more efficient then the self triggered counterpart.
-Furthermore, in the self triggered case, data at the lowest granularity consists of waveforms from an individual device.
-These waveforms need to be matched together in order to extract grid-wide anomalies.
-On the other hand, OPQ Makai events contain data from all devices which experienced an anomaly, thus saving additional CPU time.
+The computational cost of an OPQ sensor network is proportional to the amount of data acquired. Since the meter level analytics are at best only good enough for event detection, further analysis is required for event classification.
+This implies that the OPQ Makai triggering algorithm is at least 8 times more efficient then the self triggered counterpart, since 8 times less data is sent by OPQ Boxes to the cloud for analysis.
 
 \subsection{OPQ enables subthreshold event detection based on temporal locality}
 \label{sec:subthreshold-events}
