@@ -1,23 +1,7 @@
-\section{Results from the Pilot Deployment}
+\section{Results and Discussion}
 \label{sec:pilot-study}
 
-To evaluate the capabilities of the OPQ Sensor Network, 16 OPQ Boxes were deployed at the University of Hawaii Manoa campus over the course of three months in the Fall of 2019.  The University of Hawaii campus is an isolated microgrid connected to the Oahu powergrid only via a single 46kV feeder. The UH Campus also has commercial electrical meters (a mixture of GE PQMII and GE EPM 7000) deployed across various levels of the power delivery infrastructure. While the primary purpose of these meters is to monitor power consumption, they do include power quality monitoring capabilities. Data from these meters were used as ground truth for validation studies of the OPQ sensor network.
-
-The University of Hawaii power grid is interesting in that it supplies a highly diverse infrastructure. Beyond traditional residential equipment such as computers and consumer grade electronics, the UH power grid powers scientific and laboratory equipment, machine shops, and server farms. All of these elements have varying requirements/tolerances for power quality anomalies as well as different levels of power quality “pollution”. Furthermore, some of the electricity consumers in the UH campus are entirely unique. For example, the free electron laser located in the Watanabe Hall is one of only ten in the world, and the impact/sensitivity of power quality on the instrument are completely unstudied.
-
-The pilot study had the following major goals:
-
-\begin{enumerate}
-
-\item {\em Evaluation of sensor data accuracy and quality.} While we conducted extensive laboratory tests of the sensor network, the pilot study enabled us to evaluate the accuracy and utility of our hardware devices and power quality data collection procedures in a real-world setting. Does an OPQ sensor network measure power quality (and detect anomalies) as well (or better) than conventional building-level electrical meters?
-
-\item {\em Evaluation of the triggering system.} The OPQ Makai triggering system provides a novel two-way communication between sensors and the cloud, resulting in a triggering system with unique capabilities.  Does the triggering system provide efficiencies not available from more conventional approaches? Does it provide data enabling analysis opportunities not available through more conventional approaches?
-
-\item {\em Evaluation of the information architecture.} OPQ Mauka implements a tiered, hierarchical information architecture.  The pilot study enabled us to evaluate this information architecture.  Would this information architecture prove useful with real world data? Could actionable insights emerge from low-level sensor data?
-
-\item {\em Evaluation of cloud data storage management.} OPQ Mauka manages data storage through a "time-to-live" (TTL) mechanism, which results in data being discarded if it is not found to be useful and thus ``promoted" to a higher level of the information hierarchy within a defined period of time.  The pilot study enables us to evaluate this approach. Does this mechanism allow sensor network designers to determine upper bounds on storage requirements? Is information thrown away prematurely because it was not found to be useful within the time limits?
-
-\end{enumerate}
+To evaluate the capabilities of the OPQ Sensor Network, we deployed 16 OPQ Boxes at the University of Hawaii Manoa campus over the course of three months in the Fall of 2019.  The University of Hawaii campus is an isolated microgrid connected to the Oahu powergrid only via a single 46kV feeder. The UH Campus also has commercial electrical meters (a mixture of GE PQMII and GE EPM 7000) deployed across various levels of the power delivery infrastructure. While the primary purpose of these meters is to monitor power consumption, they do include power quality monitoring capabilities. Data from these meters were used as ground truth for validation studies of the OPQ sensor network.
 
 Our pilot study is significant because much of the literature on power quality assessment relies on models, not actual installations \cite{anurangi_effects_2017,bayindir_effects_2016,farhoodnea_power_2012,shafiullah_experimental_2014}. In other cases, data was collected from only one location or for a very short time span \cite{kucuk_assessment_2013,viciana_openzmeter_2018}.
 
@@ -70,6 +54,7 @@ Figure \ref{fig:statistics} provides two additional sets of summary statistics r
 \end{figure}
 
 \subsection{OPQ provides valid and reliable collection of power quality data}
+\label{hyp:01}
 
 The first goal of the pilot study was to assess how well an OPQ sensor network is able to collect basic power quality data. To do this, we compared data on voltage and frequency collected by OPQ Boxes with data on voltage and frequency collected by the existing UH power monitors.  The results are shown in Figure \ref{fig:opqbox-f-v-validation}.
 
@@ -116,6 +101,7 @@ It should be noted that the internal transient metric provided by the OPQ Box is
 As such, the transient detection capabilities of the OPQ Box are more than sufficient for its role in the OPQ ecosystem.
 
 \subsection{OPQs triggering system provides advantages with respect to bandwidth and computation}
+\label{hyp:02}
 
 The pilot study provided an opportunity to collect data on the resources required by an OPQ sensor network with respect to cloud-level network resources and server-level computation overhead.
 
@@ -168,6 +154,7 @@ From this information it is possible to conclude that the event depicted in Figu
 \end{figure}
 
 \subsection{The OPQ Information Architecture provides a means to produce actionable insights}
+\label{hyp:04}
 
 Figure \ref{fig:level-statistics} provides some descriptive statistics on the total number of entities created at each layer of the OPQ Information Architecture over the course of the pilot study. Note that the number of entities at a given layer at a given point in time is typically far less, due to the use of TTL to discard entities not promoted to higher layers.
 
@@ -192,6 +179,7 @@ Figure \ref{fig:level-statistics} provides some descriptive statistics on the to
 Figure \ref{fig:level-statistics} shows that all layers of the hierarchy were actively used. In addition, the system was able to produce actionable insights by automatically detecting periodic phenomena for two boxes, and then predicting future occurrences of power quality anomalies with over a 50\% success rate (in other words, the current implementation of predictive phenomena leads to a significant false positive rate, predicting twice as many future power quality anomalies as actually occurred). Improving the predictive capabilities is a topic of future research.
 
 \subsection{The OPQ Information Architecture provides predictable upper bounds on storage resources}
+\label{hyp:05}
 
 Figure \ref{fig:data-management-graph} shows a graph that illustrates storage requirements both with and without TTL-based data removal.  As the graph shows, over the course of the three month period, we estimate that cloud-level storage requirements would have reached approximately 2.5TB if all data was kept.  However, due to TTL, the amount of data held in the cloud at the conclusion of the case study was only 100 GB.
 
