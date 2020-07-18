@@ -29,21 +29,3 @@ make clean
 * https://en.wikipedia.org/wiki/Solar_power_in_Hawaii
 
 * Remember to revert \documentclass before submission.
-
-## Revision:
-
-Introduction
-  * Goals to Aims
-  * Include "research gap", hypotheses
-
-OPQ Architecture Section
-  * Move it into methods
-
-Related Work
-  * keep the same
-
-Methods
-  * Build the hardware and software
-  * Perform verification of hardware and software in a lab setting.
-  * Perform a pilot study to validate the utility of the architecture in a real-world setting
-

@@ -50,7 +50,7 @@ A complete device is shown in Figure~\ref{fig:opq:1:2}.
 	\label{fig:opq:2}
 \end{figure}
 
-\subsubsection{Hardware}\label{subsec:hardware}
+\subsubsection{OPQ Box Hardware}\label{subsec:hardware}
 
 The power system of the OPQ Box electrically isolates most of the device from the AC mains power.
 An isolated AC-DC converter generates $5V_{dc}$ from the mains $120V_{ac}$.
@@ -70,7 +70,7 @@ This allows OPQ Box to function with a battery attached to the expansion port, s
 A Raspberry Pi single board computer (SBC) is responsible for signal analysis and anomaly detection.
 The Raspberry Pi model used in OPQ Box is the Pi Zero W equipped with 256MB of main memory and a single core 1GHz ARM11 CPU. It also contains an on-board 802.11n WIFI transceiver, which removes the need for an external WIFI dongle.
 
-\subsubsection{Software}\label{subsec:software}
+\subsubsection{OPQ Box Software}\label{subsec:software}
 
 The software stack of the Raspberry Pi aims to deliver an accurate and precise power quality analysis framework despite the rather limited capabilities of the hardware.
 A block diagram of the software stack is shown in Figure~\ref{fig:opq:3}.
@@ -92,7 +92,7 @@ RDRS is capable of buffering up to an hour of data before it is overwritten, res
 The analysis thread of the Triggering application performs feature extraction of the raw data windows of 2000 samples.
 Four metrics are extracted from the data stream: (1) Fundamental frequency, (2) RMS Voltage, (3) Total Harmonic Distortion, and (4) Transients. Let's briefly discuss how each of these are computed.
 
-\subsubsection{Fundamental Frequency}\label{subsec:fundamental-frequency}
+\subsubsection{OPQ Box: Calculating Fundamental Frequency}\label{subsec:fundamental-frequency}
 
 The fundamental frequency is calculated by computing the zero crossings of the AC waveform.
 In order to improve the accuracy of the frequency calculation one must first filter out as much noise as possible.
@@ -103,13 +103,13 @@ Next filter has a passband of 0-100Hz allowing for further removal of high frequ
 Finally, zero crossings are extracted and used for the frequency calculation.
 The zero crossings themselves were calculated by using linear interpolation between two points which bracket the time axis.
 
-\subsubsection{Root Mean Square Voltage}\label{subsec:root-mean-square-voltage}
+\subsubsection{OPQ Box: Calculating RMS Voltage}\label{subsec:root-mean-square-voltage}
 
 Root mean square voltage ($V_{rms}$) in electrical power is the equivalent value of DC voltage which would dissipate the same power in the resistive load. $V_{rms}$ is a convenient measure for detecting voltage sags and swells, since they result in nominally higher and lower computed value.
 
 Similarly to the frequency calculation, OPQ Box uses a 10 cycle window for a single $V_{rms}$ calculation. Unlike the frequency calculation, the input is not filtered a priori.
 
-\subsubsection{Total Harmonic Distortion}\label{subsec:thd}
+\subsubsection{OPQ Box: Calculating THD}\label{subsec:thd}
 
 The OPQ Box calculates total harmonic distortion (THD) using the industry standard methodology.
 It should be noted that in the power quality domain THD is expressed as a percentage as opposed to $\frac{dB}{\sqrt{Hz}}$ as used in other disciplines.
@@ -117,14 +117,14 @@ Operationally, OPQ Box computes THD for 10 cycles of the fundamental frequency.
 First an FFT transforms the real voltage samples into its frequency components.
 Next, the square of the harmonic bins are accumulated and scaled by the magnitude of the fundamental power.
 
-\subsubsection{Transient Detection}\label{subsec:transient-detection}
+\subsubsection{OPQ Box: Transient Detection}\label{subsec:transient-detection}
 
 OPQ Box transient detection is performed via filtering out of the fundamental frequency via an FIR high pass pass filter with a cutoff frequency of $400Hz$ and searching for a maximum value in the remainder.
 
 It should be noted that this transient detection method is susceptible to THD fluctuations, since any harmonic above $400Hz$ will remain in the filtered waveform.
 However, since the THD information is transmitted along with the transient detection metric, they can be correlated in downstream transient detection.
 
-\subsubsection{Network Communication}\label{subsec:network-communication}
+\subsubsection{OPQ Box: Network Communication}\label{subsec:network-communication}
 
 The computed fundamental frequency and $V_{rms}$ are transmitted to the Makai service for aggregation.
 Data transmission is handled using ZeroMq software stack with Curve25519 elliptic curve encryption.
@@ -144,7 +144,7 @@ The expansion port of the OPQ Box supports a GPS receiver.
 However, since GPS receivers require line of sight to the sky, it was not used for deployment.
 NTP performance has been verified against GPS resulting in time error of $8ms\pm 5ms$ which is typical for NTP running over the Internet with a nearby NTP server.
 
-\subsubsection{Manufacturing}
+\subsubsection{OPQ Box: Manufacturing}
 
 Currently, there is no mechanism for mass production of OPQ Boxes, but all of the plans are available under an Open Source license, so interested organizations with some basic hardware engineering skills can build their own boxes.
 
@@ -175,7 +175,7 @@ Our pilot study, discussed in Section \ref{sec:pilot-study} will provide example
 
 {\em Temporal locality allows OPQ to provide improved insights into power quality anomalies over traditional triggering algorithms.} By exploiting the idea of temporal locality, it is possible to ascertain the geographical extent of an anomaly with only coarse features. This allows for a simple robust algorithm which may be deployed at the sink node for anomaly detection.
 
-\subsubsection{Design}
+\subsubsection{OPQ Makai: Design}
 
 OPQ Makai is a distributed extensible microservice framework responsible for receiving the triggering stream from the OPQ Boxes, locating anomalous temporal regions and requesting raw waveform for the anomalous time ranges. As shown in Figure \ref{fig:makai-design}, Makai consists of four major components: Acquisition Broker, Triggering Broker, Event Service and the Acquisition Service.
 
@@ -225,7 +225,7 @@ The fourth layer is the Incident Level (IL).  This layer starts to answer the qu
 
 The fifth and final level is the Phenomena Level (PL). This layer contains the results of analyses that attempt to identify cyclic, and thus predictable, power quality disturbances. It also contains analysis results regarding the similarity of various incidents, which can help uncover causal factors.  Finally, it provides analyses for adaptive optimization of the OPQ Sensor Network. These optimizations can change the thresholds for individual boxes to either increase their sensitivity or decrease their sensitivity over specific intervals of time. The ultimate goal of adaptive optimization is to help the network learn to acquire all of the data useful for analyses, and only the data useful for analyses.  We are still in the early stages of exploring the potential of adaptive optimization in OPQ networks.
 
-\subsubsection{OPQ Mauka Actors}
+\subsubsection{OPQ Mauka: Actors}
 
 The current capabilities of OPQ Mauka can be summarized in terms of its Actors, which are implemented as plugins. Nine of the most important Actors are described below.
 
