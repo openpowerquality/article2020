@@ -40,11 +40,11 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{%The paper was slightly modified by our English editor, please check the whole text and confirm if your meaning is retained; 2.	Do not delete any comment we left for you and reply to each comment so that we can understand your meaning clearly; 3.	If you need to revise somewhere in your paper, please highlight the revisions to let us know. (Thank you for your cooperation in advance.)
+\Title{%The paper was slightly modified by our English editor, please check the whole text and confirm if your meaning is retained; 2.	Do not delete any comment we left for you and reply to each comment so that we can understand your meaning clearly; 3.	If you need to revise somewhere in your paper, please highlight the revisions to let us know. (Thank you for your cooperation in advance.)  (CONFIRMED)
 \highlight{Design}, Implementation, and Evaluation of Open Power Quality}
 
 % Authors, for the paper (add full first names)
-\Author{\hl{Anthony} %Please carefully check the accuracy of names and affiliations. 
+\Author{\hl{Anthony} %Please carefully check the accuracy of names and affiliations. (CONFIRMED)
 J. Christe, Sergey Negrashov and Philip M. Johnson *}
 
 % Authors, for metadata in PDF
@@ -159,7 +159,7 @@ A total of 3.3 V is used to power the isolated end of the isolation amplifier as
 The~hot side of the isolation amplifier is powered from the isolated DC/DC converter.
 This allows OPQ Box to function with a battery attached to the expansion port, so that it may retain data and continue to operate during a power~outage.
 
-%%% We added a space between 5 and V. Please confirm.
+%%% We added a space between 5 and V. Please confirm. CONFIRMED.
 
 
 A Raspberry Pi single board computer (SBC) is responsible for signal analysis and anomaly detection.
@@ -345,7 +345,7 @@ The current capabilities of OPQ Mauka can be summarized in terms of its Actors, 
 \highlight{{\em Frequency Variation Actor.}} The Frequency Variation Actor classifies generic frequency sags, swells, and~interruptions as defined by the IEEE 1159 standard. Both duration and deviation from nominal are used to perform these classifications. Duration classifications include frequency deviations that last for less than 50 ns, between~50 ns to 1 ms, and~1 to 50 ms. Classifications for deviations from nominal are performed for values that are up to 40\% deviation from nominal. This Actor is able to classify frequency swells, frequency interruptions, and~frequency sags, leading to the creation of data at the Incident~Layer.
 
 \highlight{{\em IEEE 1159 Voltage Actor.}} The IEEE 1159 Voltage Actor is used to classify voltage Incidents in accordance with the IEEE 1159 standard \hl{[29]}. In~general, this standard classifies voltage disturbances by duration and by magnitude. Voltage durations are classified from 0.5 to 30 cycles, 30 cycles to 3~s, 3 s to a minute, and~greater than 1 minute. Voltage deviations are classified in both the sag and swell directions as a percentage from nominal. Sags are generally classified between 10\% and 90\% of nominal while swells are generally classified from 110\% to 180\% of nominal. This Actor is capable of classifying voltage sags, swells, and~interruptions as defined by the standard, and~creating data at the Incident Layer if~appropriate.
-%%% Should it be reference citation? 
+%%% Should it be reference citation? YES
 \highlight{{\em Box Optimization Actor.}} The Box Optimization Actor is responsible for sending and receiving typed messages to and from OPQ Boxes from OPQ Mauka. This Actor is capable of requesting the state of each OPQ Box (e.g., uptime, Measurement rate, security keys). It is also capable of adjusting the state of individual OPQ Boxes by changing things such as the Measurement and Trend rate or the sampling rate used by the~Box.
 
 \highlight{{\em Future Phenomena Actor.}} The Future Phenomena Actor is responsible for creating Future or Predictive Phenomena. These Phenomena are used to predict Events and Incidents that may occur in the future. This plugin does not subscribe to any messages, but~instead utilizes timers to perform its work. By~default, this plugin runs every 10~min.
@@ -638,7 +638,7 @@ Figure~\ref{fig:data-management-graph} shows a graph that illustrates storage re
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.4\linewidth]{images/pilot/data-management-graph.png}
-\caption{\hl{Storage} requirements with and without~time-to-live (TTL).} %%% It seems that the figure isn't complete, please modify.
+\caption{\hl{Storage} requirements with and without~time-to-live (TTL).} %%% It seems that the figure isn't complete, please modify. FIGURE IS COMPLETE.
 \label{fig:data-management-graph}
 \end{figure}
 
@@ -698,15 +698,21 @@ To conclude, a~recent paper by Mohsenian et al.~\cite{mohsenian-rad_distribution
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\authorcontributions{\hl{For} }%% research articles with several authors, a short paragraph specifying their individual contributions must be provided. The following statements should be used ``Conceptualization, X.X. and Y.Y.; methodology, X.X.; software, X.X.; validation, X.X., Y.Y. and Z.Z.; formal analysis, X.X.; investigation, X.X.; resources, X.X.; data curation, X.X.; writing--original draft preparation, X.X.; writing--review and editing, X.X.; visualization, X.X.; supervision, X.X.; project administration, X.X.; funding acquisition, Y.Y. All authors have read and agreed to the published version of the manuscript.'', please turn to the  \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation. Authorship must be limited to those who have contributed substantially to the work reported.
+\authorcontributions{\hl{For} }%% research articles with several authors, a short paragraph specifying their individual contributions must be provided. The following statements should be used ``Conceptualization, X.X. and Y.Y.; methodology, X.X.; software, X.X.; validation, X.X., Y.Y. and Z.Z.; formal analysis, X.X.; investigation, X.X.; resources, X.X.; data curation, X.X.; writing--original draft preparation, X.X.; writing--review and editing, X.X.; visualization, X.X.; supervision, X.X.; project administration, X.X.; funding acquisition, Y.Y. All authors have read and agreed to the published version of the manuscript.'', please turn to the  \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation. Authorship must be limited to those who have contributed substantially to the work reported. SEE BELOW
+
+\authorcontributions{
+Conceptualization, Johnson, Christe, Negrashov; methodology, Johnson, Christe, Negrashov; software, Johnson, Christe, Negrashov; validation, Johnson, Christe, Negrashov; formal analysis, Johnson, Christe, Negrashov; investigation, Johnson, Christe, Negrashov; resources, Johnson; data curation, Christe, Negrashov; writing--original draft preparation, Johnson, Christe, Negrashov; writing--review and editing, Johnson, Christe, Negrashov; visualization, Johnson, Christe, Negrashov; supervision, Johnson; project administration, Johnson; funding acquisition, Johnson. All authors have read and agreed to the published version of the manuscript.
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \funding{\hl{Please} }%add: ``This research received no external funding'' or ``This research was funded by NAME OF FUNDER grant number XXX.'' and  and ``The APC was funded by XXX''. Check carefully that the details given are accurate and use the standard spelling of funding agency names at \url{https://search.crossref.org/funding}, any errors may affect your future funding.
 
-
+\funding{This research was funded in part by a grant from the University of Hawaii President's Green Award program.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \conflictsofinterest{\hl{Declare} } %conflicts of interest or state ``The authors declare no conflict of interest.'' Authors must identify and declare any personal circumstances or interest that may be perceived as inappropriately influencing the representation or interpretation of reported research results. Any role of the funders in the design of the study; in the collection, analyses or interpretation of data; in the writing of the manuscript, or in the decision to publish the results must be declared in this section. If there is no role, please state ``The funders had no role in the design of the study; in the collection, analyses, or interpretation of data; in the writing of the manuscript, or in the decision to publish the results''.
+
+\conflictsofinterest{The authors declare no conflict of interest.}
 
 
 % Bibliography
@@ -717,7 +723,7 @@ To conclude, a~recent paper by Mohsenian et al.~\cite{mohsenian-rad_distribution
 \bibitem[Trabish(2014)]{trabish_solar_2014}
 Trabish, H.
 \newblock Solar Installers flee {Hawaii} as Interconnection Queue Backs Up.
-\newblock {\em Utility Dive}, {\hl{2014}}.%% Please add day month. 
+\newblock {\em Utility Dive}, {\hl{September 29, 2014}}.%% Please add day month. DONE
 
 \bibitem[Anastasi \em{et~al.}(2009)Anastasi, Conti, Di~Francesco, and
 Passarella]{anastasi_energy_2009}
@@ -730,11 +736,11 @@ Jayatunga]{anurangi_effects_2017}
 Anurangi, R.O.; Rodrigo, A.S.; Jayatunga, U.
 \newblock Effects of high levels of harmonic penetration in distribution
 networks with photovoltaic inverters.
-\newblock In {Proceedings of the } 2017 {IEEE} {International} {Conference} on IEEE Industrial and {Information} {Systems} ({ICIIS}),  \hl{2017}; pp. 1--6, doi:10.1109/ICIINFS.2017.8300335.%% Please add conference location and date. 
+\newblock In {Proceedings of the } 2017 {IEEE} {International} {Conference} on IEEE Industrial and {Information} {Systems} ({ICIIS}), Jayapura, Indonesia \hl{November 2, 2017}; pp. 1--6, doi:10.1109/ICIINFS.2017.8300335.%% Please add conference location and date.
 
 \bibitem[{Rita Pinto} \em{et~al.}(2016){Rita Pinto}, {Sílvio Mariano}, {Maria
 Do Rosário Calado}, and {José Felippe de Souza}]{rita_pinto_impact_2016}
-Pinto, R.; Mariano, S.; Calado, M.D.R.;  De Souza, J.F. 
+Pinto, R.; Mariano, S.; Calado, M.D.R.;  De Souza, J.F.
 \newblock Impact of {Rural} {Grid}-{Connected} {Photovoltaic} {Generation}
 {Systems} on {Power} {Quality}.
 \newblock {\em Energies} {\bf 2016}, {\em 9},~739, doi:10.3390/en9090739.
@@ -745,14 +751,14 @@ Delgado, J.; Santos, B.; de~Almeida, A.T.; Figueira, A.
 \newblock Solutions to mitigate power quality disturbances resulting from
 integrating intermittent renewable energy in the grid of {Porto} {Santo}.
 \newblock In {Proceedings of the } 11th {International} {Conference} on {Electrical} {Power} {Quality}
-and {Utilisation}, \hl{2011}; pp. 1--6, 
+and {Utilisation}, \hl{October 17, 2011}; pp. 1--6,
 \newblock ISSN 2150-6655,
 doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/EPQU.2011.6128870}{\detokenize{10.1109/EPQU.2011.6128870}}}.
 
 \bibitem[Zavoda(2018)]{zavoda_power_2018}
 Zavoda, F.
 \newblock { Power {Quality} and {EMC} {Issues} with {Future} {Electricity}
-{Networks}}. In {Proceedings of the } CIGRE, \hl{2018}.
+{Networks}}. In {Proceedings of the } CIGRE, \hl{May 15, 2018}.
 
 \bibitem[Nakafuji \em{et~al.}(2011)Nakafuji, Aukai, Dangelmaier, Reynolds,
 Yoshimura, and {Ying Hu}]{nakafuji_back--basics_2011}
@@ -760,38 +766,38 @@ Nakafuji, D.; Aukai, T.; Dangelmaier, L.; Reynolds, C.; Yoshimura, J.; {
 Hu, Y}.
 \newblock “{Back}-to-basics”: {Operationalizing} data mining and visualization
 techniques for utilities.
-\newblock In {Proceedings of the }The 2011 International Joint Conference on Neural Networks, \hl{2011}; pp. 3093--3098, doi:10.1109/IJCNN.2011.6033630.
+\newblock In {Proceedings of the }The 2011 International Joint Conference on Neural Networks, \hl{July 31, 2011}; pp. 3093--3098, doi:10.1109/IJCNN.2011.6033630.
 
 \bibitem[Dedad(2008)]{dedad_when_2008}
 Dedad, J.
 \newblock When {Does} {Poor} {Power} {Quality} {Cause} {Electronics}
 {Failures}?
-\newblock {\em Electrical Construction and Maintenance Magazine}, {\hl{2008}}.
-\newblock Library Catalog.  Available online:  \url{www.ecmweb.com} (accessed on \hl{day month year}).
+\newblock {\em Electrical Construction and Maintenance Magazine}, {\hl{November 1, 2008}}.
+\newblock Library Catalog.  Available online:  \url{www.ecmweb.com} (accessed on \hl{31 July 2020}).
 
 \bibitem[Elphick \em{et~al.}(2015)Elphick, Ciufo, Smith, and
 Parera]{elphick_summary_2015}
 Elphick, S.; Ciufo, P.; Smith, V.; Parera, S.
 \newblock Summary of the economic impacts of power quality on consumers.
 \newblock  In {Proceedings of the }2015 {Australasian} {Universities} {Power} {Engineering}
-{Conference}, \hl{2015}.
+{Conference}, \hl{September 27, 2015}.
 
 \bibitem[Laskar(2012)]{laskar_power_2012}
 Laskar, S.H.
 \newblock Power quality issues and need of intelligent {PQ} monitoring in the
 smart grid environment.
 \newblock In~{Proceedings of the }2012 47th
-{International} Universities {Power} {Engineering} {Conference} ({UPEC}), \hl{2012}; pp.~1--6.
+{International} Universities {Power} {Engineering} {Conference} ({UPEC}), \hl{September 4, 2012}; pp.~1--6.
 
 \bibitem[Negrashov(2020)]{negrashov_opq_2020}
 Negrashov, S.
 \newblock {OPQ} {Box} {Specifications} and {Design}, 2020.
-\newblock Library Catalog.  Available online:  \url{github.com} (accessed on \hl{day month year}).
+\newblock Library Catalog.  Available online:  \url{github.com} (accessed on \hl{31 July 2020}).
 
 \bibitem[Unruh(2018)]{unruh_ieee_2018}
 Unruh, T.
 \newblock \emph{IEEE P1159/D3: {Draft} {Recommended} {Practice} for
-{Monitoring} {Electric} {Power} {Quality}}; \hl{2018}. %% Please provide publisher and its location. 
+{Monitoring} {Electric} {Power} {Quality}}; IEEE, New York, NY \hl{February 1, 2018}. %% Please provide publisher and its location. DONE
 
 \bibitem[Kahle(2015)]{kahle_power_2015}
 Kahle, K.
@@ -802,8 +808,8 @@ Kahle, K.
 \bibitem[Thallam and Heydt(2000)]{thallam_power_2000}
 Thallam, R.; Heydt, G.
 \newblock Power acceptability and voltage sag indices in the three phase sense.
-\newblock In {Proceedings of the } 2000 {Power} {Engineering} {Society} {Summer} {Meeting}, 
- \hl{2000}; Volume~2, pp. 905--910, doi:10.1109/PESS.2000.867482.
+\newblock In {Proceedings of the } 2000 {Power} {Engineering} {Society} {Summer} {Meeting},
+ \hl{July 16, 2000}; Volume~2, pp. 905--910, doi:10.1109/PESS.2000.867482.
 
 \bibitem[Djokic \em{et~al.}(2005)Djokic, Desmet, Vanalme, Milanovic, and
 Stockman]{djokic_sensitivity_2005}
@@ -812,7 +818,7 @@ Djokic, S.; Desmet, J.; Vanalme, G.; Milanovic, J.; Stockman, K.
 interruptions.
 \newblock {\em IEEE Trans. Power Deliv.} {\bf 2005}, {\em
 20},~375--383.
-\newblock 
+\newblock
 doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/TPWRD.2004.837828}{\detokenize{10.1109/TPWRD.2004.837828}}}.
 
 \bibitem[Dickens \em{et~al.}(2019)Dickens, Christe, and
@@ -822,32 +828,32 @@ Dickens, C.; Christe, A.; Johnson, P.
 {Source} {Distributed} {Power} {Quality} {Network}.
 \newblock  In Proceedings of the {Ninth} {International} {Conference} on {Smart}
 {Grids}, {Green} {Communications} and {IT} {Energy}-aware {Technologies},
-\hl{2019}.
+\hl{June 2, 2019}.
 
 \bibitem[Fluke(2020)]{fluke_fluke_2020}
 Fluke, I.
 \newblock \emph{Fluke {Corporation}: {Fluke} {Electronics}, {Biomedical},
-{Calibration} and {Networks}}; \hl{2020}.
+{Calibration} and {Networks}}; \hl{July 31, 2020}.
 
 \bibitem[Dranetz(2020)]{dranetz_dranetz_2020}
 Dranetz, I.
 \newblock Dranetz {Power} {Monitoring}, 2020.
-\newblock Library Catalog. Available online:  \url{ www.dranetz.com} (accessed on \hl{day month year}).
+\newblock Library Catalog. Available online:  \url{ www.dranetz.com} (accessed on \hl{31 July 2020}).
 
 \bibitem[Elspec(2020)]{elspec_elspec_2020}
 Elspec, I.
 \newblock Elspec---{Power} Quality Analyzers and Solutions, 2020.
-\newblock Library Catalog. Available online:  \url{www.elspec-ltd.com} (accessed on \hl{day month year}).
+\newblock Library Catalog. Available online:  \url{www.elspec-ltd.com} (accessed on \hl{31 July 2020}).
 
 \bibitem[Powerside(2020)]{powerside_powerside_2020}
 Powerside, I.
 \newblock Powerside, {Inc}., 2020.
-\newblock Library Catalog. Available online:  \url{Powerside.com}  (accessed on \hl{day month year}).
+\newblock Library Catalog. Available online:  \url{Powerside.com}  (accessed on \hl{31 July 2020}).
 
 \bibitem[ACR(2020)]{acr_acr_2020}
 ACR, S.
 \newblock {ACR} {Systems}, 2020.
-\newblock Library Catalog. Available online:  \url{www.acrdatasolutions.com}  (accessed on \hl{day month year}).
+\newblock Library Catalog. Available online:  \url{www.acrdatasolutions.com}  (accessed on \hl{31 July 2020}).
 
 \bibitem[Viciana \em{et~al.}(2018)Viciana, Alcayde, Montoya, Baños,
 Arrabal-Campos, Zapata-Sierra, and
@@ -857,26 +863,26 @@ Zapata-Sierra, A.; Manzano-Agugliaro, F.
 \newblock {OpenZmeter}: {An} {Efficient} {Low}-{Cost} {Energy} {Smart} {Meter}
 and {Power} {Quality} {Analyzer}.
 \newblock {\em Sustainability} {\bf 2018}, {\em 10}, 4038.
-\newblock 
+\newblock
 doi:{\changeurlcolor{black}\href{https://doi.org/10.3390/su10114038}{\detokenize{10.3390/su10114038}}}.
 
 \bibitem[Concepts(2020)]{electrotek_concepts_pqview_2020}
 Concepts, E.
 \newblock {PQView} 4 {\textbar} {Electrotek} {Concepts}, 2020.
-\newblock Library Catalog. Available online:  \url{www.electrotek.com}  (accessed on \hl{day month year}).
+\newblock Library Catalog. Available online:  \url{www.electrotek.com}  (accessed on \hl{31 July 2020}).
 
 \bibitem[{Elspec, Ltd}(2016)]{elspec_ltd_pqscada_2016}
 {Elspec, Ltd}.
 \newblock {PQSCADA} {Sapphire}, 2016.
-\newblock Library Catalog. Available online:  \url{www.elspec-ltd.com}  (accessed on \hl{day month year}).
+\newblock Library Catalog. Available online:  \url{www.elspec-ltd.com}  (accessed on \hl{31 July 2020}).
 
 \bibitem[Sabin(2020)]{sabin_ieee_2020}
 Sabin, D.
-\newblock \emph{{IEEE} 1159.3 {PQDIF} {Task} {Force}}; \hl{2020}.
+\newblock \emph{{IEEE} 1159.3 {PQDIF} {Task} {Force}}; \hl{July 31, 2020}.
 
 \bibitem[Alliance(2020)]{grid_protection_alliance_grid_2020}
 Alliance, G.P.
-\newblock \emph{Grid {Protection} {Alliance}---{Home}}; \hl{2020}.
+\newblock \emph{Grid {Protection} {Alliance}---{Home}}; \hl{July 31, 2020}.
 
 \bibitem[Di~Manno \em{et~al.}(2015)Di~Manno, Varalone, Verde, De~Santis,
 Di~Perna, and Salemme]{di_manno_user_2015}
@@ -884,7 +890,7 @@ Di~Manno, M.; Varalone, P.; Verde, P.; De~Santis, M.; Di~Perna, C.; Salemme, M.
 \newblock User friendly smart distributed measurement system for monitoring and
 assessing the electrical power quality.
 \newblock In Proceedings of the 2015 {AEIT} {International} {Annual}
-{Conference}, \hl{2015}.
+{Conference}, \hl{October 14, 2015}.
 
 \bibitem[Daponte \em{et~al.}(2000)Daponte, Di~Penta, and
 Mercurio]{daponte_transientmeter:_2000}
@@ -892,7 +898,7 @@ Daponte, P.; Di~Penta, M.; Mercurio, G.
 \newblock {TRANSIENTMETER}: A distributed measurement system for power quality
 monitoring.
 \newblock In {Proceedings of the } Ninth {International} {Conference} on {Harmonics} and {Quality} of
-{Power}, \hl{2000}.
+{Power}, Orlando, Florida \hl{October 1, 2000}.
 
 \bibitem[Bilik \em{et~al.}(2007)Bilik, Koval, and Hula]{bilik_modular_2007}
 Bilik, P.; Koval, L.; Hula, J.
@@ -916,7 +922,7 @@ Suslov, K.; Solonina, N.; Smirnov, A.
 \bibitem[Sayied \em{et~al.}(2013)Sayied, Spaulding, and
 Akbary]{sayied_power_2013}
 Sayied, O.; Spaulding, J.; Akbary, B.
-\newblock \hl{Power quality metrics calculations for the smart grid}. %%% Please add more detailed information. 
+\newblock \hl{Power quality metrics calculations for the smart grid}. %%% Please add more detailed information.
 
 \bibitem[Kucuk \em{et~al.}(2010)Kucuk, Inan, Salor, Demirci, Akkaya, Buhan,
 Boyrazoglu, Unsar, Altintas, Haliloglu, Cadirci, and
@@ -925,7 +931,7 @@ Kucuk, D.; Inan, T.; Salor, O.; Demirci, T.; Akkaya, Y.; Buhan, S.; Boyrazoglu,
 B.; Unsar, O.; Altintas, E.; Haliloglu, B.; et al.
 \newblock An extensible database architecture for nationwide power quality
 monitoring.
-\newblock {\em Electr. Power Energy Syst.} {\bf 2010}, {\em 32},  559--570. 
+\newblock {\em Electr. Power Energy Syst.} {\bf 2010}, {\em 32},  559--570.
 
 \bibitem[Mohsenian-Rad \em{et~al.}(2018)Mohsenian-Rad, Stewart, and
 Cortez]{mohsenian-rad_distribution_2018}
